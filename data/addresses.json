@@ -1,0 +1,672 @@
+[
+  {
+    "serial": "SLUS-20407",
+    "label": "SetTargetChar",
+    "address": "0x0011CD10",
+    "fmt": "function",
+    "category": "camera",
+    "notes": "Camera target setter. Auto-named from string \"SetTargetChar: No Target!\" at 0x00214800. ref @ 0x0011CD40.",
+    "pointer_chain": null,
+    "code_refs": null
+  },
+  {
+    "serial": "SLUS-20407",
+    "label": "CCamera region begin",
+    "address": "0x0011F000",
+    "fmt": "region",
+    "category": "camera",
+    "notes": "Start of the camera subsystem code. Spans roughly 0x0011F000-0x0012F000.",
+    "pointer_chain": null,
+    "code_refs": null
+  },
+  {
+    "serial": "SLUS-20407",
+    "label": "err_ccamera_battle",
+    "address": "0x0011F3A0",
+    "fmt": "function",
+    "category": "camera",
+    "notes": "CCameraBattle error handler. References \"CCameraBattle: no target error!\".",
+    "pointer_chain": null,
+    "code_refs": null
+  },
+  {
+    "serial": "SLUS-20407",
+    "label": "VM main loop A",
+    "address": "0x001654A0",
+    "fmt": "function",
+    "category": "script_vm",
+    "notes": "CallScript executor #1 (1020 bytes). Has bounds check at +0x20 of arg, calls 0x1d28a8 (error msg dispatcher).",
+    "pointer_chain": null,
+    "code_refs": null
+  },
+  {
+    "serial": "SLUS-20407",
+    "label": "VM main loop B",
+    "address": "0x00165B70",
+    "fmt": "function",
+    "category": "script_vm",
+    "notes": "CallScript executor #2 (1020 bytes, near-identical to A).",
+    "pointer_chain": null,
+    "code_refs": null
+  },
+  {
+    "serial": "SLUS-20407",
+    "label": "VM main loop C",
+    "address": "0x00165F70",
+    "fmt": "function",
+    "category": "script_vm",
+    "notes": "CallScript executor #3 (1020 bytes, near-identical to A and B).",
+    "pointer_chain": null,
+    "code_refs": null
+  },
+  {
+    "serial": "SLUS-20407",
+    "label": "If-statement evaluator",
+    "address": "0x0016DA00",
+    "fmt": "function",
+    "category": "script_vm",
+    "notes": "?i(cond){...} executor. 3940 bytes. References \"?i: no if conditional\", \"?i: no execute block\", etc.",
+    "pointer_chain": null,
+    "code_refs": null
+  },
+  {
+    "serial": "SLUS-20407",
+    "label": "CScript container ctor",
+    "address": "0x0017FED0",
+    "fmt": "function",
+    "category": "script_vm",
+    "notes": "Initializes script container list. Allocates 16-byte node, sets type-tag 0x00223C68 at +0xC. 1252 bytes.",
+    "pointer_chain": null,
+    "code_refs": null
+  },
+  {
+    "serial": "SLUS-20407",
+    "label": "IRX module path table",
+    "address": "0x00203900",
+    "fmt": "array",
+    "category": "iop_modules",
+    "notes": "256-entry uint32 array; each points to a 32-byte string slot starting 0x00214BA0. Boot IRX list: sio2man, padman, mcman, mcserv, libsd, modmidi, modhsyn, sdrdrv, ...",
+    "pointer_chain": null,
+    "code_refs": "[{\"pc\": 1259512, \"instr\": \"lw $a1, ($v0)\", \"kind\": \"read\", \"base_reg\": \"v0\", \"offset\": 0, \"field_off\": 0}, {\"pc\": 1259900, \"instr\": \"lh $v1, ($v0)\", \"kind\": \"read\", \"base_reg\": \"v0\", \"offset\": 0, \"field_off\": 0}, {\"pc\": 1266380, \"instr\": \"lw $a1, ($v0)\", \"kind\": \"read\", \"base_reg\": \"v0\", \"offset\": 0, \"field_off\": 0}, {\"pc\": 1266512, \"instr\": \"lh $v1, ($v0)\", \"kind\": \"read\", \"base_reg\": \"v0\", \"offset\": 0, \"field_off\": 0}, {\"pc\": 1269804, \"instr\": \"lw $a1, ($v0)\", \"kind\": \"read\", \"base_reg\": \"v0\", \"offset\": 0, \"field_off\": 0}, {\"pc\": 1344000, \"instr\": \"lw $a0, ($v0)\", \"kind\": \"read\", \"base_reg\": \"v0\", \"offset\": 0, \"field_off\": 0}, {\"pc\": 1345060, \"instr\": \"lw $a1, ($v0)\", \"kind\": \"read\", \"base_reg\": \"v0\", \"offset\": 0, \"field_off\": 0}, {\"pc\": 1259684, \"instr\": \"lw $a1, 4($v0)\", \"kind\": \"read\", \"base_reg\": \"v0\", \"offset\": 4, \"field_off\": 4}, {\"pc\": 1259908, \"instr\": \"lb $v0, 2($v0)\", \"kind\": \"read\", \"base_reg\": \"v0\", \"offset\": 2, \"field_off\": 2}, {\"pc\": 1266520, \"instr\": \"lb $v0, 2($v0)\", \"kind\": \"read\", \"base_reg\": \"v0\", \"offset\": 2, \"field_off\": 2}]"
+  },
+  {
+    "serial": "SLUS-20407",
+    "label": "Boot script manifest",
+    "address": "0x00203BB0",
+    "fmt": "array",
+    "category": "script_vm",
+    "notes": "Array of char* pointers to script paths: main.sol, walker.sol, walkerfunc.sol, mapoutend.sol, playerpos.sol.",
+    "pointer_chain": null,
+    "code_refs": null
+  },
+  {
+    "serial": "SLUS-20407",
+    "label": "Sword name list table",
+    "address": "0x002059B0",
+    "fmt": "array",
+    "category": "inventory",
+    "notes": "20-entry array of pointers to sword names. Includes: Chuyo-tou, Tonpu, Kakkazan, Aizome, Nidai-Kikumasa, HARUYUKI, Ippatsumaru, Jurokumon, Dai-Kuronama, Takefuji, Samehada-tou, Kamikaze, Binetsu, Zangetsu, Jukkaimaru, Kachouhugetsu, Gun, Rifle, Dull sword.",
+    "pointer_chain": null,
+    "code_refs": "[{\"pc\": 1448852, \"instr\": \"lw $a2, ($v0)\", \"kind\": \"read\", \"base_reg\": \"v0\", \"offset\": 0, \"field_off\": 0}, {\"pc\": 1448884, \"instr\": \"lw $a0, ($v0)\", \"kind\": \"read\", \"base_reg\": \"v0\", \"offset\": 0, \"field_off\": 0}, {\"pc\": 2240116, \"instr\": \"lw $t0, 0x59b0($at)\", \"kind\": \"read\", \"base_reg\": \"at\", \"offset\": 22960, \"field_off\": 0}, {\"pc\": 2240124, \"instr\": \"lw $a3, 0x59b4($at)\", \"kind\": \"read\", \"base_reg\": \"at\", \"offset\": 22964, \"field_off\": 4}, {\"pc\": 2240132, \"instr\": \"lw $a2, 0x59b8($at)\", \"kind\": \"read\", \"base_reg\": \"at\", \"offset\": 22968, \"field_off\": 8}, {\"pc\": 2240140, \"instr\": \"lw $a1, 0x59bc($at)\", \"kind\": \"read\", \"base_reg\": \"at\", \"offset\": 22972, \"field_off\": 12}]"
+  },
+  {
+    "serial": "SLUS-20407",
+    "label": "Sword metadata table",
+    "address": "0x00205AC0",
+    "fmt": "array",
+    "category": "inventory",
+    "notes": "32-byte records per sword. Schema: [name_ptr, flags_u32, durability_packed_u32, count_u32, 0, runtime_data_ptr, ?, 0]. Entry 0 = Chuyo-tou with durability_max=3 (0x00030000 high word).",
+    "pointer_chain": null,
+    "code_refs": "[{\"pc\": 2240164, \"instr\": \"sw $t0, 0x5ac0($at)\", \"kind\": \"write\", \"base_reg\": \"at\", \"offset\": 23232, \"field_off\": 0}]"
+  },
+  {
+    "serial": "SLUS-20407",
+    "label": "Camera config file path",
+    "address": "0x00216D30",
+    "fmt": "string",
+    "category": "camera",
+    "notes": "\"Camera/Camera.dat\" — runtime-loaded camera presets. Referenced from path table at 0x00203D58.",
+    "pointer_chain": null,
+    "code_refs": null
+  },
+  {
+    "serial": "SLUS-20407",
+    "label": "Sword name table",
+    "address": "0x00218B28",
+    "fmt": "array",
+    "category": "inventory",
+    "notes": "NULL-terminated sword names: \"Chuyo-tou\", \"Tonpu\", \"Kakkazan\", \"Aizome\", \"Nidai-...\".",
+    "pointer_chain": null,
+    "code_refs": null
+  },
+  {
+    "serial": "SLUS-20407",
+    "label": "Player name format string",
+    "address": "0x00219755",
+    "fmt": "string",
+    "category": "player",
+    "notes": "#PLAYERNAME format string \"%s\". The actual value lives at the bound runtime address (to find).",
+    "pointer_chain": null,
+    "code_refs": null
+  },
+  {
+    "serial": "SLUS-20407",
+    "label": "CallScript type-tag sentinel",
+    "address": "0x00223C68",
+    "fmt": "data",
+    "category": "script_vm",
+    "notes": "Used as identifier/vtable-ptr in CScript node structs. NOT a real vtable (target is zeros at runtime).",
+    "pointer_chain": null,
+    "code_refs": "[{\"pc\": 1572812, \"instr\": \"lw $v0, ($v1)\", \"kind\": \"read\", \"base_reg\": \"v1\", \"offset\": 0, \"field_off\": 0}, {\"pc\": 1572824, \"instr\": \"sw $v0, ($v1)\", \"kind\": \"write\", \"base_reg\": \"v1\", \"offset\": 0, \"field_off\": 0}, {\"pc\": 1572956, \"instr\": \"lw $v0, ($v1)\", \"kind\": \"read\", \"base_reg\": \"v1\", \"offset\": 0, \"field_off\": 0}, {\"pc\": 1572968, \"instr\": \"sw $v0, ($v1)\", \"kind\": \"write\", \"base_reg\": \"v1\", \"offset\": 0, \"field_off\": 0}, {\"pc\": 1573100, \"instr\": \"lw $v0, ($v1)\", \"kind\": \"read\", \"base_reg\": \"v1\", \"offset\": 0, \"field_off\": 0}, {\"pc\": 1573112, \"instr\": \"sw $v0, ($v1)\", \"kind\": \"write\", \"base_reg\": \"v1\", \"offset\": 0, \"field_off\": 0}, {\"pc\": 1595100, \"instr\": \"sw $zero, 0x5f8($v0)\", \"kind\": \"write\", \"base_reg\": \"v0\", \"offset\": 1528, \"field_off\": 0}, {\"pc\": 1595112, \"instr\": \"sw $zero, 0x5fc($v0)\", \"kind\": \"write\", \"base_reg\": \"v0\", \"offset\": 1532, \"field_off\": 4}, {\"pc\": 1951920, \"instr\": \"lw $v0, 0x5ac($v0)\", \"kind\": \"read\", \"base_reg\": \"v0\", \"offset\": 1452, \"field_off\": 4}]"
+  },
+  {
+    "serial": "SLUS-20407",
+    "label": "Player secondary mesh",
+    "address": "0x008CC000",
+    "fmt": "region",
+    "category": "player",
+    "notes": "Second player mesh region (head/weapon/sub-meshes). Double-buffered at 0x008DC000.",
+    "pointer_chain": null,
+    "code_refs": null
+  },
+  {
+    "serial": "SLUS-20407",
+    "label": "Weapon stat database",
+    "address": "0x00904F80",
+    "fmt": "table",
+    "category": "inventory",
+    "notes": "Array of u16 stat values: power/sharpness/toughness/usage per weapon. 9999 = cap. Bytes 257/514/771/1028/1285 = packed dual-byte attr pairs (0x0101, 0x0202, etc). 14624 bytes total.",
+    "pointer_chain": null,
+    "code_refs": null
+  },
+  {
+    "serial": "SLUS-20407",
+    "label": "Mass item slot table",
+    "address": "0x00905578",
+    "fmt": "table",
+    "category": "inventory",
+    "notes": "Long contiguous block of 0xFFFF (65535) values = empty inventory slot markers.",
+    "pointer_chain": null,
+    "code_refs": null
+  },
+  {
+    "serial": "SLUS-20407",
+    "label": "Player Y-velocity (primary)",
+    "address": "0x0091D948",
+    "fmt": "float",
+    "category": "physics",
+    "notes": "VERIFIED_HAND 2026-06-23: Snapshot diff (stand_bridge vs apex_paused) showed -11.03 at apex. Mirror copy at 0x00A9D948 (delta 0x180000, double-buffered).",
+    "pointer_chain": null,
+    "code_refs": null
+  },
+  {
+    "serial": "SLUS-20407",
+    "label": "Player render matrix",
+    "address": "0x00924E50",
+    "fmt": "matrix4x4",
+    "category": "player",
+    "notes": "4x4 column-major transform with translation in last row matching player world pos (3.16, 1.95, -16.14). Used by VU1 render pipeline.",
+    "pointer_chain": null,
+    "code_refs": null
+  },
+  {
+    "serial": "SLUS-20407",
+    "label": "Player mesh region",
+    "address": "0x00925000",
+    "fmt": "region",
+    "category": "player",
+    "notes": "~64KB player vertex+anim data (size 64736 per asset table entry). Double-buffered at 0x00AA5000 (delta 0x180000 = render double-buffer).",
+    "pointer_chain": null,
+    "code_refs": null
+  },
+  {
+    "serial": "SLUS-20407",
+    "label": "Player position X (vertex)",
+    "address": "0x00925310",
+    "fmt": "float",
+    "category": "player",
+    "notes": "3-snapshot diff matched walks of 12.5 and 16.2 units. Position is stored as a vertex (XYZ1 homogeneous) in the player mesh, repeating every 16 bytes for the full mesh.",
+    "pointer_chain": null,
+    "code_refs": null
+  },
+  {
+    "serial": "SLUS-20407",
+    "label": "Player position Y (vertex)",
+    "address": "0x00925314",
+    "fmt": "float",
+    "category": "player",
+    "notes": "Y axis (height) component.",
+    "pointer_chain": null,
+    "code_refs": null
+  },
+  {
+    "serial": "SLUS-20407",
+    "label": "Player position Z (vertex)",
+    "address": "0x00925318",
+    "fmt": "float",
+    "category": "player",
+    "notes": "Z axis component.",
+    "pointer_chain": null,
+    "code_refs": null
+  },
+  {
+    "serial": "SLUS-20407",
+    "label": "Player Y-velocity (mirror)",
+    "address": "0x00A9D948",
+    "fmt": "float",
+    "category": "physics",
+    "notes": "VERIFIED_HAND 2026-06-23: PS2 double-buffer mirror of primary at 0x0091D948.",
+    "pointer_chain": null,
+    "code_refs": null
+  },
+  {
+    "serial": "SLUS-20407",
+    "label": "Character object table",
+    "address": "0x00C18000",
+    "fmt": "table",
+    "category": "player",
+    "notes": "Array of ~4KB character records. Each starts at 0xXXX608 offset. Player is slot 0 at 0x00C18608.",
+    "pointer_chain": null,
+    "code_refs": null
+  },
+  {
+    "serial": "SLUS-20407",
+    "label": "NPC table BASE",
+    "address": "0x00C18000",
+    "fmt": "table",
+    "category": "npc_table",
+    "notes": "Character/NPC object table. Stride=0x800 bytes/slot, 27 total slots (last slot is end-sentinel). Slot 0 = player (extended layout, HP@+0x608). Slots 1-26 = NPCs (compact layout, HP@+0x08, HP_max@+0x0A, char_id@+0x00). VERIFIED ingame_idle snapshot.",
+    "pointer_chain": null,
+    "code_refs": null
+  },
+  {
+    "serial": "SLUS-20407",
+    "label": "Player HP (current)",
+    "address": "0x00C18608",
+    "fmt": "uint16",
+    "category": "player",
+    "notes": "VERIFIED_HAND 2026-06-23: Live PINE freeze test successful. During in-game combat, 12 damage events were detected by polling at 50ms. Each event restored within ~100ms via single uint16 write of HP_max value. User confirmed visual restoration in PCSX2. Address is 100% reliable.",
+    "pointer_chain": null,
+    "code_refs": "[{\"pc\": 1369112, \"instr\": \"lh $v1, -0x79f8($at)\", \"kind\": \"read\", \"base_reg\": \"at\", \"offset\": -31224, \"field_off\": 0}, {\"pc\": 1369124, \"instr\": \"sh $v1, -0x79f8($at)\", \"kind\": \"write\", \"base_reg\": \"at\", \"offset\": -31224, \"field_off\": 0}, {\"pc\": 1607620, \"instr\": \"sh $v1, 0x58($a1)\", \"kind\": \"write\", \"base_reg\": \"a1\", \"offset\": 88, \"field_off\": 0}, {\"pc\": 1607724, \"instr\": \"lh $v1, 0x58($a1)\", \"kind\": \"read\", \"base_reg\": \"a1\", \"offset\": 88, \"field_off\": 0}, {\"pc\": 1660316, \"instr\": \"lh $a2, ($a2)\", \"kind\": \"read\", \"base_reg\": \"a2\", \"offset\": 0, \"field_off\": 0}, {\"pc\": 1667844, \"instr\": \"lh $a1, ($v0)\", \"kind\": \"read\", \"base_reg\": \"v0\", \"offset\": 0, \"field_off\": 0}, {\"pc\": 1667884, \"instr\": \"sw $v1, ($v0)\", \"kind\": \"write\", \"base_reg\": \"v0\", \"offset\": 0, \"field_off\": 0}, {\"pc\": 1668652, \"instr\": \"lh $s0, ($v1)\", \"kind\": \"read\", \"base_reg\": \"v1\", \"offset\": 0, \"field_off\": 0}, {\"pc\": 1668660, \"instr\": \"sh $v0, ($v1)\", \"kind\": \"write\", \"base_reg\": \"v1\", \"offset\": 0, \"field_off\": 0}, {\"pc\": 1744592, \"instr\": \"lh $v0, ($v0)\", \"kind\": \"read\", \"base_reg\": \"v0\", \"offset\": 0, \"field_off\": 0}, {\"pc\": 1607628, \"instr\": \"sh $v1, 0x5e($a1)\", \"kind\": \"write\", \"base_reg\": \"a1\", \"offset\": 94, \"field_off\": 6}, {\"pc\": 1607736, \"instr\": \"lh $v1, 0x5e($a1)\", \"kind\": \"read\", \"base_reg\": \"a1\", \"offset\": 94, \"field_off\": 6}, {\"pc\": 1717564, \"instr\": \"lw $v0, ($v1)\", \"kind\": \"read\", \"base_reg\": \"v1\", \"offset\": 0, \"field_off\": 6}, {\"pc\": 1717572, \"instr\": \"sw $v0, ($v1)\", \"kind\": \"write\", \"base_reg\": \"v1\", \"offset\": 0, \"field_off\": 6}, {\"pc\": 1718032, \"instr\": \"lh $a1, ($v0)\", \"kind\": \"read\", \"base_reg\": \"v0\", \"offset\": 0, \"field_off\": 6}, {\"pc\": 1718068, \"instr\": \"sw $v1, ($v0)\", \"kind\": \"write\", \"base_reg\": \"v0\", \"offset\": 0, \"field_off\": 6}, {\"pc\": 1718300, \"instr\": \"sh $a0, ($v0)\", \"kind\": \"write\", \"base_reg\": \"v0\", \"offset\": 0, \"field_off\": 6}, {\"pc\": 1607636, \"instr\": \"sh $v1, 0x60($a1)\", \"kind\": \"write\", \"base_reg\": \"a1\", \"offset\": 96, \"field_off\": 8}, {\"pc\": 1607744, \"instr\": \"lh $v1, 0x60($a1)\", \"kind\": \"read\", \"base_reg\": \"a1\", \"offset\": 96, \"field_off\": 8}, {\"pc\": 1716960, \"instr\": \"lh $a1, ($v0)\", \"kind\": \"read\", \"base_reg\": \"v0\", \"offset\": 0, \"field_off\": 8}, {\"pc\": 1716996, \"instr\": \"sw $v1, ($v0)\", \"kind\": \"write\", \"base_reg\": \"v0\", \"offset\": 0, \"field_off\": 8}, {\"pc\": 1717228, \"instr\": \"sh $a0, ($v0)\", \"kind\": \"write\", \"base_reg\": \"v0\", \"offset\": 0, \"field_off\": 8}, {\"pc\": 1607644, \"instr\": \"sb $v1, 0x62($a1)\", \"kind\": \"write\", \"base_reg\": \"a1\", \"offset\": 98, \"field_off\": 10}, {\"pc\": 1607752, \"instr\": \"lb $v1, 0x62($a1)\", \"kind\": \"read\", \"base_reg\": \"a1\", \"offset\": 98, \"field_off\": 10}, {\"pc\": 1670908, \"instr\": \"sb $a0, ($v0)\", \"kind\": \"write\", \"base_reg\": \"v0\", \"offset\": 0, \"field_off\": 10}, {\"pc\": 1671136, \"instr\": \"lb $a1, ($v0)\", \"kind\": \"read\", \"base_reg\": \"v0\", \"offset\": 0, \"field_off\": 10}, {\"pc\": 1671172, \"instr\": \"sw $v1, ($v0)\", \"kind\": \"write\", \"base_reg\": \"v0\", \"offset\": 0, \"field_off\": 10}, {\"pc\": 1607660, \"instr\": \"sb $v1, 0x64($a1)\", \"kind\": \"write\", \"base_reg\": \"a1\", \"offset\": 100, \"field_off\": 12}, {\"pc\": 1607768, \"instr\": \"lb $v1, 0x64($a1)\", \"kind\": \"read\", \"base_reg\": \"a1\", \"offset\": 100, \"field_off\": 12}, {\"pc\": 1659580, \"instr\": \"sb $a0, ($v0)\", \"kind\": \"write\", \"base_reg\": \"v0\", \"offset\": 0, \"field_off\": 12}, {\"pc\": 1607676, \"instr\": \"sb $v1, 0x66($a1)\", \"kind\": \"write\", \"base_reg\": \"a1\", \"offset\": 102, \"field_off\": 14}, {\"pc\": 1607784, \"instr\": \"lb $v1, 0x66($a1)\", \"kind\": \"read\", \"base_reg\": \"a1\", \"offset\": 102, \"field_off\": 14}, {\"pc\": 1653360, \"instr\": \"lb $a1, ($v0)\", \"kind\": \"read\", \"base_reg\": \"v0\", \"offset\": 0, \"field_off\": 14}, {\"pc\": 1653396, \"instr\": \"sw $v1, ($v0)\", \"kind\": \"write\", \"base_reg\": \"v0\", \"offset\": 0, \"field_off\": 14}, {\"pc\": 1653944, \"instr\": \"lw $v0, ($v1)\", \"kind\": \"read\", \"base_reg\": \"v1\", \"offset\": 0, \"field_off\": 14}, {\"pc\": 1653952, \"instr\": \"sw $v0, ($v1)\", \"kind\": \"write\", \"base_reg\": \"v1\", \"offset\": 0, \"field_off\": 14}, {\"pc\": 1654172, \"instr\": \"sb $a0, ($v0)\", \"kind\": \"write\", \"base_reg\": \"v0\", \"offset\": 0, \"field_off\": 14}, {\"pc\": 1660320, \"instr\": \"lh $v1, ($v1)\", \"kind\": \"read\", \"base_reg\": \"v1\", \"offset\": 0, \"field_off\": 2}, {\"pc\": 1668096, \"instr\": \"lh $a1, ($v0)\", \"kind\": \"read\", \"base_reg\": \"v0\", \"offset\": 0, \"field_off\": 2}, {\"pc\": 1668136, \"instr\": \"sw $v1, ($v0)\", \"kind\": \"write\", \"base_reg\": \"v0\", \"offset\": 0, \"field_off\": 2}, {\"pc\": 1668364, \"instr\": \"sh $a0, ($v0)\", \"kind\": \"write\", \"base_reg\": \"v0\", \"offset\": 0, \"field_off\": 2}, {\"pc\": 1670032, \"instr\": \"sh $t0, ($v1)\", \"kind\": \"write\", \"base_reg\": \"v1\", \"offset\": 0, \"field_off\": 2}]"
+  },
+  {
+    "serial": "SLUS-20407",
+    "label": "Player HP (max)",
+    "address": "0x00C1860A",
+    "fmt": "uint16",
+    "category": "player",
+    "notes": "Max HP, immediately after current HP. Both u16.",
+    "pointer_chain": null,
+    "code_refs": "[{\"pc\": 1367488, \"instr\": \"lb $v0, -0x79e8($at)\", \"kind\": \"read\", \"base_reg\": \"at\", \"offset\": -31208, \"field_off\": 14}, {\"pc\": 1367540, \"instr\": \"lb $v0, 0x68($v1)\", \"kind\": \"read\", \"base_reg\": \"v1\", \"offset\": 104, \"field_off\": 14}, {\"pc\": 1657196, \"instr\": \"sb $a0, ($v0)\", \"kind\": \"write\", \"base_reg\": \"v0\", \"offset\": 0, \"field_off\": 14}]"
+  },
+  {
+    "serial": "SLUS-20407",
+    "label": "Player status flags?",
+    "address": "0x00C1860C",
+    "fmt": "uint16",
+    "category": "player",
+    "notes": "Status word (0 when idle).",
+    "pointer_chain": null,
+    "code_refs": null
+  },
+  {
+    "serial": "SLUS-20407",
+    "label": "Player target ID",
+    "address": "0x00C1860E",
+    "fmt": "uint16",
+    "category": "player",
+    "notes": "0xFFFE = no target locked. -- spawn-state gate (0=menu, FFFE=ingame)",
+    "pointer_chain": null,
+    "code_refs": "[{\"pc\": 1367476, \"instr\": \"lw $v0, -0x79e4($at)\", \"kind\": \"read\", \"base_reg\": \"at\", \"offset\": -31204, \"field_off\": 14}, {\"pc\": 1367532, \"instr\": \"lw $v0, 0x6c($v1)\", \"kind\": \"read\", \"base_reg\": \"v1\", \"offset\": 108, \"field_off\": 14}, {\"pc\": 1384788, \"instr\": \"sw $a1, ($v1)\", \"kind\": \"write\", \"base_reg\": \"v1\", \"offset\": 0, \"field_off\": 14}, {\"pc\": 1384816, \"instr\": \"sw $a1, ($v1)\", \"kind\": \"write\", \"base_reg\": \"v1\", \"offset\": 0, \"field_off\": 14}, {\"pc\": 1384844, \"instr\": \"sw $a1, ($v1)\", \"kind\": \"write\", \"base_reg\": \"v1\", \"offset\": 0, \"field_off\": 14}, {\"pc\": 1384868, \"instr\": \"sw $a1, ($v1)\", \"kind\": \"write\", \"base_reg\": \"v1\", \"offset\": 0, \"field_off\": 14}, {\"pc\": 1384896, \"instr\": \"sw $a1, ($v1)\", \"kind\": \"write\", \"base_reg\": \"v1\", \"offset\": 0, \"field_off\": 14}, {\"pc\": 1384920, \"instr\": \"sw $a1, ($v1)\", \"kind\": \"write\", \"base_reg\": \"v1\", \"offset\": 0, \"field_off\": 14}, {\"pc\": 1384948, \"instr\": \"sw $a1, ($v1)\", \"kind\": \"write\", \"base_reg\": \"v1\", \"offset\": 0, \"field_off\": 14}, {\"pc\": 1384968, \"instr\": \"sw $a1, ($v1)\", \"kind\": \"write\", \"base_reg\": \"v1\", \"offset\": 0, \"field_off\": 14}]"
+  },
+  {
+    "serial": "SLUS-20407",
+    "label": "Player weapon flags",
+    "address": "0x00C18614",
+    "fmt": "uint32",
+    "category": "player",
+    "notes": "Bytes 06 06 00 ff = equipment/weapon-slot flags.",
+    "pointer_chain": null,
+    "code_refs": "[{\"pc\": 1367500, \"instr\": \"lw $v0, -0x79e0($at)\", \"kind\": \"read\", \"base_reg\": \"at\", \"offset\": -31200, \"field_off\": 12}, {\"pc\": 1367548, \"instr\": \"lw $v0, 0x70($v1)\", \"kind\": \"read\", \"base_reg\": \"v1\", \"offset\": 112, \"field_off\": 12}, {\"pc\": 1383504, \"instr\": \"sw $a3, ($v1)\", \"kind\": \"write\", \"base_reg\": \"v1\", \"offset\": 0, \"field_off\": 12}, {\"pc\": 1383532, \"instr\": \"sw $a3, ($v1)\", \"kind\": \"write\", \"base_reg\": \"v1\", \"offset\": 0, \"field_off\": 12}, {\"pc\": 1383556, \"instr\": \"sw $zero, ($v1)\", \"kind\": \"write\", \"base_reg\": \"v1\", \"offset\": 0, \"field_off\": 12}, {\"pc\": 1383584, \"instr\": \"sw $a3, ($v1)\", \"kind\": \"write\", \"base_reg\": \"v1\", \"offset\": 0, \"field_off\": 12}, {\"pc\": 1383612, \"instr\": \"sw $a3, ($v1)\", \"kind\": \"write\", \"base_reg\": \"v1\", \"offset\": 0, \"field_off\": 12}, {\"pc\": 1383640, \"instr\": \"sw $a3, ($v1)\", \"kind\": \"write\", \"base_reg\": \"v1\", \"offset\": 0, \"field_off\": 12}, {\"pc\": 1383668, \"instr\": \"sw $a3, ($v1)\", \"kind\": \"write\", \"base_reg\": \"v1\", \"offset\": 0, \"field_off\": 12}, {\"pc\": 1383696, \"instr\": \"sw $a3, ($v1)\", \"kind\": \"write\", \"base_reg\": \"v1\", \"offset\": 0, \"field_off\": 12}, {\"pc\": 1383724, \"instr\": \"sw $a3, ($v1)\", \"kind\": \"write\", \"base_reg\": \"v1\", \"offset\": 0, \"field_off\": 12}, {\"pc\": 1383752, \"instr\": \"sw $a3, ($v1)\", \"kind\": \"write\", \"base_reg\": \"v1\", \"offset\": 0, \"field_off\": 12}, {\"pc\": 1383780, \"instr\": \"sw $a3, ($v1)\", \"kind\": \"write\", \"base_reg\": \"v1\", \"offset\": 0, \"field_off\": 12}, {\"pc\": 1383808, \"instr\": \"sw $a3, ($v1)\", \"kind\": \"write\", \"base_reg\": \"v1\", \"offset\": 0, \"field_off\": 12}, {\"pc\": 1383836, \"instr\": \"sw $a3, ($v1)\", \"kind\": \"write\", \"base_reg\": \"v1\", \"offset\": 0, \"field_off\": 12}, {\"pc\": 1383864, \"instr\": \"sw $a3, ($v1)\", \"kind\": \"write\", \"base_reg\": \"v1\", \"offset\": 0, \"field_off\": 12}, {\"pc\": 1383892, \"instr\": \"sw $a3, ($v1)\", \"kind\": \"write\", \"base_reg\": \"v1\", \"offset\": 0, \"field_off\": 12}, {\"pc\": 1383920, \"instr\": \"sw $a3, ($v1)\", \"kind\": \"write\", \"base_reg\": \"v1\", \"offset\": 0, \"field_off\": 12}, {\"pc\": 1383948, \"instr\": \"sw $a3, ($v1)\", \"kind\": \"write\", \"base_reg\": \"v1\", \"offset\": 0, \"field_off\": 12}, {\"pc\": 1383976, \"instr\": \"sw $a3, ($v1)\", \"kind\": \"write\", \"base_reg\": \"v1\", \"offset\": 0, \"field_off\": 12}, {\"pc\": 1384004, \"instr\": \"sw $a3, ($v1)\", \"kind\": \"write\", \"base_reg\": \"v1\", \"offset\": 0, \"field_off\": 12}, {\"pc\": 1384032, \"instr\": \"sw $a3, ($v1)\", \"kind\": \"write\", \"base_reg\": \"v1\", \"offset\": 0, \"field_off\": 12}, {\"pc\": 1384060, \"instr\": \"sw $a3, ($v1)\", \"kind\": \"write\", \"base_reg\": \"v1\", \"offset\": 0, \"field_off\": 12}, {\"pc\": 1384088, \"instr\": \"sw $a3, ($v1)\", \"kind\": \"write\", \"base_reg\": \"v1\", \"offset\": 0, \"field_off\": 12}, {\"pc\": 1384116, \"instr\": \"sw $a3, ($v1)\", \"kind\": \"write\", \"base_reg\": \"v1\", \"offset\": 0, \"field_off\": 12}, {\"pc\": 1384144, \"instr\": \"sw $a3, ($v1)\", \"kind\": \"write\", \"base_reg\": \"v1\", \"offset\": 0, \"field_off\": 12}, {\"pc\": 1384172, \"instr\": \"sw $a3, ($v1)\", \"kind\": \"write\", \"base_reg\": \"v1\", \"offset\": 0, \"field_off\": 12}, {\"pc\": 1384200, \"instr\": \"sw $a3, ($v1)\", \"kind\": \"write\", \"base_reg\": \"v1\", \"offset\": 0, \"field_off\": 12}, {\"pc\": 1384224, \"instr\": \"sw $a3, ($v1)\", \"kind\": \"write\", \"base_reg\": \"v1\", \"offset\": 0, \"field_off\": 12}]"
+  },
+  {
+    "serial": "SLUS-20407",
+    "label": "Player sword durability",
+    "address": "0x00C18618",
+    "fmt": "uint32",
+    "category": "player",
+    "notes": "REJECTED 2026-06-23: Same pattern as yen — write persists in RAM (durability=5) but in-game UI shows 3. Cached slot, not display source. Need fresh hunt via gameplay diff.",
+    "pointer_chain": null,
+    "code_refs": null
+  },
+  {
+    "serial": "SLUS-20407",
+    "label": "Player sword count",
+    "address": "0x00C1861C",
+    "fmt": "uint32",
+    "category": "player",
+    "notes": "1 = one sword equipped.",
+    "pointer_chain": null,
+    "code_refs": null
+  },
+  {
+    "serial": "SLUS-20407",
+    "label": "Player struct field +0x18",
+    "address": "0x00C18620",
+    "fmt": "uint32",
+    "category": "player",
+    "notes": "Unknown count = 1.",
+    "pointer_chain": null,
+    "code_refs": null
+  },
+  {
+    "serial": "SLUS-20407",
+    "label": "NPC slot[1] (char_id=1)",
+    "address": "0x00C18800",
+    "fmt": "struct",
+    "category": "npc_slot",
+    "notes": "Stride=0x800. HP=1800 in ingame_idle. char_id@+0x00. Sample VERIFIED.",
+    "pointer_chain": null,
+    "code_refs": null
+  },
+  {
+    "serial": "SLUS-20407",
+    "label": "Player yen (currency)",
+    "address": "0x00C18A20",
+    "fmt": "uint32",
+    "category": "player",
+    "notes": "REJECTED 2026-06-23: Writes persist in RAM (verified live: wrote 999999, RAM still reads 999999) but in-game HUD shows different value (5). This is a CACHED COPY / debug slot, NOT the address the game UI reads from. Same pattern as the original 0x00C18A20 vs 0x00C291F4 yen conflict — we picked wrong winner. Need fresh hunt: live-diff while user earns yen organically.",
+    "pointer_chain": null,
+    "code_refs": null
+  },
+  {
+    "serial": "SLUS-20407",
+    "label": "Player rotation A",
+    "address": "0x00C18BB0",
+    "fmt": "float",
+    "category": "player",
+    "notes": "pitch / lookY?",
+    "pointer_chain": null,
+    "code_refs": null
+  },
+  {
+    "serial": "SLUS-20407",
+    "label": "Player rotation sin",
+    "address": "0x00C18BB8",
+    "fmt": "float",
+    "category": "player",
+    "notes": "sin of facing angle (yaw)",
+    "pointer_chain": null,
+    "code_refs": null
+  },
+  {
+    "serial": "SLUS-20407",
+    "label": "Player rotation -sin (mirror)",
+    "address": "0x00C18BD0",
+    "fmt": "float",
+    "category": "player",
+    "notes": "mirrored sin — confirms rotation pair",
+    "pointer_chain": null,
+    "code_refs": null
+  },
+  {
+    "serial": "SLUS-20407",
+    "label": "Player rotation A2",
+    "address": "0x00C18BD8",
+    "fmt": "float",
+    "category": "player",
+    "notes": "mirror of A",
+    "pointer_chain": null,
+    "code_refs": null
+  },
+  {
+    "serial": "SLUS-20407",
+    "label": "Player look/cam X",
+    "address": "0x00C18BE0",
+    "fmt": "float",
+    "category": "player",
+    "notes": "changed across walks; near player.X but off — likely camera/look-at X",
+    "pointer_chain": null,
+    "code_refs": null
+  },
+  {
+    "serial": "SLUS-20407",
+    "label": "Player look/cam Y",
+    "address": "0x00C18BE4",
+    "fmt": "float",
+    "category": "player",
+    "notes": "see X",
+    "pointer_chain": null,
+    "code_refs": null
+  },
+  {
+    "serial": "SLUS-20407",
+    "label": "Player look/cam Z",
+    "address": "0x00C18BE8",
+    "fmt": "float",
+    "category": "player",
+    "notes": "see X",
+    "pointer_chain": null,
+    "code_refs": null
+  },
+  {
+    "serial": "SLUS-20407",
+    "label": "NPC slot[2] (char_id=5)",
+    "address": "0x00C19000",
+    "fmt": "struct",
+    "category": "npc_slot",
+    "notes": "Stride=0x800. HP=1600 in ingame_idle. char_id@+0x00. Sample VERIFIED.",
+    "pointer_chain": null,
+    "code_refs": null
+  },
+  {
+    "serial": "SLUS-20407",
+    "label": "NPC slot[3] (char_id=9)",
+    "address": "0x00C19800",
+    "fmt": "struct",
+    "category": "npc_slot",
+    "notes": "Stride=0x800. HP=1200 in ingame_idle. char_id@+0x00. Sample VERIFIED.",
+    "pointer_chain": null,
+    "code_refs": null
+  },
+  {
+    "serial": "SLUS-20407",
+    "label": "NPC slot[4] (char_id=13)",
+    "address": "0x00C1A000",
+    "fmt": "struct",
+    "category": "npc_slot",
+    "notes": "Stride=0x800. HP=1000 in ingame_idle. char_id@+0x00. Sample VERIFIED.",
+    "pointer_chain": null,
+    "code_refs": null
+  },
+  {
+    "serial": "SLUS-20407",
+    "label": "NPC slot[5] (char_id=29)",
+    "address": "0x00C1A800",
+    "fmt": "struct",
+    "category": "npc_slot",
+    "notes": "Stride=0x800. HP=9999 in ingame_idle. char_id@+0x00. Sample VERIFIED.",
+    "pointer_chain": null,
+    "code_refs": null
+  },
+  {
+    "serial": "SLUS-20407",
+    "label": "NPC slot[6] (char_id=16)",
+    "address": "0x00C1B000",
+    "fmt": "struct",
+    "category": "npc_slot",
+    "notes": "Stride=0x800. HP=200 in ingame_idle. char_id@+0x00. Sample VERIFIED.",
+    "pointer_chain": null,
+    "code_refs": null
+  },
+  {
+    "serial": "SLUS-20407",
+    "label": "NPC slot[7] (char_id=17)",
+    "address": "0x00C1B800",
+    "fmt": "struct",
+    "category": "npc_slot",
+    "notes": "Stride=0x800. HP=1000 in ingame_idle. char_id@+0x00. Sample VERIFIED.",
+    "pointer_chain": null,
+    "code_refs": null
+  },
+  {
+    "serial": "SLUS-20407",
+    "label": "Char-unlock bitmask (mirror)",
+    "address": "0x00C25C64",
+    "fmt": "uint32",
+    "category": "progression",
+    "notes": "Same mask stored as (m|m<<16). Write 0x3FFF3FFF for all-unlock. Update both this and 0x00C2D6C4 for consistency.",
+    "pointer_chain": null,
+    "code_refs": null
+  },
+  {
+    "serial": "SLUS-20407",
+    "label": "UI script BGM debug log",
+    "address": "0x00C29290",
+    "fmt": "string",
+    "category": "audio",
+    "notes": "C++ debug log \"GzMfBgm::Stop()\" - WoS engine uses GzMfBgm sound manager namespace.",
+    "pointer_chain": null,
+    "code_refs": "[{\"pc\": 1913540, \"instr\": \"lw $a1, 0x1d4($s1)\", \"kind\": \"read\", \"base_reg\": \"s1\", \"offset\": 468, \"field_off\": 12}, {\"pc\": 1913564, \"instr\": \"lw $a1, 0x1d4($s1)\", \"kind\": \"read\", \"base_reg\": \"s1\", \"offset\": 468, \"field_off\": 12}]"
+  },
+  {
+    "serial": "SLUS-20407",
+    "label": "Char-unlock bitmask (canonical)",
+    "address": "0x00C2D6C4",
+    "fmt": "uint32",
+    "category": "progression",
+    "notes": "u32 bitmask, low 14 bits = unlocked playable chars. 0x3FFF = all unlocked. VERIFIED live + agent snapshot diff.",
+    "pointer_chain": null,
+    "code_refs": null
+  },
+  {
+    "serial": "SLUS-20407",
+    "label": "Unlock-related counter",
+    "address": "0x00C2D6C8",
+    "fmt": "uint32",
+    "category": "progression",
+    "notes": "u32 ticked +2 by the unlock cheat. Possibly purchase/menu-event counter. Needs further test.",
+    "pointer_chain": null,
+    "code_refs": null
+  },
+  {
+    "serial": "SLUS-20407",
+    "label": "Char-select active flag",
+    "address": "0x00C2D6CC",
+    "fmt": "uint32",
+    "category": "progression",
+    "notes": "u32 = 1 when char select screen is active, 0 otherwise. Cross-snapshot verified.",
+    "pointer_chain": null,
+    "code_refs": null
+  },
+  {
+    "serial": "SLUS-20407",
+    "label": "Live script region",
+    "address": "0x00C2D930",
+    "fmt": "region",
+    "category": "script_runtime",
+    "notes": "Start of in-mission compiled/decompressed script region. Holds dialogue tables, branching logic, character ID bindings.",
+    "pointer_chain": null,
+    "code_refs": null
+  },
+  {
+    "serial": "SLUS-20407",
+    "label": "Live script arena start",
+    "address": "0x00C2D930",
+    "fmt": "region",
+    "category": "script_runtime",
+    "notes": "Confirmed: script source loaded as plain text. 105 #mapid references, opcode tables visible.",
+    "pointer_chain": null,
+    "code_refs": null
+  },
+  {
+    "serial": "SLUS-20407",
+    "label": "Live NPC dialogue table",
+    "address": "0x00C2FEEA",
+    "fmt": "region",
+    "category": "script_runtime",
+    "notes": "NPC dialogue (#AKA_*, #ZAKO_*, #KURO_*) with $CAC speech calls. ~920 $CAC instances.",
+    "pointer_chain": null,
+    "code_refs": null
+  },
+  {
+    "serial": "SLUS-20407",
+    "label": "Animation track ring buffer A",
+    "address": "0x00C70C20",
+    "fmt": "array",
+    "category": "audio_anim",
+    "notes": "Records striding 0x1F0 (496) bytes labeled by ASCII char (a/b/c/d/e/f/g/h). Each holds 16-bit signed samples (slowly varying waves). Either audio waveform or animation curve data.",
+    "pointer_chain": null,
+    "code_refs": null
+  },
+  {
+    "serial": "SLUS-20407",
+    "label": "Asset allocation table",
+    "address": "0x00E0AF80",
+    "fmt": "table",
+    "category": "memory",
+    "notes": "16-byte entries: [ptr:u32, size:u32, ptr:u32, size:u32]. Maps every loaded EE RAM asset block. Entry +0x100 has ptr=0x00925000 (player mesh) size=64736. Entry +0xC0 (idx 12) has ptr=0x00905000 (weapon db) size=14624.",
+    "pointer_chain": null,
+    "code_refs": null
+  },
+  {
+    "serial": "SLUS-20407",
+    "label": "Save/UI region head",
+    "address": "0x0105B000",
+    "fmt": "region",
+    "category": "menu_inventory",
+    "notes": "Menu inventory data region. Sword records of ~48 bytes each.",
+    "pointer_chain": null,
+    "code_refs": null
+  },
+  {
+    "serial": "SLUS-20407",
+    "label": "Menu sword record start",
+    "address": "0x0105B8F0",
+    "fmt": "struct",
+    "category": "menu_inventory",
+    "notes": "Sword record begins here. Layout: 28-byte header + u16 dur@+1C + u16 flag + u16 atk + u16 atk + u16 def + u16 def + 0xFFFF separator + price-pair + empty slots.",
+    "pointer_chain": null,
+    "code_refs": null
+  },
+  {
+    "serial": "SLUS-20407",
+    "label": "Menu sword: u16@-10",
+    "address": "0x0105B902",
+    "fmt": "uint16",
+    "category": "menu_inventory",
+    "notes": "Value=12, likely sword TYPE ID (12 might be slot index in name table or weapon type).",
+    "pointer_chain": null,
+    "code_refs": null
+  },
+  {
+    "serial": "SLUS-20407",
+    "label": "Menu sword: durability current",
+    "address": "0x0105B90C",
+    "fmt": "uint16",
+    "category": "menu_inventory",
+    "notes": "VERIFIED via cheat-trigger diff. Exactly one address transitioned 3->4 then 4->5 after user activated +1 durability cheat. THIS is what the pause menu reads.",
+    "pointer_chain": null,
+    "code_refs": null
+  },
+  {
+    "serial": "SLUS-20407",
+    "label": "Menu sword: probable max-dur",
+    "address": "0x0105B910",
+    "fmt": "uint16",
+    "category": "menu_inventory",
+    "notes": "Same value = 5 (or 6?). Paired with current dur. Could be max.",
+    "pointer_chain": null,
+    "code_refs": null
+  },
+  {
+    "serial": "SLUS-20407",
+    "label": "Menu sword: u16@+14",
+    "address": "0x0105B91A",
+    "fmt": "uint16",
+    "category": "menu_inventory",
+    "notes": "Value=137, paired with +16. Possible price or rarity score.",
+    "pointer_chain": null,
+    "code_refs": null
+  }
+]

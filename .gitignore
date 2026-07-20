@@ -1,0 +1,14 @@
+# Never ship game binary data or dumps
+*.db
+*.iso
+*.bin
+*.ISO
+*.BIN
+*.elf
+*.ELF
+dumps/
+assets/
+*.dat
+*.DAT
+__pycache__/
+*.pyc

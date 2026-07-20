@@ -1,0 +1,1514 @@
+[
+  {
+    "opcode": 0,
+    "handler_addr": 1665392,
+    "mnemonic": "$C00",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_001349e0; 36 ln"
+  },
+  {
+    "opcode": 1,
+    "handler_addr": 1667072,
+    "mnemonic": "$C01",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_001349e0; 57 ln"
+  },
+  {
+    "opcode": 2,
+    "handler_addr": 1668336,
+    "mnemonic": "$C02",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_001349e0; 74 ln"
+  },
+  {
+    "opcode": 3,
+    "handler_addr": 1668064,
+    "mnemonic": "$C03",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0; 29 ln"
+  },
+  {
+    "opcode": 4,
+    "handler_addr": 1670080,
+    "mnemonic": "$C04",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_00182910; 59 ln"
+  },
+  {
+    "opcode": 5,
+    "handler_addr": 1672048,
+    "mnemonic": "$C05",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_001349e0; 118 ln"
+  },
+  {
+    "opcode": 6,
+    "handler_addr": 1673568,
+    "mnemonic": "$C06",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_001349e0; 93 ln"
+  },
+  {
+    "opcode": 7,
+    "handler_addr": 1672912,
+    "mnemonic": "$C07",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_001349e0; 97 ln"
+  },
+  {
+    "opcode": 8,
+    "handler_addr": 1671424,
+    "mnemonic": "$C08",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_001349e0; 90 ln"
+  },
+  {
+    "opcode": 9,
+    "handler_addr": 1671104,
+    "mnemonic": "$C09",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_00185d30; 38 ln"
+  },
+  {
+    "opcode": 10,
+    "handler_addr": 1669040,
+    "mnemonic": "$C0A",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_001349e0; 48 ln"
+  },
+  {
+    "opcode": 11,
+    "handler_addr": 1664752,
+    "mnemonic": "$C0B",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_001349e0; 83 ln"
+  },
+  {
+    "opcode": 12,
+    "handler_addr": 1663904,
+    "mnemonic": "$C0C",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_00182910; 102 ln"
+  },
+  {
+    "opcode": 13,
+    "handler_addr": 1663632,
+    "mnemonic": "$C0D",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_00166c90; 35 ln"
+  },
+  {
+    "opcode": 14,
+    "handler_addr": 1663104,
+    "mnemonic": "$C0E",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_00105ce0; 68 ln"
+  },
+  {
+    "opcode": 15,
+    "handler_addr": 1667552,
+    "mnemonic": "$C0F",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_001349e0; 37 ln"
+  },
+  {
+    "opcode": 16,
+    "handler_addr": 1667808,
+    "mnemonic": "$C10",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_001349e0; 36 ln"
+  },
+  {
+    "opcode": 17,
+    "handler_addr": 1665728,
+    "mnemonic": "$C11",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_001349e0; 69 ln"
+  },
+  {
+    "opcode": 18,
+    "handler_addr": 1662208,
+    "mnemonic": "$C12",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_00182910; 126 ln"
+  },
+  {
+    "opcode": 19,
+    "handler_addr": 1661904,
+    "mnemonic": "$C13",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_001349e0; 42 ln"
+  },
+  {
+    "opcode": 20,
+    "handler_addr": 1670880,
+    "mnemonic": "$C14",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_00166cd0; 29 ln"
+  },
+  {
+    "opcode": 21,
+    "handler_addr": 1661520,
+    "mnemonic": "$C15",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_001349e0; 46 ln"
+  },
+  {
+    "opcode": 22,
+    "handler_addr": 1661264,
+    "mnemonic": "$C16",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_001349e0; 32 ln"
+  },
+  {
+    "opcode": 23,
+    "handler_addr": 1660656,
+    "mnemonic": "$C17",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_00182910; 89 ln"
+  },
+  {
+    "opcode": 24,
+    "handler_addr": 1660352,
+    "mnemonic": "$C18",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_001349e0; 42 ln"
+  },
+  {
+    "opcode": 25,
+    "handler_addr": 1660048,
+    "mnemonic": "$C19",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_001df320; 38 ln"
+  },
+  {
+    "opcode": 26,
+    "handler_addr": 1659776,
+    "mnemonic": "$C1A",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0; 29 ln"
+  },
+  {
+    "opcode": 27,
+    "handler_addr": 1659552,
+    "mnemonic": "$C1B",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_00166cd0; 29 ln"
+  },
+  {
+    "opcode": 28,
+    "handler_addr": 1659040,
+    "mnemonic": "$C1C",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_001349e0; 35 ln"
+  },
+  {
+    "opcode": 29,
+    "handler_addr": 1659280,
+    "mnemonic": "$C1D",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0; 29 ln"
+  },
+  {
+    "opcode": 30,
+    "handler_addr": 1658784,
+    "mnemonic": "$C1E",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_001349e0; 36 ln"
+  },
+  {
+    "opcode": 31,
+    "handler_addr": 1666656,
+    "mnemonic": "$C1F",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00166a30, FUN_00177b40, FUN_001708f0; 43 ln"
+  },
+  {
+    "opcode": 32,
+    "handler_addr": 1666240,
+    "mnemonic": "$C20",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00166a30, FUN_00177b40, FUN_001708f0; 43 ln"
+  },
+  {
+    "opcode": 33,
+    "handler_addr": 1658512,
+    "mnemonic": "$C21",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_001349e0; 35 ln"
+  },
+  {
+    "opcode": 34,
+    "handler_addr": 1657376,
+    "mnemonic": "$C22",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_00178f80; 142 ln"
+  },
+  {
+    "opcode": 35,
+    "handler_addr": 1670608,
+    "mnemonic": "$C23",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0; 29 ln"
+  },
+  {
+    "opcode": 36,
+    "handler_addr": 1657168,
+    "mnemonic": "$C24",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_001349e0; 25 ln"
+  },
+  {
+    "opcode": 37,
+    "handler_addr": 1656896,
+    "mnemonic": "$C25",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0; 29 ln"
+  },
+  {
+    "opcode": 38,
+    "handler_addr": 1656784,
+    "mnemonic": "$C26",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_001784a0; 10 ln"
+  },
+  {
+    "opcode": 39,
+    "handler_addr": 1655760,
+    "mnemonic": "$C27",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_00182910; 96 ln"
+  },
+  {
+    "opcode": 40,
+    "handler_addr": 1655184,
+    "mnemonic": "$C28",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_001349e0; 43 ln"
+  },
+  {
+    "opcode": 41,
+    "handler_addr": 1654144,
+    "mnemonic": "$C29",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_001349e0; 94 ln"
+  },
+  {
+    "opcode": 42,
+    "handler_addr": 1653872,
+    "mnemonic": "$C2A",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0; 29 ln"
+  },
+  {
+    "opcode": 43,
+    "handler_addr": 1653104,
+    "mnemonic": "$C2B",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_00166cd0; 29 ln"
+  },
+  {
+    "opcode": 44,
+    "handler_addr": 1653600,
+    "mnemonic": "$C2C",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0; 31 ln"
+  },
+  {
+    "opcode": 45,
+    "handler_addr": 1653328,
+    "mnemonic": "$C2D",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0; 31 ln"
+  },
+  {
+    "opcode": 46,
+    "handler_addr": 1652864,
+    "mnemonic": "$C2E",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_001349e0; 29 ln"
+  },
+  {
+    "opcode": 47,
+    "handler_addr": 1652624,
+    "mnemonic": "$C2F",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_001349e0; 29 ln"
+  },
+  {
+    "opcode": 48,
+    "handler_addr": 1652352,
+    "mnemonic": "$C30",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_001349e0; 32 ln"
+  },
+  {
+    "opcode": 49,
+    "handler_addr": 1652096,
+    "mnemonic": "$C31",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_00178440; 31 ln"
+  },
+  {
+    "opcode": 50,
+    "handler_addr": 1651504,
+    "mnemonic": "$C32",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_00105cf0; 62 ln"
+  },
+  {
+    "opcode": 51,
+    "handler_addr": 1651216,
+    "mnemonic": "$C33",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_001348b0; 42 ln"
+  },
+  {
+    "opcode": 52,
+    "handler_addr": 1655488,
+    "mnemonic": "$C34",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_001349e0; 35 ln"
+  },
+  {
+    "opcode": 53,
+    "handler_addr": 1650944,
+    "mnemonic": "$C35",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_001348b0; 35 ln"
+  },
+  {
+    "opcode": 54,
+    "handler_addr": 1646736,
+    "mnemonic": "$C36",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_0011d060; 33 ln"
+  },
+  {
+    "opcode": 55,
+    "handler_addr": 1644704,
+    "mnemonic": "$C37",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_00192510; 46 ln"
+  },
+  {
+    "opcode": 56,
+    "handler_addr": 1646128,
+    "mnemonic": "$C38",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_0011d060; 92 ln"
+  },
+  {
+    "opcode": 57,
+    "handler_addr": 1645616,
+    "mnemonic": "$C39",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_00182910; 68 ln"
+  },
+  {
+    "opcode": 58,
+    "handler_addr": 1645296,
+    "mnemonic": "$C3A",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_001349e0; 37 ln"
+  },
+  {
+    "opcode": 59,
+    "handler_addr": 1643872,
+    "mnemonic": "$C3B",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_00182910; 48 ln"
+  },
+  {
+    "opcode": 60,
+    "handler_addr": 1643552,
+    "mnemonic": "$C3C",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_001349e0; 36 ln"
+  },
+  {
+    "opcode": 61,
+    "handler_addr": 1645056,
+    "mnemonic": "$C3D",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_00182910, FUN_0011ec80; 26 ln"
+  },
+  {
+    "opcode": 62,
+    "handler_addr": 1644496,
+    "mnemonic": "$C3E",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0; 23 ln"
+  },
+  {
+    "opcode": 63,
+    "handler_addr": 1644288,
+    "mnemonic": "$C3F",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_00182910, FUN_0011dc50; 25 ln"
+  },
+  {
+    "opcode": 64,
+    "handler_addr": 1587376,
+    "mnemonic": "$C40",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_001349e0; 61 ln"
+  },
+  {
+    "opcode": 66,
+    "handler_addr": 1587024,
+    "mnemonic": "$C42",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_001349e0; 42 ln"
+  },
+  {
+    "opcode": 67,
+    "handler_addr": 1586656,
+    "mnemonic": "$C43",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_001349e0; 42 ln"
+  },
+  {
+    "opcode": 68,
+    "handler_addr": 1586320,
+    "mnemonic": "$C44",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_001349e0; 44 ln"
+  },
+  {
+    "opcode": 69,
+    "handler_addr": 1585696,
+    "mnemonic": "$C45",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_001349e0; 92 ln"
+  },
+  {
+    "opcode": 70,
+    "handler_addr": 1585248,
+    "mnemonic": "$C46",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_00182910; 63 ln"
+  },
+  {
+    "opcode": 71,
+    "handler_addr": 1588240,
+    "mnemonic": "$C47",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "(no decompiled file: (mid-function or unlisted))"
+  },
+  {
+    "opcode": 72,
+    "handler_addr": 1583536,
+    "mnemonic": "$C48",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_00182f40; 173 ln"
+  },
+  {
+    "opcode": 73,
+    "handler_addr": 1582656,
+    "mnemonic": "$C49",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_001349e0; 49 ln"
+  },
+  {
+    "opcode": 74,
+    "handler_addr": 1582096,
+    "mnemonic": "$C4A",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_001349e0; 74 ln"
+  },
+  {
+    "opcode": 75,
+    "handler_addr": 1582960,
+    "mnemonic": "$C4B",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_00182910; 52 ln"
+  },
+  {
+    "opcode": 76,
+    "handler_addr": 1587872,
+    "mnemonic": "$C4C",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0; 41 ln"
+  },
+  {
+    "opcode": 77,
+    "handler_addr": 1581824,
+    "mnemonic": "$C4D",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_001349e0; 35 ln"
+  },
+  {
+    "opcode": 78,
+    "handler_addr": 1740944,
+    "mnemonic": "$C4E",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_001348b0; 71 ln"
+  },
+  {
+    "opcode": 79,
+    "handler_addr": 1740416,
+    "mnemonic": "$C4F",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_00166a30; 61 ln"
+  },
+  {
+    "opcode": 80,
+    "handler_addr": 1740128,
+    "mnemonic": "$C50",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00166a30, FUN_00177b40, FUN_001708f0; 33 ln"
+  },
+  {
+    "opcode": 81,
+    "handler_addr": 1739712,
+    "mnemonic": "$C51",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_001348b0; 46 ln"
+  },
+  {
+    "opcode": 82,
+    "handler_addr": 1721328,
+    "mnemonic": "$C52",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_00122530; 120 ln"
+  },
+  {
+    "opcode": 83,
+    "handler_addr": 1720384,
+    "mnemonic": "$C53",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_00158190; 33 ln"
+  },
+  {
+    "opcode": 84,
+    "handler_addr": 1719840,
+    "mnemonic": "$C54",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_0013e1c0; 69 ln"
+  },
+  {
+    "opcode": 85,
+    "handler_addr": 1719504,
+    "mnemonic": "$C55",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0; 34 ln"
+  },
+  {
+    "opcode": 86,
+    "handler_addr": 1717776,
+    "mnemonic": "$C56",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_00166cd0; 29 ln"
+  },
+  {
+    "opcode": 87,
+    "handler_addr": 1718000,
+    "mnemonic": "$C57",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0; 29 ln"
+  },
+  {
+    "opcode": 88,
+    "handler_addr": 1717488,
+    "mnemonic": "$C58",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0; 34 ln"
+  },
+  {
+    "opcode": 89,
+    "handler_addr": 1717200,
+    "mnemonic": "$C59",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0; 34 ln"
+  },
+  {
+    "opcode": 90,
+    "handler_addr": 1716704,
+    "mnemonic": "$C5A",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_00166cd0; 29 ln"
+  },
+  {
+    "opcode": 91,
+    "handler_addr": 1716928,
+    "mnemonic": "$C5B",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0; 29 ln"
+  },
+  {
+    "opcode": 92,
+    "handler_addr": 1716400,
+    "mnemonic": "$C5C",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166cd0; 15 ln"
+  },
+  {
+    "opcode": 93,
+    "handler_addr": 1716496,
+    "mnemonic": "$C5D",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0; 23 ln"
+  },
+  {
+    "opcode": 94,
+    "handler_addr": 1716096,
+    "mnemonic": "$C5E",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166cd0; 15 ln"
+  },
+  {
+    "opcode": 95,
+    "handler_addr": 1716192,
+    "mnemonic": "$C5F",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0; 23 ln"
+  },
+  {
+    "opcode": 96,
+    "handler_addr": 1715792,
+    "mnemonic": "$C60",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166cd0; 15 ln"
+  },
+  {
+    "opcode": 97,
+    "handler_addr": 1715888,
+    "mnemonic": "$C61",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0; 23 ln"
+  },
+  {
+    "opcode": 98,
+    "handler_addr": 1715488,
+    "mnemonic": "$C62",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166cd0; 15 ln"
+  },
+  {
+    "opcode": 99,
+    "handler_addr": 1715584,
+    "mnemonic": "$C63",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0; 23 ln"
+  },
+  {
+    "opcode": 100,
+    "handler_addr": 1718480,
+    "mnemonic": "$C64",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166cd0; 15 ln"
+  },
+  {
+    "opcode": 101,
+    "handler_addr": 1718272,
+    "mnemonic": "$C65",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0; 23 ln"
+  },
+  {
+    "opcode": 102,
+    "handler_addr": 1701808,
+    "mnemonic": "$C66",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0; 23 ln"
+  },
+  {
+    "opcode": 103,
+    "handler_addr": 1701712,
+    "mnemonic": "$C67",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166cd0; 15 ln"
+  },
+  {
+    "opcode": 104,
+    "handler_addr": 1713072,
+    "mnemonic": "$C68",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00170a10, FUN_00163fd0, FUN_001652b0; 181 ln"
+  },
+  {
+    "opcode": 105,
+    "handler_addr": 1712368,
+    "mnemonic": "$C69",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00150dd0, FUN_00150d30, FUN_001d3cb8, FUN_00150ae0; 86 ln"
+  },
+  {
+    "opcode": 106,
+    "handler_addr": 1711520,
+    "mnemonic": "$C6A",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00150dd0, FUN_00150d30, FUN_001d3cb8, FUN_00150ae0; 108 ln"
+  },
+  {
+    "opcode": 107,
+    "handler_addr": 1715216,
+    "mnemonic": "$C6B",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0; 27 ln"
+  },
+  {
+    "opcode": 108,
+    "handler_addr": 1714992,
+    "mnemonic": "$C6C",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_00166cd0; 29 ln"
+  },
+  {
+    "opcode": 109,
+    "handler_addr": 1714736,
+    "mnemonic": "$C6D",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_0019f140; 27 ln"
+  },
+  {
+    "opcode": 110,
+    "handler_addr": 1714512,
+    "mnemonic": "$C6E",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_00166c20; 29 ln"
+  },
+  {
+    "opcode": 111,
+    "handler_addr": 1710784,
+    "mnemonic": "$C6F",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00150dd0, FUN_00150d30, FUN_001d3cb8; 92 ln"
+  },
+  {
+    "opcode": 112,
+    "handler_addr": 1710048,
+    "mnemonic": "$C70",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00150dd0, FUN_00150d30, FUN_001d3cb8; 92 ln"
+  },
+  {
+    "opcode": 113,
+    "handler_addr": 1709840,
+    "mnemonic": "$C71",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_0013e1d0; 25 ln"
+  },
+  {
+    "opcode": 114,
+    "handler_addr": 1709456,
+    "mnemonic": "$C72",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_0015e6b0; 42 ln"
+  },
+  {
+    "opcode": 115,
+    "handler_addr": 1709072,
+    "mnemonic": "$C73",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_0015e6b0; 42 ln"
+  },
+  {
+    "opcode": 116,
+    "handler_addr": 1708688,
+    "mnemonic": "$C74",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_0015e6b0; 42 ln"
+  },
+  {
+    "opcode": 117,
+    "handler_addr": 1706528,
+    "mnemonic": "$C75",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_0019f140; 21 ln"
+  },
+  {
+    "opcode": 118,
+    "handler_addr": 1707248,
+    "mnemonic": "$C76",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00170a10, FUN_00163fd0, FUN_001652b0; 181 ln"
+  },
+  {
+    "opcode": 119,
+    "handler_addr": 1706016,
+    "mnemonic": "$C77",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00179480, FUN_00179400, FUN_00179340, FUN_00166b20; 64 ln"
+  },
+  {
+    "opcode": 120,
+    "handler_addr": 1706736,
+    "mnemonic": "$C78",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00150dd0, FUN_00150d30, FUN_001d3cb8, FUN_00150ae0; 59 ln"
+  },
+  {
+    "opcode": 121,
+    "handler_addr": 1704288,
+    "mnemonic": "$C79",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0; 26 ln"
+  },
+  {
+    "opcode": 122,
+    "handler_addr": 1704192,
+    "mnemonic": "$C7A",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166cd0; 15 ln"
+  },
+  {
+    "opcode": 123,
+    "handler_addr": 1703600,
+    "mnemonic": "$C7B",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00150dd0, FUN_00150d30, FUN_001d3cb8, FUN_00150ae0; 65 ln"
+  },
+  {
+    "opcode": 124,
+    "handler_addr": 1703008,
+    "mnemonic": "$C7C",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00150dd0, FUN_00150d30, FUN_001d3cb8, FUN_00150ae0; 65 ln"
+  },
+  {
+    "opcode": 125,
+    "handler_addr": 1699264,
+    "mnemonic": "$C7D",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00134bb0, FUN_00134970, FUN_00120130, FUN_0012ae90; 38 ln"
+  },
+  {
+    "opcode": 126,
+    "handler_addr": 1698944,
+    "mnemonic": "$C7E",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00185c70, FUN_001b6ac0, FUN_0012ae90, FUN_0017f280; 37 ln"
+  },
+  {
+    "opcode": 127,
+    "handler_addr": 1701456,
+    "mnemonic": "$C7F",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0; 29 ln"
+  },
+  {
+    "opcode": 128,
+    "handler_addr": 1701248,
+    "mnemonic": "$C80",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_00166cd0; 29 ln"
+  },
+  {
+    "opcode": 129,
+    "handler_addr": 1700992,
+    "mnemonic": "$C81",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0; 29 ln"
+  },
+  {
+    "opcode": 130,
+    "handler_addr": 1700784,
+    "mnemonic": "$C82",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_00166cd0; 29 ln"
+  },
+  {
+    "opcode": 131,
+    "handler_addr": 1700528,
+    "mnemonic": "$C83",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0; 29 ln"
+  },
+  {
+    "opcode": 132,
+    "handler_addr": 1700320,
+    "mnemonic": "$C84",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_00166cd0; 29 ln"
+  },
+  {
+    "opcode": 133,
+    "handler_addr": 1699696,
+    "mnemonic": "$C85",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00150dd0, FUN_00150d30, FUN_001d3cb8, FUN_00150ae0; 55 ln"
+  },
+  {
+    "opcode": 134,
+    "handler_addr": 1698144,
+    "mnemonic": "$C86",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_001d3440, FUN_00150dd0, FUN_00150d30, FUN_001d3cb8; 74 ln"
+  },
+  {
+    "opcode": 135,
+    "handler_addr": 1697472,
+    "mnemonic": "$C87",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_0017f280, FUN_001d3440, FUN_00150dd0, FUN_00150d30; 70 ln"
+  },
+  {
+    "opcode": 136,
+    "handler_addr": 1697280,
+    "mnemonic": "$C88",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0; 22 ln"
+  },
+  {
+    "opcode": 137,
+    "handler_addr": 1698832,
+    "mnemonic": "$C89",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: load_battle_now_loading_0014d1d0; 10 ln"
+  },
+  {
+    "opcode": 138,
+    "handler_addr": 1697152,
+    "mnemonic": "$C8A",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00185c70; 11 ln"
+  },
+  {
+    "opcode": 139,
+    "handler_addr": 1696256,
+    "mnemonic": "$C8B",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_0019e3b0; 54 ln"
+  },
+  {
+    "opcode": 140,
+    "handler_addr": 1720656,
+    "mnemonic": "$C8C",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_00185d30; 25 ln"
+  },
+  {
+    "opcode": 141,
+    "handler_addr": 1695968,
+    "mnemonic": "$C8D",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_001349e0; 31 ln"
+  },
+  {
+    "opcode": 142,
+    "handler_addr": 1702768,
+    "mnemonic": "$C8E",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_00162420; 26 ln"
+  },
+  {
+    "opcode": 143,
+    "handler_addr": 1702640,
+    "mnemonic": "$C8F",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00162420; 10 ln"
+  },
+  {
+    "opcode": 144,
+    "handler_addr": 1702480,
+    "mnemonic": "$C90",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_0014aaf0, FUN_001233f0; 13 ln"
+  },
+  {
+    "opcode": 145,
+    "handler_addr": 1702384,
+    "mnemonic": "$C91",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166cd0; 15 ln"
+  },
+  {
+    "opcode": 146,
+    "handler_addr": 1702272,
+    "mnemonic": "$C92",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166cd0; 16 ln"
+  },
+  {
+    "opcode": 147,
+    "handler_addr": 1702144,
+    "mnemonic": "$C93",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00162310, FUN_00166cd0; 17 ln"
+  },
+  {
+    "opcode": 148,
+    "handler_addr": 1702016,
+    "mnemonic": "$C94",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00162310, FUN_00166cd0; 17 ln"
+  },
+  {
+    "opcode": 149,
+    "handler_addr": 1694640,
+    "mnemonic": "$C95",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00168a80, FUN_001668a0, FUN_00185e30, FUN_001689c0; 60 ln"
+  },
+  {
+    "opcode": 150,
+    "handler_addr": 1693536,
+    "mnemonic": "$C96",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00168a80, FUN_001668a0, FUN_00185e30, FUN_001689c0; 54 ln"
+  },
+  {
+    "opcode": 151,
+    "handler_addr": 1692464,
+    "mnemonic": "$C97",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00168a80, FUN_001668a0, FUN_00185e30, FUN_001689c0; 54 ln"
+  },
+  {
+    "opcode": 152,
+    "handler_addr": 1692032,
+    "mnemonic": "$C98",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00134bb0, FUN_00134970, FUN_00120130, FUN_0012ae90; 37 ln"
+  },
+  {
+    "opcode": 153,
+    "handler_addr": 1691664,
+    "mnemonic": "$C99",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "(no decompiled file: (mid-function or unlisted))"
+  },
+  {
+    "opcode": 155,
+    "handler_addr": 1758176,
+    "mnemonic": "$C9B",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_001348b0; 78 ln"
+  },
+  {
+    "opcode": 156,
+    "handler_addr": 1757904,
+    "mnemonic": "$C9C",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_001348b0; 41 ln"
+  },
+  {
+    "opcode": 157,
+    "handler_addr": 1757632,
+    "mnemonic": "$C9D",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_001348b0; 31 ln"
+  },
+  {
+    "opcode": 158,
+    "handler_addr": 1757344,
+    "mnemonic": "$C9E",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_001b62e0; 37 ln"
+  },
+  {
+    "opcode": 159,
+    "handler_addr": 1757120,
+    "mnemonic": "$C9F",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_0017a620; 25 ln"
+  },
+  {
+    "opcode": 160,
+    "handler_addr": 1756848,
+    "mnemonic": "$CA0",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_00182910; 35 ln"
+  },
+  {
+    "opcode": 161,
+    "handler_addr": 1756576,
+    "mnemonic": "$CA1",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_00182910; 35 ln"
+  },
+  {
+    "opcode": 162,
+    "handler_addr": 1756304,
+    "mnemonic": "$CA2",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_00182910; 35 ln"
+  },
+  {
+    "opcode": 163,
+    "handler_addr": 1756032,
+    "mnemonic": "$CA3",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_00182910; 35 ln"
+  },
+  {
+    "opcode": 164,
+    "handler_addr": 1755760,
+    "mnemonic": "$CA4",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_001348b0; 35 ln"
+  },
+  {
+    "opcode": 165,
+    "handler_addr": 1755440,
+    "mnemonic": "$CA5",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_00182910; 47 ln"
+  },
+  {
+    "opcode": 166,
+    "handler_addr": 1758800,
+    "mnemonic": "$CA6",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_001349e0; 139 ln"
+  },
+  {
+    "opcode": 167,
+    "handler_addr": 1755184,
+    "mnemonic": "$CA7",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_001b62c0; 31 ln"
+  },
+  {
+    "opcode": 168,
+    "handler_addr": 1754976,
+    "mnemonic": "$CA8",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_001b6140; 25 ln"
+  },
+  {
+    "opcode": 169,
+    "handler_addr": 1754672,
+    "mnemonic": "$CA9",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_001b9980; 37 ln"
+  },
+  {
+    "opcode": 170,
+    "handler_addr": 1754416,
+    "mnemonic": "$CAA",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_001b9940; 37 ln"
+  },
+  {
+    "opcode": 171,
+    "handler_addr": 1744672,
+    "mnemonic": "$CAB",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00150dd0, FUN_00150d30, FUN_001d3cb8, FUN_00150ae0; 193 ln"
+  },
+  {
+    "opcode": 172,
+    "handler_addr": 1746048,
+    "mnemonic": "$CAC",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_001349e0; 64 ln"
+  },
+  {
+    "opcode": 173,
+    "handler_addr": 1744256,
+    "mnemonic": "$CAD",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_001f21d0; 49 ln"
+  },
+  {
+    "opcode": 174,
+    "handler_addr": 1741840,
+    "mnemonic": "$CAE",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00150dd0, FUN_00150d30, FUN_001d3cb8, FUN_00150ae0; 363 ln"
+  },
+  {
+    "opcode": 175,
+    "handler_addr": 1746544,
+    "mnemonic": "$CAF",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_001348b0; 45 ln"
+  },
+  {
+    "opcode": 176,
+    "handler_addr": 1741488,
+    "mnemonic": "$CB0",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_001f21d0; 39 ln"
+  },
+  {
+    "opcode": 177,
+    "handler_addr": 1754160,
+    "mnemonic": "$CB1",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_001349e0; 36 ln"
+  },
+  {
+    "opcode": 178,
+    "handler_addr": 1753504,
+    "mnemonic": "$CB2",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00105cf0, FUN_00166b20, FUN_00177b40, FUN_001708f0; 45 ln"
+  },
+  {
+    "opcode": 179,
+    "handler_addr": 1753840,
+    "mnemonic": "$CB3",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00105cf0, FUN_00166b20, FUN_00177b40, FUN_001708f0; 41 ln"
+  },
+  {
+    "opcode": 180,
+    "handler_addr": 1752832,
+    "mnemonic": "$CB4",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_00182910; 56 ln"
+  },
+  {
+    "opcode": 181,
+    "handler_addr": 1753232,
+    "mnemonic": "$CB5",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_001900f0; 35 ln"
+  },
+  {
+    "opcode": 182,
+    "handler_addr": 1752608,
+    "mnemonic": "$CB6",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_001900f0; 29 ln"
+  },
+  {
+    "opcode": 183,
+    "handler_addr": 1752384,
+    "mnemonic": "$CB7",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_001905c0; 25 ln"
+  },
+  {
+    "opcode": 184,
+    "handler_addr": 1752272,
+    "mnemonic": "$CB8",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_0018e910; 10 ln"
+  },
+  {
+    "opcode": 185,
+    "handler_addr": 1752064,
+    "mnemonic": "$CB9",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_0018e7d0; 25 ln"
+  },
+  {
+    "opcode": 186,
+    "handler_addr": 1751840,
+    "mnemonic": "$CBA",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_001900f0; 29 ln"
+  },
+  {
+    "opcode": 187,
+    "handler_addr": 1751632,
+    "mnemonic": "$CBB",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_00188e50; 25 ln"
+  },
+  {
+    "opcode": 188,
+    "handler_addr": 1751424,
+    "mnemonic": "$CBC",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0, FUN_00188da0; 25 ln"
+  },
+  {
+    "opcode": 189,
+    "handler_addr": 1691824,
+    "mnemonic": "$CBD",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166b20, FUN_00177b40, FUN_001708f0; 21 ln"
+  },
+  {
+    "opcode": 190,
+    "handler_addr": 1691728,
+    "mnemonic": "$CBE",
+    "arg_layout": null,
+    "evidence": "static_vtable_walk",
+    "notes": "calls: FUN_00166cd0; 15 ln"
+  }
+]

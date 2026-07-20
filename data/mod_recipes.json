@@ -1,0 +1,58 @@
+[
+  {
+    "serial": "SLUS-20407",
+    "name": "char_unlock_all",
+    "kind": "pnach",
+    "status": "verified",
+    "payload": "<path>",
+    "notes": "{\"addresses\": [\"0x00C2D6C4\", \"0x00C25C64\"], \"crc\": \"06157251\"}"
+  },
+  {
+    "serial": "SLUS-20407",
+    "name": "dur_lock",
+    "kind": "memory",
+    "status": "needs_recheck",
+    "payload": "{\"addr\":\"0x00C18618\",\"fmt\":\"uint32\",\"target\":5,\"safe_window\":[1,4]}",
+    "notes": "Sword durability lock. Writes 5 when drops below 4. | OVERRIDE 2026-06-27: contradicted by km_bad_paths (writes persist in RAM but HUD does not update)"
+  },
+  {
+    "serial": "SLUS-20407",
+    "name": "hp_lock",
+    "kind": "memory",
+    "status": "verified",
+    "payload": "{\"addr\":\"0x00C18608\",\"fmt\":\"uint16\",\"target\":1000,\"safe_window\":[10,995]}",
+    "notes": "Kill-safe HP lock at 1000. Only writes when HP in (10, max-5) window. Threshold-based intervention pattern."
+  },
+  {
+    "serial": "SLUS-20407",
+    "name": "infinite_hp",
+    "kind": "pnach",
+    "status": "verified",
+    "payload": "<path>",
+    "notes": "{\"addresses\": [\"0x00C18608\"], \"crc\": \"06157251\"}"
+  },
+  {
+    "serial": "SLUS-20407",
+    "name": "infinite_yen",
+    "kind": "pnach",
+    "status": "needs_recheck",
+    "payload": "<path>",
+    "notes": "{\"addresses\": [\"0x00C18A20\"], \"crc\": \"06157251\"} | OVERRIDE 2026-06-27: contradicted by km_bad_paths (writes persist in RAM but HUD does not update)"
+  },
+  {
+    "serial": "SLUS-20407",
+    "name": "sword_dur_lock",
+    "kind": "pnach",
+    "status": "needs_recheck",
+    "payload": "<path>",
+    "notes": "{\"addresses\": [\"0x00C18618\"], \"crc\": \"06157251\"} | OVERRIDE 2026-06-27: contradicted by km_bad_paths (writes persist in RAM but HUD does not update)"
+  },
+  {
+    "serial": "SLUS-20407",
+    "name": "yen_boost",
+    "kind": "memory",
+    "status": "needs_recheck",
+    "payload": "{\"addr\":\"0x00C18A20\",\"fmt\":\"uint32\",\"target\":99999}",
+    "notes": "Yen boost — write to live yen field, persists but doesnt update displayed yen counter. | OVERRIDE 2026-06-27: contradicted by km_bad_paths (writes persist in RAM but HUD does not update)"
+  }
+]

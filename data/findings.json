@@ -1,0 +1,1052 @@
+[
+  {
+    "serial": "SLUS-20407",
+    "topic": "ISO extraction",
+    "outcome": "works",
+    "details": "Source was a Mode2/2352 raw CD dump. Strip 24-byte header per sector → 2048-byte user data → valid ISO9660. Disc volume ID: SAMURAI. ELF: SLUS_204.07 (1,198,768 bytes). Entry 0x00100008. Version 1.02."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "Ghidra headless analyze",
+    "outcome": "works",
+    "details": "r5900:LE:32:default succeeded. 2820 functions, 1010 strings. 84 sec total. Auto-named 129/2820 (4.6%) via lui+addiu string-xref heuristic. Notable discoveries: CallScript engine (script VM), CCameraBattle subsystem, libdma utilities, MPEG playback, sceCdSt streaming, file system init at 0x148120."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "MIPS:LE:32:R5900 processor ID",
+    "outcome": "fails",
+    "details": "Ghidra throws InvalidInputException: Unsupported language. Confirmed even with emotionengine-reloaded extension installed. Correct ID: r5900:LE:32:default. Note: Tenchu ghidra_setup.py source contains the wrong ID — must have been hand-run differently."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "VOLUME.DAT main archive",
+    "outcome": "investigated",
+    "details": "ISO contains a single 132MB VOLUME.DAT at LBA 94218. Unanalyzed. Likely holds all character/level/texture data per Spike convention. Next step: regex-scan for known magics (TIM2, MDL/MDS, KMD, etc.) at 16-byte alignment to map block structure."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "VOLUME.DAT decoded",
+    "outcome": "works",
+    "details": "Format: FADEBABE magic, BE, 16-byte header (capacity=4000 slots, live=971), 24-byte TOC entries sorted by hash, 2KB sector-aligned blocks. 972 live entries (header undercounts by 1). 521/972 are text (122 explicit CallScript fragments + 399 mixed text); 449 are binary blobs in 28 type categories (0x0A-0x29). Notably contains plain-text CallScript source code with syntax: ?i(cond){...}, #var, $#var, $Cnn opcodes, #mapid, #EventFlag, #ONESELF, etc. Found 1 nested FADEBABE archive (sub-manifest, 856 bytes)."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "CallScript VM grammar",
+    "outcome": "works",
+    "details": "156 unique $Cxx opcodes (range 0x01-0xBF), 1554+ #vars, 428 $#charvars, only ?i keyword. Most common: $CAC (2835x), $C05 (1241x), $C0D, $C28. Top vars: #taskid(17168x), #DDD/EEE/CCC/FFF (15k each). Position vars #MapX/Y/Z, #GoalX/Y/Z. Boot script manifest at 0x00203BB0: main.sol, walker.sol, walkerfunc.sol, mapoutend.sol, playerpos.sol. Scripts stored as .sol files in VOLUME.DAT."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "Script engine code map",
+    "outcome": "partial",
+    "details": "Code region 0x16C000-0x180000 contains the script engine. Three VM main loops at 0x001654A0/0x00165B70/0x00165F70 (1020 bytes each, near-identical — likely for 3 parallel script contexts). If-statement evaluator at 0x0016DA00 (3940 bytes, refs ?i: error msgs). CScript container ctor at 0x0017FED0 (1252 bytes — sets up doubly-linked-list node with type tag 0x00223C68). Container ops at 0x1503c0/0x150d30 (likely std::map insert/find)."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "Opcode dispatcher search",
+    "outcome": "investigated",
+    "details": "Did NOT find a contiguous jump table of 156 function pointers. The engine likely uses a switch cascade or hash-keyed lookup. Strong candidate region: 0x16C000-0x180000 contains 1860-byte FUN_0016cf00 + 3940-byte i_0016da00. Recommend opening these in Ghidra GUI for decompiler view to extract opcode->handler map. Tried scanning for sequential uint32 arrays in text-range — gave 773 false-positives (most were string-pointer tables)."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "CCamera subsystem",
+    "outcome": "partial",
+    "details": "Camera code in 0x11F000-0x12F000 region. CCameraBattle has classes: SoloShot, TwoShot, Battle. Error handler err_ccamera_battle_0011f3a0 (896 bytes). SetTargetChar refed from 0x0011CD40. Big methods at 0x00125B10 (6648b), 0x00127510 (8068b), 0x001294A0 (6228b) — likely Update/Render/Lock. Camera config loaded from \"Camera/Camera.dat\" (string at 0x00216D30, referenced from a path table at 0x00203D58)."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "PCSX2 live-memory tooling",
+    "outcome": "works",
+    "details": "Verified pymem + EEmem-export attach works on this machine. Ported memory.py, pine.py from Tenchu project. Built snapshot.py (take/list/diff/find_changed/find_constant) and entity_finder.py (multi-round value-hunt orchestrator with intersection across rounds). 32MB EE RAM snapshot reads in 0.1s. NOTE: connection-time test was done against Vampire Night (SLUS-20221) which was currently running in PCSX2 — to validate against WoS, user must boot SLUS-20407 first."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "Live script content in RAM",
+    "outcome": "works",
+    "details": "In-mission RAM has full script source visible at 0x00C2D930 (mapid/MapX init) and 0x00C2FEEA (NPC dialogue table). Verified opcodes: $CAC=NPC speech display (most-used, 2835x in scripts), $CAE=post-speech action, $C5F=GetMapID, $C65=GetPhaseID, $C1C=counter-query, $C0B=comparison/test, $C42=multi-target set. Character ID consts: #AKA_1A/1B/2A/2B (Akadama variants), #ZAKO_1A..3B (enemy mooks), #KURO_B (Kurohama). #ONESELF refers to current actor (this). $#KuroSamuraiDo is player rank, with thresholds $#Nami/$#Shita/$#YayaUe. #PLAYERNAME and #PLAYCOUNT exist (format strings at 0x00219755). 920 $CAC instances in live RAM = active dialogue table."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "opcode $CAC",
+    "outcome": "works",
+    "details": "NPC dialogue display ($CAC speaker, listener, text, duration, ?, ?, ?). Context: most common opcode (2835x in scripts)"
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "opcode $CAE",
+    "outcome": "works",
+    "details": "post-dialogue action (close speech bubble / cleanup). Context: follows $CAC"
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "opcode $C5F",
+    "outcome": "works",
+    "details": "GetMapID. Context: #mapid | $C5F"
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "opcode $C65",
+    "outcome": "works",
+    "details": "GetPhaseID. Context: #phaseid | $C65"
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "opcode $C1C",
+    "outcome": "works",
+    "details": "counter query. Context: ($C1C 3) ge 1 = \"has 3+ of something\""
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "opcode $C0B",
+    "outcome": "works",
+    "details": "comparison / test. Context: ($C0B #id, 6) eq 1"
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "opcode $C42",
+    "outcome": "works",
+    "details": "multi-target setting/binding. Context: $C42 #ONESELF, -1, 1"
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "Runtime structural scan",
+    "outcome": "partial",
+    "details": "PCSX2 VM became unresponsive (paused) during scan — dynamic value-find via input is blocked (user PCSX2 has SDL gamepad bindings only, no keyboard mapping). Passive scan results: 5 candidate script var arenas in heap, top scoring at 0x008CC000 (small_int=0+small_float=892). Script text region 0x00C2D000-0x00D00000 contains 1830 $C tokens, 359 ?i( conditionals."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "var_arena_candidate@0x008CC000",
+    "outcome": "investigated",
+    "details": "4KB region with 0 small ints + 892 small floats + 113 zeros. Likely script var slot table or entity state."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "var_arena_candidate@0x00C78000",
+    "outcome": "investigated",
+    "details": "4KB region with 773 small ints + 0 small floats + 70 zeros. Likely script var slot table or entity state."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "var_arena_candidate@0x00C79000",
+    "outcome": "investigated",
+    "details": "4KB region with 751 small ints + 0 small floats + 121 zeros. Likely script var slot table or entity state."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "var_arena_candidate@0x00C66000",
+    "outcome": "investigated",
+    "details": "4KB region with 33 small ints + 634 small floats + 162 zeros. Likely script var slot table or entity state."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "var_arena_candidate@0x00C2A000",
+    "outcome": "investigated",
+    "details": "4KB region with 575 small ints + 27 small floats + 97 zeros. Likely script var slot table or entity state."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "Script var hash function",
+    "outcome": "works",
+    "details": "SDBM hash IS the script variable hasher. sdbm('#taskid') = 0x2C340683 found in RAM. However, hashes are NOT stored as 4-byte keys in a flat var table — parser hashes literals at runtime. Var values are stored elsewhere (likely indexed array or hashmap with pointers). Variable name strings ARE in RAM as plain text (105 #mapid, 800+ #taskid string occurrences) — the parser hashes them inline during script execution."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "496-byte record arrays @ 0x00C70C20",
+    "outcome": "investigated",
+    "details": "Striding 0x1F0 records labeled 'a'-'h' contain signed 16-bit samples (slowly varying values). Likely audio waveform data or animation curve data, NOT character objects."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "volume_type_0x0A",
+    "outcome": "investigated",
+    "details": "weapon/move DB single record. Evidence: ASCII property:value pairs like \"damage:25\"."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "volume_type_0x0D",
+    "outcome": "investigated",
+    "details": "32-entry palette/index table. Evidence: dense 0x88-0xCC bytes."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "volume_type_0x0E",
+    "outcome": "investigated",
+    "details": "TCD UI element list. Evidence: paired with 0x17 .pim."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "volume_type_0x0F",
+    "outcome": "investigated",
+    "details": "quantized weights or compressed mesh indices. Evidence: bytes 0x04-0x1F, stride-4."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "volume_type_0x10",
+    "outcome": "investigated",
+    "details": ".bin parameter tables (zakopos.bin/chara/zakoparam.bin style). Evidence: 0xFF separators."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "volume_type_0x11",
+    "outcome": "investigated",
+    "details": "fixed-point Q-format vertex coords for VU1. Evidence: bytes <0x3E, packed 4/word."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "volume_type_0x12",
+    "outcome": "investigated",
+    "details": ".mdl mesh chunk (VIF unpack 0x60). Evidence: multiple blocks."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "volume_type_0x13",
+    "outcome": "investigated",
+    "details": "quantized vertex normals/tangent frames. Evidence: repeated nibbles 0x44-0xE6."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "volume_type_0x14",
+    "outcome": "investigated",
+    "details": "compressed/encoded blob (LZ candidate). Evidence: entropy 7.6."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "volume_type_0x15",
+    "outcome": "investigated",
+    "details": ".pim texture bitmap (8bpp, 0xFF transparent). Evidence: frequent 0xFF."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "volume_type_0x16",
+    "outcome": "investigated",
+    "details": ".mdl primary mesh blocks (matches 54 .mdl ELF refs). Evidence: 69 blocks 18.7MB largest category."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "volume_type_0x17",
+    "outcome": "investigated",
+    "details": "VU1 microprogram/VIF packet stream. Evidence: UNPACK opcodes 6C-6F."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "volume_type_0x18",
+    "outcome": "investigated",
+    "details": "large texture/.arc archive (pim atlas?). Evidence: largest avg 818KB."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "volume_type_0x19",
+    "outcome": "investigated",
+    "details": "padding/animation track stubs. Evidence: small VIF preamble."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "volume_type_0x1A",
+    "outcome": "investigated",
+    "details": "skeletal .mdl variant (character meshes). Evidence: paired with 0x1B."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "volume_type_0x1B",
+    "outcome": "investigated",
+    "details": "bind-pose/animation float matrices (4x4=64B). Evidence: float density 0.91."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "volume_type_0x1C",
+    "outcome": "investigated",
+    "details": "24-bit ADPCM audio samples. Evidence: every 4th byte 0x80."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "volume_type_0x1D",
+    "outcome": "investigated",
+    "details": "VIF DMA packet stream (VU1/GS command lists). Evidence: stride-4."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "volume_type_0x1E",
+    "outcome": "investigated",
+    "details": "tiny bone-index remap / palette. Evidence: one 752-byte block."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "volume_type_0x1F",
+    "outcome": "investigated",
+    "details": "MIPS R5900 code or VU0 macro microcode. Evidence: 0x10 top byte = MIPS b opcode."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "volume_type_0x20",
+    "outcome": "investigated",
+    "details": ".mdl LOD / extra-mesh blocks. Evidence: one is FADEBABE archive marker."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "volume_type_0x21",
+    "outcome": "investigated",
+    "details": "collision mesh vertices / octree bounds. Evidence: float density 0.74."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "volume_type_0x22",
+    "outcome": "investigated",
+    "details": "packed bytecode/animation delta-stream. Evidence: RLE with 0xFF escape."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "volume_type_0x23",
+    "outcome": "investigated",
+    "details": "animation keyframe data (paired with 0x1B). Evidence: 0xFF separators."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "volume_type_0x24",
+    "outcome": "investigated",
+    "details": ".arc archive blob (multiple sub-objects). Evidence: second-largest avg."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "volume_type_0x25",
+    "outcome": "investigated",
+    "details": "VIF packet template (shared). Evidence: single 4KB block."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "volume_type_0x29",
+    "outcome": "investigated",
+    "details": "reserved / sparse uninitialized. Evidence: all zeros."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "asset_extension_.pim",
+    "outcome": "works",
+    "details": ".pim (textures/sprites) — 115 references in ELF. PSS movies stream from cdrom0:/MOVIE/ not VOLUME."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "asset_extension_.mdl",
+    "outcome": "works",
+    "details": ".mdl (models) — 54 references in ELF. PSS movies stream from cdrom0:/MOVIE/ not VOLUME."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "asset_extension_.bin",
+    "outcome": "works",
+    "details": ".bin (param tables) — 32 references in ELF. PSS movies stream from cdrom0:/MOVIE/ not VOLUME."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "asset_extension_.tcd",
+    "outcome": "works",
+    "details": ".tcd (UI layout) — 6 references in ELF. PSS movies stream from cdrom0:/MOVIE/ not VOLUME."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "asset_extension_.sol",
+    "outcome": "works",
+    "details": ".sol (compiled script) — 6 references in ELF. PSS movies stream from cdrom0:/MOVIE/ not VOLUME."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "asset_extension_.arc",
+    "outcome": "works",
+    "details": ".arc (mini-archive) — 1 references in ELF. PSS movies stream from cdrom0:/MOVIE/ not VOLUME."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "Player position via 3-snapshot diff",
+    "outcome": "works",
+    "details": "Triple-snapshot intersection method: baseline -> walk1 -> walk2, find triples that moved in BOTH diffs. Player movement of 12.6 and 16.3 units recorded. Position confirmed at 0x00925310 (vertex), 0x00924E60 (matrix translation)."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "Player mesh structure",
+    "outcome": "works",
+    "details": "Mesh stored as XYZW homogeneous vertices (16 bytes each, W=1.0). Vertex region 0x00925310..0x00925800+ contains player body, multiple sub-meshes at 0x00925560+, 0x008CC200+. Each mesh chunk preceded by VIF UNPACK tag (e.g., 0x6C... at offset -0x10 from data)."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "PS2 double-buffered render",
+    "outcome": "works",
+    "details": "Player vertex data exists at TWO addresses 1.5MB apart: 0x00925000 / 0x00AA5000 and 0x008CC000 / 0x008DC000. PS2 uses dual-buffer pattern for GS->VU streaming. Both buffers updated together each frame."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "No standalone player position float",
+    "outcome": "partial",
+    "details": "Could not find a single isolated 3-float Vector3 for player position outside vertex/matrix data. Position is baked into mesh transformations. Modifying any vertex moves a polygon; modifying the render matrix could teleport the displayed player."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "Weapon/stat table at 0x00904F80",
+    "outcome": "investigated",
+    "details": "u16 array of weapon attributes. Values 1000-2000 typical, 9999 cap. Packed pairs (257=0x0101, 514=0x0202, etc.) appear to encode sword sharpness levels or item IDs."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "Player HP confirmed live",
+    "outcome": "works",
+    "details": "HP found at 0x00C18608 (u16). Wrote 1000->999, persisted. Test confirms it is the live player HP register."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "Sword durability confirmed live",
+    "outcome": "works",
+    "details": "Durability at 0x00C18618 (u32). Wrote 3->5. User can verify in sword info tab."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "Yen counter confirmed live",
+    "outcome": "works",
+    "details": "Yen at 0x00C18A20 (u32). Wrote 5->105. User can verify in money display."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "Player object struct layout",
+    "outcome": "works",
+    "details": "Player slot at 0x00C18608, size ~4KB (next char at +0x1000). Fields: +0 HP/max, +0x10 durability, +0x14-18 weapon counts, +0x418 yen. Inhabits a flat character table starting at 0x00C18000."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "Sword name table located",
+    "outcome": "works",
+    "details": "ELF data section 0x00218B28+ holds NULL-terminated sword names. ~12 swords known: Chuyo-tou, Tonpu, Kakkazan, Aizome, Nidai-..."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "UI/save struct identified",
+    "outcome": "partial",
+    "details": "Region 0x00C27150-0x00C29400+ holds tree of typed records that the pause menu reads from. Yen=5 confirmed at 0x00C291F4. Durability=3 candidate at 0x00C27164. Awaiting menu-refresh test."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "Live combat vs menu values separate",
+    "outcome": "works",
+    "details": "Player struct 0x00C18608 holds LIVE combat HP/dur/yen used during gameplay; pause menu reads from a separate UI/save struct at 0x00C27150+. Both exist simultaneously; modifying live doesnt update menu and vice versa."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "Engine namespace identified",
+    "outcome": "works",
+    "details": "WoS engine uses GzMfBgm:: namespace for BGM/sound (debug log \"GzMfBgm::Stop()\" in heap). Suggests larger Gz* namespace family."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "20-sword catalog extracted",
+    "outcome": "works",
+    "details": "All 20 sword names from name table at 0x002059B0. Player starting sword \"Chuyo-tou\" at index 0."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "Opcodes $C03/$C04 identified",
+    "outcome": "works",
+    "details": "Live script bytecode shows $C04 0,1000 / $C04 21,? / $C03 0,1000 patterns. Strong evidence these are HP-set / stat-set opcodes (args: id, value)."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "Cheat: +1 sword durability",
+    "outcome": "works",
+    "details": "Pause, hold R1+R2, press RIGHT,RIGHT,LEFT,LEFT,DOWN,UP,CIRCLE. Increments durability, max 5."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "Cheat: Full HP restore",
+    "outcome": "works",
+    "details": "Pause, hold L1+L2, press DOWN,UP,DOWN,UP,RIGHT,LEFT,CIRCLE. Story mode."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "Cheat: Face gleam effect",
+    "outcome": "works",
+    "details": "Hold L1+L2, spin left analog stick. Visual effect only."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "Cheat: Random sword",
+    "outcome": "works",
+    "details": "Sword inventory screen, hold L1+R1, press CIRCLE,DOWN,DOWN,UP,UP,DOWN,UP,CIRCLE. Adds random sword to stock."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "Cheat: Unlock playable characters",
+    "outcome": "works",
+    "details": "New Game screen, press L1,R1,R1,L2,L2,L2,R2,R2,R2+SQUARE."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "Cheat: Unlock Battle Mode",
+    "outcome": "works",
+    "details": "Title screen, hold L1+R1, press CIRCLE+SQUARE."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "Cheat-trigger diff isolates menu addresses",
+    "outcome": "works",
+    "details": "User-triggered cheat changes the menu source-of-truth. Exact value transition (3->4, 4->5) leaves a unique address in EE RAM. Method: snap before cheat, user fires cheat, snap after, filter u16 transitions to exact (old, new). Confirmed for sword durability at 0x0105B90C. Same method applicable for HP, yen, etc."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "Cheat button sequences NOT stored as direct arrays",
+    "outcome": "fails",
+    "details": "PS2 libpad codes (RIGHT=0x20, LEFT=0x80, DOWN=0x40, UP=0x10, CIRCLE=0x2000) packed as u16 array do not match in ELF. Cheat handler likely uses bit-encoded codes, hashed strings, or hardcoded sequential compares. Need to find by tracing pad-input reader."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "HP and menu HP are the same address",
+    "outcome": "works",
+    "details": "Pause menu reads from 0x00C18608 directly. Earlier assumption of a separate menu/save struct was WRONG. The \"menu didn't update\" observation was because PCSX2 menu doesn't refresh display while open. Diff confirmed: exactly ONE address in 32MB transitioned 1000->955 after taking 45 damage."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "Yen address still unknown",
+    "outcome": "partial",
+    "details": "My yen writes to 0x00C18A20 (became 105) and 0x00C291F4 (became 9999) PERSIST in RAM but neither affects displayed yen (user reports yen still 5). These are decoy buffers — actual yen address still needs cheat-trigger diff (e.g., picking up money)."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "PLAYER STRUCT FINAL MAP",
+    "outcome": "works",
+    "details": "Player struct @ 0x00C18608, size ~4KB. Confirmed fields: +0x00 u16 HP_current (CONFIRMED via dmg diff), +0x02 u16 HP_max, +0x04 u16 status, +0x06 u16 target_id (0xFFFE=none), +0x0C u32 weapon flags, +0x10 u32 live durability (writable, reverts on area change), +0x14 u32 sword count, +0x418 u32 yen (writable, may decoy), +0x5A8 float rotation A (pitch), +0x5B0 float rotation sin (yaw), +0x5C8 float rotation -sin (mirror), +0x5D0 float rotation A2 (mirror), +0x5D8-0x5E0 float camera/look target XYZ. Position floats NOT in struct (live position computed from vertex buffer at 0x00925310). MENU SOURCE: HP/durability fields here ARE what pause menu shows; menu cache fails to refresh."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "WoS Mod Engine GUI built",
+    "outcome": "works",
+    "details": "scripts/wos_gui.py = Tk-based PCSX2-themed mod toggle UI. Desktop launcher \"WoS Mod Engine.bat\" boots PCSX2+ISO+GUI. Initial mods: HP Lock (1000, kill-safe), Sword Durability Lock (>=4), Yen Boost (live buffer). Tab structure follows the request: single \"Way of the Samurai Mods\" tab. Easy to add more mods (subclass Mod, append to MODS list)."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "VOLUME.DAT taxonomy correction",
+    "outcome": "works",
+    "details": "{\"type_0A\": {\"binary_mesh\": 1, \"text_callscript\": 1}, \"type_0C\": {\"text_callscript\": 1}, \"type_0D\": {\"unknown\": 1, \"text_callscript\": 1}, \"type_0E\": {\"binary_mips\": 10, \"text_callscript_padded\": 1, \"text_callscript\": 5, \"unknown\": 6, \"binary_compressed\": 1}, \"type_0F\": {\"binary_mips\": 7, \"unknown\": 6, \"text_callscript\": 6, \"binary_mesh\": 3, \"binary_compressed\": 2}, \"type_10\": {\"binary_mips\": 5, \"text_callscript\": 9, \"unknown\": 8, \"binary_compressed\": 4, \"binary_mesh\": 4}, \"type_11\": {\"unknown\": 6, \"binary_compressed\": 3, \"text_callscript\": 6, \"text_callscript_padded\": 1, \"binary_mips\": 1}, \"type_12\": {\"text_callscript\": 8, \"binary_mips\": 3, \"unknown\": 5, \"binary_mesh\": 22, \"binary_compressed\": 1}, \"type_13\": {\"unknown\": 5, \"binary_mesh\": 4, \"text_callscript\": 6, \"binary_mips\": 1, \"binary_compressed\": 2, \"text_callscript_padded\": 1}, \"type_14\": {\"text_callscript\": 6, \"binary_compressed\": 4, \"unknown\": 13, \"binary_mips\": 10, \"binary_mesh\": 16}, \"type_15\": {\"binary_mips\": 9, \"text_callscript\": 3, \"unknown\": 9, \"binary_compressed\": 1, \"binary_mesh\": 2}, \"type_16\": {\"unknown\": 33, \"text_callscript\": 6, \"text_callscript_padded\": 1, \"binary_mips\": 20, \"binary_compressed\": 14, \"binary_mesh\": 3}, \"type_17\": {\"binary_mesh\": 9, \"text_callscript_padded\": 4, \"text_callscript\": 16, \"unknown\": 6, \"binary_mips\": 1}, \"type_18\": {\"text_callscript_padded\": 2, \"text_callscript\": 3, \"binary_mesh\": 1, \"binary_mips\": 3, \"unknown\": 2, \"binary_compressed\": 4}, \"type_19\": {\"binary_mesh\": 12, \"unknown\": 5, \"text_callscript\": 1}, \"type_1A\": {\"binary_mesh\": 11, \"text_callscript_padded\": 1, \"binary_compressed\": 4, \"text_callscript\": 2}, \"type_1B\": {\"unknown\": 13, \"binary_mesh\": 7, \"text_callscript\": 2, \"binary_mips\": 3}, \"type_1C\": {\"unknown\": 2, \"text_callscript\": 1}, \"type_1D\": {\"unknown\": 12, \"binary_mesh\": 7, \"text_callscript\": 3, \"binary_mips\": 2}, \"type_1E\": {\"unknown\": 1, \"text_callscript\": 2}, \"type_1F\": {\"text_callscript_padded\": 18, \"text_callscript\": 176, \"binary_mesh\": 24, \"unknown\": 6, \"binary_compressed\": 3, \"binary_mips\": 10, \"text_other\": 1}, \"type_20\": {\"text_callscript\": 51, \"text_other\": 4, \"binary_mesh\": 16, \"unknown\": 6, \"binary_mips\": 6, \"binary_compressed\": 2, \"text_callscript_padded\": 2}, \"type_21\": {\"text_callscript\": 51, \"binary_mesh\": 7, \"text_callscript_padded\": 8, \"unknown\": 2, \"binary_mips\": 2, \"binary_compressed\": 1}, \"type_22\": {\"binary_mips\": 1, \"text_callscript\": 23, \"unknown\": 3, \"binary_compressed\": 1}, \"type_23\": {\"all_zero\": 1, \"text_callscript\": 25, \"binary_mesh\": 11, \"binary_mips\": 2, \"unknown\": 4, \"binary_compressed\": 1, \"text_other\": 1}, \"type_24\": {\"binary_mips\": 2, \"binary_mesh\": 6, \"text_callscript\": 22, \"text_callscript_padded\": 1, \"binary_compressed\": 2, \"unknown\": 1}, \"type_25\": {\"text_callscript\": 3, \"unknown\": 2, \"text_callscript_padded\": 1}, \"type_26\": {\"text_callscript\": 1}, \"type_27\": {\"text_callscript\": 1, \"binary_mips\": 1}, \"type_29\": {\"binary_mesh\": 2, \"text_callscript\": 7, \"text_callscript_padded\": 1}, \"type_7E18000\": {\"text_callscript\": 1}}"
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "type 0x1F is NOT microcode",
+    "outcome": "fails",
+    "details": "Prior classification 'type 0x1F: MIPS R5900 / VU0 microcode' was wrong. Body inspection shows 176/238 blocks are plain-text CallScript (prefix '| #A...', '#mapid', '$C5F', etc). Only 10/238 actually look like MIPS code."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "type 0x21 is NOT collision mesh",
+    "outcome": "fails",
+    "details": "Prior classification 'type 0x21: collision mesh / octree floats' was wrong. Body inspection shows 51/71 + 8 padded blocks are plain-text CallScript per-NPC AI/dialogue, starting with '#mapid', '$C5F'. Collision is elsewhere (probably in low-entropy binary_mesh in type_19 or type_1A)."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "Snapshot taken: char_creation_unlocked",
+    "outcome": "investigated",
+    "details": "32MB RAM captured at character creation screen after applying all-character unlock cheat. Diff vs baselines pending."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "Verifier pass: all known addresses sane",
+    "outcome": "works",
+    "details": "23/53 addresses pass live-RAM read at PCSX2 base 0x7FF6B0000000"
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "Accuracy check at char-creation menu",
+    "outcome": "partial",
+    "details": "{\"context\": \"Read all 53 km_addresses while user at character creation screen w/ unlock cheat applied\", \"issues\": [\"HP@0x00C18608=2000 but HP_max@0x00C1860A=1000 \\u2014 impossible if same struct. Either stale data, OR addresses mean different things during menu state.\", \"Yen@0x00C18A20=5 \\u2014 looks stale, not real yen.\", \"Player position X@0x00925310 = 4.592e-41 (subnormal) \\u2014 likely NOT actual position; address claim suspect outside gameplay.\", \"Player rotation/lookcam zeros \\u2014 consistent with player-not-loaded-yet.\"], \"plan\": \"Re-verify these in-game (after user passes char creation). Down-grade DB status from verified to candidate until live-gameplay confirms.\"}"
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "Cross-ref of player struct fields against snapshot history",
+    "outcome": "partial",
+    "details": "{\n  \"Player HP (current)\": {\n    \"addr\": \"0x00C18608\",\n    \"fmt\": \"u16\",\n    \"results\": {\n      \"hp_baseline_1000.bin\": [\n        \"pass\",\n        1000\n      ],\n      \"hp_955.bin\": [\n        \"pass\",\n        955\n      ],\n      \"ingame_idle.bin\": [\n        \"pass\",\n        1000\n      ],\n      \"ingame_moved.bin\": [\n        \"pass\",\n        1000\n      ]\n    }\n  },\n  \"Player HP (max)\": {\n    \"addr\": \"0x00C1860A\",\n    \"fmt\": \"u16\",\n    \"results\": {\n      \"hp_baseline_1000.bin\": [\n        \"pass\",\n        1000\n      ],\n      \"hp_955.bin\": [\n        \"pass\",\n        1000\n      ],\n      \"ingame_idle.bin\": [\n        \"pass\",\n        1000\n      ]\n    }\n  },\n  \"Player sword durability\": {\n    \"addr\": \"0x00C18618\",\n    \"fmt\": \"u32\",\n    \"results\": {\n      \"dur_state_4.bin\": [\n        \"fail\",\n        5\n      ],\n      \"dur_state_5.bin\": [\n        \"pass\",\n        5\n      ],\n      \"dur_before.bin\": [\n        \"fail\",\n        5\n      ],\n      \"dur_after4.bin\": [\n        \"pass\",\n        5\n      ]\n    }\n  },\n  \"Player yen (currency)\": {\n    \"addr\": \"0x00C18A20\",\n    \"fmt\": \"u32\",\n    \"results\": {\n      \"hp_baseline_1000.bin\": [\n        \"pass\",\n        105\n      ],\n      \"ingame_idle.bin\": [\n        \"pass\",\n        5\n      ]\n    }\n  }\n}"
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "Sword durability address suspect",
+    "outcome": "fails",
+    "details": "Cross-ref of 0x00C18618 against snapshots fails: dur_state_4.bin shows 5 (expected 4), dur_before.bin shows 5 (expected 4). At char-creation it reads 3. Live read in char-creation shows: 0x00C18618=3, 0x00C1861C=1. Possibilities: (a) prior snapshots mislabeled, (b) durability is at a different address, (c) field at 0x00C18618 was correctly +1-cheat-incrementable but is not raw durability. Action: needs in-game re-verification by watching while user actually uses the durability cheat ( pause R1+R2 RIGHT,RIGHT,LEFT,LEFT,DOWN,UP,CIRCLE)."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "Snapshot durability series mislabeled",
+    "outcome": "investigated",
+    "details": "All 5 snapshots named dur_before/dur_state_4/dur_state_5/dur_after4 show IDENTICAL bytes at 0x00C18608-0x00C18628. They were taken at the same gameplay moment (durability=5) but labeled by expected outcome. The address 0x00C18618 itself IS sword durability (matches live read: =3 at char-creation, =5 mid-game). Removing earlier address-suspect flag."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "Player struct VALID-state gate found",
+    "outcome": "works",
+    "details": "{\"address\": \"0x00C1860E\", \"meaning\": \"Player target ID / spawn-state gate\", \"rule\": \"When this u16 == 0, HP/yen/sword/etc at lower offsets are SENTINEL not real values. When == 0xFFFE, normal gameplay. When == 0xFFFF, early in-game (briefly after spawn).\", \"evidence_snapshots\": {\"0xFFFE\": [\"ingame_idle\", \"ingame_moved\", \"live_*\", \"dur_*\"], \"0xFFFF\": [\"hp_baseline_1000\", \"hp_955\"], \"0x0000\": [\"baseline\", \"char_creation_unlocked\", \"fresh_boot\", \"after_start\", \"state01\"]}, \"implication\": \"Verifier must check this gate first before trusting player-struct readings during menu/loading.\"}"
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "Verifier v2 pass (gate=0x0000)",
+    "outcome": "works",
+    "details": "{\"VERIFIED\": 25, \"MENU_MASKED\": 24, \"CANDIDATE\": 4}"
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "Char-unlock bitmask identified and VERIFIED",
+    "outcome": "works",
+    "details": "{\"canonical_addr\": \"0x00C2D6C4\", \"mirror_addr\": \"0x00C25C64\", \"verification_methods\": [\"snapshot diff: 6 pre-cheat baselines vs char_creation_unlocked\", \"live RAM read: live value=0x3FFF after user applied unlock cheat\", \"bit count: post=14 bits, pre=8 bits, delta=6 chars unlocked\"], \"mod_recipe\": \"Write 0x3FFF to 0x00C2D6C4 AND 0x3FFF3FFF to 0x00C25C64\", \"pending_verification\": \"After save+reload cycle, confirm mask persists across boots\"}"
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "VOLUME unknown-block sub-decode",
+    "outcome": "works",
+    "details": "{\"sub_categories\": {\"binary_gs\": 34, \"binary_compressed\": 21, \"text_callscript\": 21, \"text_callscript_padded\": 4, \"unknown\": 18, \"binary_mips\": 29, \"binary_strided\": 12, \"binary_mesh\": 18, \"binary_record\": 4}, \"note\": \"type_16: 10 GS-packet candidates; type_1B/1D: 9-11 GS packets each. GS classifier needs tightening (loose match on register-ID byte).\"}"
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "Verifier v2 pass (gate=0x0000)",
+    "outcome": "works",
+    "details": "{\"VERIFIED\": 26, \"MENU_MASKED\": 24, \"CANDIDATE\": 7}"
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "Verifier v2 pass (gate=0x0000)",
+    "outcome": "works",
+    "details": "{\"VERIFIED\": 26, \"MENU_MASKED\": 24, \"CANDIDATE\": 7}"
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "NPC table fully mapped (stride + layout)",
+    "outcome": "works",
+    "details": "{\"base\": \"0x00C18000\", \"stride\": \"0x800\", \"count\": 27, \"player_slot_layout\": \"HP @ slot+0x608, gate @ slot+0x60E, sword_dur @ slot+0x618\", \"npc_slot_layout\": \"char_id @ slot+0x00, inst_id @ slot+0x04, HP @ slot+0x08, HP_max @ slot+0x0A, type @ slot+0x0C\", \"sample_npcs\": {\"slot1 id=1 HP=1800\": \"first NPC, likely Akadama leader\", \"slot2 id=5 HP=1600\": \"likely Kurohama leader\", \"slot5 id=29 HP=9999\": \"boss/invincible (HP 9999)\", \"slot[17-19] id=25\": \"CHID_KATUAGEKUN (from CallScript var)\"}, \"verification\": \"Read structurally from ingame_idle.bin; pattern consistent across 26 occupied slots; all share canonical layout.\"}"
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "CHID enum built (char_id -> CallScript names)",
+    "outcome": "works",
+    "details": "{\"chid_count\": 28, \"id_count\": 12, \"sample\": {\"373\": [\"CHID_KATUAGEKUN\"], \"171\": [\"CHID_ZAKO_A\"], \"127\": [\"CHID_ZAKO_B\"], \"40\": [\"AKA_1A\", \"AKA_1B\", \"AKA_2A\", \"AKA_2B\"], \"39\": [\"ZAKO_1A\", \"ZAKO_1B\", \"ZAKO_2A\", \"ZAKO_2B\", \"ZAKO_3A\", \"ZAKO_3B\", \"KURO_A\", \"KURO_B\"], \"3\": [\"CHID_ZAKO_C\"], \"2\": [\"ZAKO_NINZUU\"], \"1\": [\"ZAKO_Talk01_Func\", \"ZAKO_TalkSelect01_Func\", \"ZAKO_Talk02_Func\", \"ZAKO_TalkSelect02_Func\", \"CHID_YAKUNIN_1\", \"CHID_MurasakiTask\"], \"21\": [\"#KURO_B\"], \"22\": [\"#KURO_A\", \"#CHID_ZAKO_C\"], \"25\": [\"#CHID_KATUAGEKUN\"], \"114\": [\"#ZAKO_NINZUU\"]}}"
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "Function naming tiered by evidence",
+    "outcome": "works",
+    "details": "{\"methodology\": \"CONFIRMED tiers backed by direct string xref or hand verification; INFERRED tiers are transitive guesses.\", \"high_confidence_count\": 151, \"inferred_count\": 390, \"note\": \"Use evidence column to filter when querying for trustworthy names.\"}"
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "CallScript dispatch model corrected",
+    "outcome": "works",
+    "details": "{\"old_assumption\": \"Switch cascade \\u2014 cmp opcode/beq handler\", \"corrected_model\": \"C++ virtual method dispatch \\u2014 instruction node has a vtable at +0x20, opcode handlers are virtual methods at vtable+0x8\", \"evidence_va\": \"0x001654A0 (vm_loop_A first 17 instructions)\", \"implication\": \"Opcode -> handler mapping requires walking each CScript instruction class vtable. Each opcode (e.g. ) is a CInstrCAC class with handler at its vtable+0x8.\", \"next_step\": \"Find the vtables: search ELF rodata for pointer arrays of size ~16 bytes (4 ptrs) pointing into code region. Each is an instruction-node class vtable.\"}"
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "Prior claim: 156-opcode jump table fitted into 1020 bytes — SUPERSEDED",
+    "outcome": "fails",
+    "details": "The original 3-VM-loops claim (each 1020 bytes) was based on Ghidra labels; the actual functions at those addresses are SHORT virtual-method dispatchers, not opcode interpreters."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "Function naming evidence tiers VERIFIED",
+    "outcome": "works",
+    "details": "{\"tier_counts\": {\"VERIFIED_HAND\": 7, \"CONFIRMED_GHIDRA\": 70, \"CONFIRMED_STRXREF\": 196, \"INFERRED_ADJACENCY\": 13, \"INFERRED_HELPER\": 377}, \"verification_method\": \"Spot-checked 10/10 CONFIRMED_STRXREF functions against ghidra/analysis.json xref data \\u2014 all 10 verified to actually reference the named string in their bodies (just not via simple lui+addiu \\u2014 ghidra catches gp-relative loads, post-prologue refs, etc.)\", \"reliability\": {\"VERIFIED_HAND\": \"Production-ready; use freely\", \"CONFIRMED_GHIDRA\": \"PS2 SDK symbol names from Ghidra; high confidence\", \"CONFIRMED_STRXREF\": \"String-evidence backed; the function does reference the named string. The chosen verb (load/save/play/etc.) is heuristic but the function IS related to that string.\", \"INFERRED_ADJACENCY\": \"Adjacent to a named function; lower confidence\", \"INFERRED_HELPER\": \"Caller is named; this is a transitive guess. Treat as scaffolding, not ground truth.\"}, \"query_pattern\": \"SELECT * FROM km_ghidra_functions WHERE evidence IN ('VERIFIED_HAND','CONFIRMED_GHIDRA','CONFIRMED_STRXREF') -- 273 trustworthy named fns\"}"
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "re-string-curator: categorized strings",
+    "outcome": "works",
+    "details": "updated=1010 cat_counts={'other': 593, 'scelib': 2, 'format-string': 147, 'debug': 22, 'menu': 10, 'asset-path': 236} top_subs=[('path:ui', 84), ('path:map', 82), ('path:menu', 35), ('path:iop', 9), ('path:script', 5), ('path:cdrom0:', 5), ('path:chara', 4), ('path:effect', 2)]"
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "re-cross-game-xref: SLUS-20407 vs SLUS-20397",
+    "outcome": "works",
+    "details": "matches=127 a_fns=2064 b_fns=5274 unique_hashes_common=104 top=[('err_sys_sce_mpeg_get_picture_helper4_00104f30', 'FUN_00103a38', 1.0), ('stdcpp_root_00118d88', 'FUN_001175c0', 1.0), ('too_small_buffer_size_0010aa88', 'too_small_buffer_size_00108d48', 1.0), ('too_long_parameter_s_helper2_00116c18', 'FUN_00115078', 1.0), ('tlb_spad_kernel_001171d0', 'tlb_spad_kernel_00115640', 1.0), ('validate_invalid_macroblock_helper2_00109328', 'FUN_001075e8', 1.0), ('stdcpp_root_00117e88', 'FUN_001166c0', 1.0), ('sys_leaf_001fe868', 'FUN_0037b0a0', 1.0), ('draw_mem_sce_gs_put_draw_env_00102f80', 'draw_sce_gs_put_draw_env_00100ce0', 1.0), ('mem_node_0010c448', 'FUN_0010a718', 1.0)]"
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "mod-recipe-writer: infinite_hp",
+    "outcome": "works",
+    "details": "target=infinite_hp pnach=<path> addresses=['0xc18608']"
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "mod-recipe-writer: char_unlock_all",
+    "outcome": "works",
+    "details": "target=char_unlock_all pnach=<path> addresses=['0xc2d6c4', '0xc25c64']"
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "mod-recipe-writer: sword_dur_lock",
+    "outcome": "works",
+    "details": "target=sword_dur_lock pnach=<path> addresses=['0xc18618']"
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "re-sound-classifier: pass complete",
+    "outcome": "works",
+    "details": "scanned=450 no_file=0 format_breakdown={'unknown': 450}"
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "re-compression-decoder: type_0x14",
+    "outcome": "investigated",
+    "details": "block_kind=type_0x14 tried=0 hits={'no_codec': 49} sane={}"
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "re-compression-decoder: type_0x14",
+    "outcome": "fails",
+    "details": "block_kind=type_0x14 tried=49 handled=0 hits={'no_codec': 49} sane={}"
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "re-compression-decoder: type_0x16",
+    "outcome": "works",
+    "details": "block_kind=type_0x16 tried=77 handled=2 hits={'no_codec': 75, 'lzss-4k': 2} sane={'lzss-4k/structured_binary': 2}"
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "re-opcode-mapper: heuristic pass",
+    "outcome": "partial",
+    "details": "candidates=102 confirmed=0 inferred_pending=102 unmapped_opcodes=156"
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "re-opcode-mapper: heuristic pass",
+    "outcome": "partial",
+    "details": "candidates=102 confirmed=0 inferred_pending=102 unmapped_opcodes=156"
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "re-opcode-mapper: 96 distinct handlers identified",
+    "outcome": "partial",
+    "details": "102 vtable candidates collapse to 96 distinct method[2] addresses. 95 are singleton (1 vtable -> 1 handler); one (0x001E3BE0) is shared by 7 vtables. 156 opcodes in scripts -> 96 unique handler functions: some opcodes share handlers. Captured all 102 vtable candidates as km_pending_findings (target_table=km_opcode_handlers) with call-edge info. Next-leverage: (a) Ghidra GUI on the factory function that constructs script instructions, or (b) PCSX2 EE-side breakpoint on each candidate handler with script-byte capture as scripts execute. Both produce the missing opcode->handler labels."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "re-address-crossvalidator: yen conflict resolved",
+    "outcome": "works",
+    "details": "label=yen candidates=[12683808, 12751348] winner=0x00C18A20 loser=0x00C18A20 scores={12683808: {'sane': 17, 'extreme': 2, 'diversity': 3, 'total': 16}, 12751348: {'sane': 17, 'extreme': 2, 'diversity': 3, 'total': 16}} live={12683808: 0, 12751348: 0}"
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "re-address-crossvalidator: yen conflict resolved",
+    "outcome": "works",
+    "details": "label=yen candidates=[12683808, 12751348] winner=0x00C18A20 loser=0x00C291F4 scores={12683808: {'sane': 17, 'extreme': 2, 'cheaty': 0, 'organic': 17, 'diversity': 3, 'max_val': 1163984896, 'total': 33}, 12751348: {'sane': 17, 'extreme': 2, 'cheaty': 6, 'organic': 11, 'diversity': 3, 'max_val': 1118699520, 'total': 9}} live={12683808: 0, 12751348: 0}"
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "mod-recipe-writer: infinite_yen",
+    "outcome": "works",
+    "details": "target=infinite_yen pnach=<path> addresses=['0xc18a20']"
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "re-compression-decoder: type_0x14",
+    "outcome": "fails",
+    "details": "block_kind=type_0x14 tried=49 handled=0 hits={'no_codec': 49} sane={}"
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "re-compression-decoder: type_0x14",
+    "outcome": "fails",
+    "details": "block_kind=type_0x14 tried=49 handled=0 hits={'no_codec': 49} sane={}"
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "re-compression-decoder: type_0x14",
+    "outcome": "fails",
+    "details": "block_kind=type_0x14 tried=49 handled=0 hits={'no_codec': 49} sane={}"
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "re-compression-decoder: type_0x14",
+    "outcome": "fails",
+    "details": "block_kind=type_0x14 tried=49 handled=0 hits={'no_codec': 49} sane={}"
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "re-opcode-mapper: heuristic pass",
+    "outcome": "partial",
+    "details": "candidates=102 confirmed=0 inferred_pending=102 unmapped_opcodes=156"
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "re-cross-game-xref: SLUS-20407 vs SLUS-20397",
+    "outcome": "works",
+    "details": "matches=127 a_fns=2064 b_fns=5274 unique_hashes_common=104 top=[('stdcpp_node_0010f810', 'FUN_0010db10', 1.0), ('stdcpp_node_0010f810', 'FUN_0010db78', 1.0), ('stdcpp_node_0010f878', 'FUN_0010db10', 1.0), ('stdcpp_node_0010f878', 'FUN_0010db78', 1.0), ('err_sys_sce_mpeg_get_picture_helper8_00105070', 'FUN_00103bf0', 1.0), ('mem_node_001099a0', 'FUN_00107c60', 1.0), ('too_long_parameter_s_helper2_00116c18', 'FUN_00115078', 1.0), ('stdcpp_root_00116ec8', 'FUN_00115328', 1.0), ('stdcpp_node_00112520', 'FUN_00110708', 1.0), ('stdcpp_node_001115c0', 'FUN_0010f7a8', 1.0)]"
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "Day 0: purged 102 noise pending findings",
+    "outcome": "works",
+    "details": "Deleted 102 INFERRED_HELPER km_opcode_handlers rows that had opcode=null. Future opcode discoveries route through Unicorn emulation (Day 2) which produces CONFIRMED_UNICORN tier directly into km_opcode_handlers, no staging needed."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "pointer-chain walker: Day 3",
+    "outcome": "works",
+    "details": "{\"addrs_attempted\": 15, \"addrs_with_chains\": 0, \"snapshots_loaded\": 12}"
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "code xref finder: Day 3 (lui+addiu walker)",
+    "outcome": "works",
+    "details": "{\"addrs_with_refs\": 9, \"total_addrs_checked\": 65, \"elapsed_s\": 1.7}"
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "Live HP freeze verified — 12 damage events restored",
+    "outcome": "works",
+    "details": "{\"address\": \"0x00C18608\", \"mechanism\": \"PINE write every 50ms (uint16)\", \"sanity_gate\": \"HP_max in range 0..10000\", \"damage_events_seen\": 12, \"restoration_latency_ms\": \"~50-100\", \"user_confirmation\": \"visual confirmation in PCSX2 during combat\", \"daemon_script\": \"scripts/freeze_daemon.py hp\"}"
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "Moon gravity verified live — 226 Y-vel clamps in 90s",
+    "outcome": "works",
+    "details": "{\"mechanism\": \"PINE: if Y-vel < -1.5, write -1.5\", \"addresses\": [\"0x0091D948\", \"0x00A9D948\"], \"clamp_value\": -1.5, \"writes_in_90s\": 226, \"user_visible\": \"Slow-fall after jumps; jumps themselves unaffected\", \"daemon\": \"scripts/freeze_daemon.py moon_gravity\"}"
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "Toggle UI shipped — toggle_ui.py + active_mods.json + watch-control-file daemon",
+    "outcome": "works",
+    "details": "{\"ui\": \"scripts/toggle_ui.py (Tkinter window with checkboxes)\", \"control_file\": \"<path>\", \"daemon_mode\": \"python freeze_daemon.py --watch-control-file (reads control file every 1s)\", \"mods_supported\": [\"hp\", \"yen\", \"sword_dur\", \"char_unlock\", \"moon_gravity\", \"high_jump\"]}"
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "Moon gravity attempt #1 FAILED — wrong address (kimono bone, not Y-vel)",
+    "outcome": "fails",
+    "details": "{\"addresses_tried\": [\"0x0091D948\", \"0x00A9D948\"], \"symptom\": \"Kimono texture stretching, NOT slow-fall\", \"lesson\": \"Snapshot diff (paused) can find animation/IK fields; need write-test before claiming binding.\"}"
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "Mod toggle UI desktop shortcut created",
+    "outcome": "works",
+    "details": "{\"shortcut_path\": \"<path> Mod Toggles.lnk\", \"target\": \"<path>\", \"description\": \"Double-click to launch the Tkinter toggle window. Edit active_mods.json \\u2192 daemon (--watch-control-file) picks up <1s.\", \"verified_mods_in_ui\": [\"hp\", \"char_unlock\"], \"demoted_mods_pending_rehunt\": [\"yen\", \"sword_dur\"]}"
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "HP lock CONFIRMED again — Life 990→999 visible on pause menu",
+    "outcome": "works",
+    "details": "{\"address\": \"0x00C18608\", \"mechanism\": \"direct PINE write u16\", \"visible_change_on_pause_menu\": true, \"test_value_written\": 999, \"this_session\": \"2026-06-23 ~16:00\"}"
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "re-opcode-mapper: heuristic pass",
+    "outcome": "partial",
+    "details": "candidates=102 confirmed=0 inferred_pending=102 unmapped_opcodes=156"
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "P1: Ghidra R5900 backend now produces 2820/2820 real C bodies",
+    "outcome": "works",
+    "details": "{\"prev\":\"33/2104 (1.6%) real, 2071 halt_baddata\",\"new\":\"2820/2820 (100%) real, 0 halt_baddata\",\"decompile_time\":\"61s\",\"vm_shims_show_vt_8\":[true,true,true],\"opcode_mapper_outcome\":\"0_confirmed_102_pending_inferred — deferred to P5 with Unicorn + AI matching\"}"
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "P2: PS2Recomp first pass shipped — 2821 .cpp files from 2820 functions",
+    "outcome": "works",
+    "details": "{\"build_target\":\"Windows MSVC native (VS2026 BuildTools)\",\"deps\":\"FetchContent: elfio,toml11,fmt,libdwarf,rabbitizer,nlohmann_json,raylib,imgui,rlimgui,sdl2\",\"binaries_built\":[\"ps2_recomp.exe\",\"ps2_analyzer.exe\",\"ps2EntryRunner.exe\",\"ps2xStudio.exe\",\"ps2x_tests.exe\"],\"input_fns\":2820,\"output_cpps\":2820,\"output_size_mb\":92,\"unknown_ops\":{\"MMI_0x2c\":2},\"vm_shims_recompiled\":True,\"WSL_needed\":false,\"plan_agent_was_wrong\":\"claimed Linux-only; README says MSVC-primary\"}"
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "P3: wos_runtime boots WoS recompiled code; game reaches scheduler idle loop",
+    "outcome": "works",
+    "details": "{\"strategy\":\"reuse PS2Recomp ps2EntryRunner via runtime-side splice of 2820 generated cpps + register_functions.cpp + 2 headers (per upstream Readme.md)\",\"build_outcome\":\"ps2EntryRunner.exe 48MB (was 1.9MB before splice)\",\"boot_smoke_test_outcome\":\"PASSED beyond P3 success criterion. Reached EE entry 0x100008, recompiled code executing, game spawned dispatcher thread #2 at 0x10faa0, set up 3 semaphores, entered standard idle pattern (sema wait/signal). ZERO unimplemented HAL stub hits.\",\"runtime_capabilities_discovered\":\"PS2Recomp runtime is more complete than plan agent claimed: ps2_memory (full EE memory map), ps2_runtime (kernel + threading + sema), ps2_iop (IOP emulation), ps2_pad, ps2_audio + audio_vag, ps2_vu1 (VU1 microcode interpretation), ps2_vif1_interpreter, ps2_gs_gpu + ps2_gs_memory + ps2_gs_rasterizer (full GS pipeline)\",\"current_block\":\"game in tight WaitSema(1)/SignalSema(1) idle loop on main thread; dispatcher thread blocked on sema 3 at pc=0x10eca0. Game waiting for VSync interrupt or IOP RPC response that runtime needs to fire to break the loop.\",\"next_step_per_plan\":\"P4 HAL ring 0 was scoped at 2 tick-days to write cdvd/pad/gs/dma/spu2/sif stubs; most of that is already implemented in PS2Recomp ps2_runtime. P4 collapses to: enable VSync timer, configure IOP module load sequence, and let the runtime drive the game past the idle loop.\"}"
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "Tesshu asset identity (for model swap)",
+    "outcome": "works",
+    "details": "ELF asset table slot_idx=2 Tesshu. entries elf_va 0x433058 & 0x433088; chara_offset=0x0018F7A0 true_size=0x0011B8A0 (~1.164MB). Repoint offset/size to swap model. Char obj table stride 0x800 @0xC18000."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "Model-injection critical path",
+    "outcome": "investigated",
+    "details": "GOAL replace Tesshu model w/ imported mesh (Luffy glb Desktop/Luffy_Model). PLUMBING EXISTS: volume_repack.py rebuilds TOC changed sizes; iso_inject.py; asset table 0x433040+ repoints char->assets. BLOCKER: 0x1A skeletal .mdl not writable. Need spec 0x1A mesh+0x1B bindpose+0x0F weights+0x17/0x1D VIF+0x15/0x18 pim+0x0D CLUT + a model builder. Texture side K2Tx+Rabatini LZSS documented."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "Model format is MDSP/KMDp/KMDs - FULLY parseable (writer spec)",
+    "outcome": "works",
+    "details": "Char models = MDSP container in CHARA.BIN (NOT raw VOLUME.DAT). Parsers exist: pcsx2_modder/mdsp_parser.py, kmds_parser.py, spec at mdsp_format_spec.md. LAYOUT: MDSP magic@base; +0x04 kmd_anim_ptr; pointer table 0x08..0x150 (u32 block-rel offsets, 0xFFFFFFFF=null) -> sub-blocks by magic: KMDp(mesh)/KMDs(skeleton)/TEXx(textures)/bone-table(no magic). KMDp: +0x04 vcount,+0x08 pcount,+0x10 vif_tag,+0x34 batch_size(40),+0x3C tex_id; body@+0x40 = interleaved [<=40 verts x32B][strip section]; inter-batch 16B hdr FFFFFFFF|bs|bs+1|tex. VERTEX 32B: +0x00 pos xyz f32, +0x0C bone_id u32 (SMALL INT = per-vertex rigid bone!), +0x10 normal xyz f32, +0x1C 0.0. STRIP sec: [VIFcode u32 cmd|num|imm][implicit UV u16u,u16v /4096][8B records: u16 raw_index(stride2 actual=raw/2), byte+3 strip_flag(0x80=restart), u16u,u16v UV /4096]. TEXx: +4 count + count u32 tex offsets. WHY MATTERS: writer only needs to emit KMDp submeshes; can REUSE Tesshu KMDs skeleton+bone-table+TEXx and swap only mesh. Skinning is 1-bone/vertex via bone_id -> assign Luffy verts to nearest Tesshu bone."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "chara_offset == CHARA.BIN offset (injection resolved)",
+    "outcome": "works",
+    "details": "Tesshu chara_slot_map.json: idx2 offset=1636256(0x18F7A0) size=1161376(0x11B8A0) n_submeshes=19 has_kmd=True. This offset EQUALS the ELF asset-table chara_offset 0x18F7A0. => asset table points into CHARA.BIN. SWAP = replace Tesshu MDSP region in CHARA.BIN @0x18F7A0, update asset-table size field (0x433058/0x433088+4) if size changes, repack CHARA.BIN into ISO/VOLUME. Stay <=0x11B8A0 to avoid relayout."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "KMDp model WRITER works (round-trip validated)",
+    "outcome": "works",
+    "details": "Built pcsx2_modder/mdsp_writer.py (inverse of mdsp_parser). build_kmdp(batches,tex_id) emits KMDp bytes. VALIDATION: real Tesshu weapon KMDp (CHARA.BIN 0x18F7A0+0x7CD10,168v) -> writer -> re-parse: 168/168 verts, 177/177 strips MATCH (pos,bone_id,uv,flag). Constants from real bytes: flags0x10 vif_tag0x30000281 gif0x7C518000 stripVIF0x7D288079 interbatch FFFFFFFF|40|41|tex raw_index=real*2+1. GATE CLEARED: can author mesh blocks. Final gate=in-game GS render (needs PCSX2). Remaining: mesh->batch/strip gen, MDSP assembler reuse Tesshu skel/TEXx, bone_id assign, tex convert, size<=0x11B8A0."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "mesh->KMDp generator works (tri reconstruction validated)",
+    "outcome": "works",
+    "details": "Added build_kmdp_from_mesh() to mdsp_writer.py: arbitrary tri mesh (pos,normal,uv,bone_id,triangles) -> KMDp. Greedy batch packing keeps each batch <=40 unique verts; each triangle = restart-delimited 3-vert strip. TEST: 80 random tris -> 6 batches (39,40,40,39,40,3), re-parsed + reconstructed via game strip logic = 80/80 tris MATCH. WHY: encodes tris as 0x80-restart strips that strip_to_triangles inverts. Core authoring pipeline (mesh->Tenchu KMDp) now proven at format level. Remaining: MDSP assembler (reuse Tesshu KMDs/TEXx/bone-table), bone_id assignment via nearest KMDs bone, Luffy decimate+load, tex convert, in-game GS render (final gate, needs PCSX2)."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "Tesshu skeleton/mesh parsed; coord-space ambiguity (needs in-game)",
+    "outcome": "investigated",
+    "details": "Tesshu MDSP@0x18F7A0: 26 KMDp, 6 KMDs, 2 bonetbl, 1 TEXx. Main KMDs 31 bones, world bbox x[-150,108] y[-161,142] z[-144,144]. BUT aggregated mesh verts bbox x[-90,91] y[-170,-135] z[-13,6] and only 3 distinct vertex bone_id fields (44,60,76 -> bones 11,15,19). AMBIGUITY: kmds_parser docstring says verts are bone-LOCAL (transform by bone matrix); export_tenchu_models_v2 comment says verts are WORLD-space raw. These conflict. Also so-few bone_ids suggests coarse rigid rig OR parser under-reads bone_id on some submeshes. IMPACT: coord-space + bone-binding for a new model CANNOT be nailed blind -> requires in-game iteration in PCSX2 to confirm. Saved tesshu_skeleton.json. NEXT solo: surgical MDSP assembler (raw-byte KMDp replace + pointer-table patch). Then emulator loop required for geometry/scale/texture verification."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "MDSP in-place assembler works (injection-safe swap validated)",
+    "outcome": "works",
+    "details": "Wrote mdsp_assembler.py: replace_kmdp_inplace(region,{data_off:new_bytes}) swaps a KMDp within its existing byte budget (data_off..next_block), zero-pads remainder, NO pointer-table/relayout changes = safest injection. VALIDATED: rebuilt Tesshu weapon KMDp (6960B, budget 10288B) reinserted -> region size preserved, all 26 KMDp/6 KMDs/1 TEXx/2 bonetbl preserved, replaced submesh reads 168v, ALL other submeshes byte-identical. OFFLINE PIPELINE NOW COMPLETE+VALIDATED: mesh->KMDp (writer+generator) -> in-place MDSP swap (assembler). Constraint: each Luffy submesh must fit its Tesshu counterpart's byte budget. REMAINING TO PLAYABLE: (1) load/decimate Luffy glb + coord/scale transform + bone_id assign [coord-space ambiguous -> needs in-game], (2) TEXTURE ENCODER PNG->pim/CLUT [not built, substantial], (3) patch CHARA.BIN + locate CHARA.BIN in ISO/VOLUME + iso_inject, (4) PCSX2 in-game iteration loop [MANDATORY - blind PS2 model+tex inject won't land first try]."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "p7a_weave_deinterlace_verified",
+    "outcome": "works",
+    "details": "Weave deinterlace in ps2_gs_gpu present path VERIFIED on-screen: boot_p7a 254s run, screenshot pairs mean-abs-diff 0.75/0.03 at MC screen and 0.0000/0.0000 at 225s clean frame (flashing threshold >10). Also 0 bad=0x1 in 36586 lines confirming p6 vsync INTC-order fix holds. Exe 2026-07-14 19:17. Game idles at MC no-save confirmation dialog awaiting pad input; steady 640x448 uploads, MC GetInfo=0 fmt=1 free=8192, GetDir=-4. Artifacts wos_recomp/hunts_parscan/ port_trace.json + port_menu_ram.bin (32MB guest RAM dump, spawn gate 0xC1860E=0). PS2Recomp commit bdca794."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "parscan_v1_port_vs_pcsx2_menu",
+    "outcome": "works",
+    "details": "First parallel scan port-vs-original complete. 32MB guest RAM dumps at menu milestone both sides (port_menu_ram.bin @ MC no-save dialog, pcsx2_menu_ram.bin @ title menu). Comparator tools/parscan_compare.py: 60/67 verified km_addresses MATCH. .text 0x100000-0x1FD236 byte-identical; all 332 code-region diff runs at 0x1FD236+ = .data/.sbss mutable globals. 2299/8192 pages differ, dominated by heap band 0x187E000-0x18CE000 (whole-page diffs = different assets resident: attract movie vs MC dialog). NPC table slots 1-7 char_ids identical, player struct HP/max/dur/yen/rotation identical. No structural one-side-empty region found = no uninitialized subsystem in port at menu phase. Report: wos_recomp/hunts_parscan/parscan_report.md+json"
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "parscan_v1_explained_diffs",
+    "outcome": "investigated",
+    "details": "7 known-address DIFFs all explained: char-unlock 0xC2D6C4/0xC25C64 = PCSX2 pnach cheat contamination (06157251_char_unlock_all.pnach active, ref=0xFF, port=0 clean); HP u32 @0xC18608 ref low16=2000 likely HP-cheat contamination; render matrix 0x924E50 + anim ring 0xC70C20 = attract-mode animation running on ref only; menu-sword block 0x105B8F0-0x105B91A + UI/BGM 0xC29290 = milestone offset (title menu vs MC dialog heap state). None indicates port defect."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "p7b_clean_reference_capture",
+    "outcome": "works",
+    "details": "Cheat-free PCSX2 reference at title menu captured. 06157251_char_unlock_all.pnach moved to Documents/PCSX2/cheats_disabled_parscan/, EnableCheats=false in PCSX2.ini (backup PCSX2.ini.bak_p7b). Clean values: char-unlock 0xC2D6C4 = 0x0 (natural first-boot, prior 0xFF was cheat artifact), spawn gate 0xC1860E = 0. Dump: wos_recomp/hunts_parscan/pcsx2_title_clean_ram.bin (32MB) + pcsx2_title_clean.png (F8 proof, title menu Start from Beginning) + pcsx2_reference_p7b.json. PCSX2 left running cheat-free."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "p7b_hp_pair_anomaly_at_menu",
+    "outcome": "investigated",
+    "details": "u32 @0xC18608 reads 0x03E807D0 at title menu even CHEAT-FREE (low16 HP=2000, high16 max=1000) on original; port shows 1000/1000 at MC dialog. Prior assumption (cheat contamination) WRONG for this field. Either pre-spawn garbage/different init, or layout note HP@+0x608 max@+0x60A needs re-check at menu phase. Compare again with port title-milestone dump when available; only trust this field when spawn gate = 0xFFFE (active gameplay)."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "p7b_port_input_blocker_pad_backend",
+    "outcome": "fails",
+    "details": "Port CANNOT be driven past MC dialog by scripted input with current build. Root cause: ps2_pad.cpp PSPadBackend::readState() reads raylib gamepad index 0 and always returns true; readPadPortData (Kernel/Stubs/Pad.cpp:302) prefers backend, so keyboard fallback (X/SPACE=Cross) is dead code whenever ANY pad occupies XInput slot 0. Real Xbox controller (HID VID_045E PID_02FF IG_00) holds slot 0 feeding neutral FF FF; vgamepad ViGEm lands slot 1 = ignored; Disable-PnpDevice denied; setPadOverrideState() is dead code (never called). Keys DO reach window (F1 debug panel toggles) - guest never samples them. Fix options: (a) fall through to keyboard when slot-0 pad fully neutral, (b) findFirstGamepad() not hardcoded 0, (c) wire setPadOverrideState to hotkey/CLI. Evidence: hunts_parscan/p7b_padtab.png (Source=BACKEND bytes FF FF), port_trace_p7b.json."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "p7b_port_mcdialog_idle_healthy",
+    "outcome": "works",
+    "details": "Port at MC create-file dialog is HEALTHY idle, not crash: main thread parked at PC=RA=0x151910 SP=0x1FF7F60 (input-wait loop), frame uploads advancing (idx~17100), SignalSema sid=10 cadence, no deathring. RAM dump port_mcdialog_ram.bin verified (.text match, spawn gate 0). Screenshots p7b_03e/p7b_04b1 show clean X:Yes triangle:No dialog - weave still artifact-free."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "p7c_ingame_reference_capture",
+    "outcome": "works",
+    "details": "Cheat-free ORIGINAL in-game reference captured via ViGEm pad (created BEFORE PCSX2 launch = takes SDL-0; 4 presses: START at attract, A title, A difficulty Easy, START confirm name Dad). NEW-GAME PATH HAS NO PRE-RENDERED MOVIE: title->difficulty->name->Now Loading(~35s, gate 0, pos churning)->bridge map gate 0xFFFE. In-game: HP 0x03E803E8 (1000/1000), unlock_mask NATURAL IN-GAME VALUE 0x3665 (not 0), pos (0.000,0.748,2.320). Dump: hunts_parscan/pcsx2_ingame_ram.bin + pcsx2_p7c_ingame.png (bridge, HP HUD). PCSX2 left paused at gameplay; pad daemon scratchpad/pad_daemon_p7c.py via pad_cmds.txt."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "p7c_mc_create_livelock_root_cause",
+    "outcome": "fails",
+    "details": "Port livelocks at Creating-a-system-file screen: after Yes press ZERO new [mc] ops and ZERO SifCallRpc (census: Init x8 GetInfo x24 GetDir x2 Sync x8 all pre-tick-1514). Root cause: save-create first calls 0x11B7C0 (sceMcMkDir; wrapper FUN_00154cc0; fn sits right after sceMcGetEntSpace 0x11B670) which was UNBOUND -> recompiled body reads libmc internal global @0x20074C that HLE sceMcInit never populates -> silent early bail, game state machine retries forever. Dialog blink loop 1s (lum 125<->0), idle PCs 0x151910/0x1517d4 (merged fn 0x151720), frame pump healthy. ALSO VERIFIED: pad keyboard-merge fix works on-screen (SPACE advanced MC dialog). Boot logos SPIKE.PSS/ACQUIRE.PSS fail open cleanly (skipped, harmless). FIX: bound 0x11B7C0 -> ps2_stubs::sceMcMkdir (existing handler). Evidence: hunts_parscan/port_trace_p7c.json, port_mcstall_ram.bin."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "p7d_mc_create_livelock_persists_after_mkdir_binding",
+    "outcome": "fails",
+    "details": "sceMcMkdir binding at 0x11B7C0 (build 2026-07-17 20:13) is applied at boot but DOES NOT fix create livelock. Yes press accepted (padread data3=0xbf, screen advanced to Creating-a-system-file) yet ZERO [mc] ops + ZERO SifCallRpc after press and mc0/ stays empty -> HLE sceMcMkdir never invoked -> wrapper world_root_00154cc0/func_11B7C0 never CALLED. Dispatch path verified sound: generated sub_00154CC0 uses hasFunction/lookupFunction and registerFunction is last-wins, override applied after generated registration. So finding 158 root cause is incomplete: blocker is UPSTREAM of the Mkdir wrapper. Stall thread map: tid1 spins UI loop 0x151720 (pc 0x151910); tid4 pump WaitSema(9) wakes every frame but never dispatches MC work; tid2 blocked SEMA 3 forever; tid3 blocked SEMA 7 forever (entry 0x1B4A80, stack 0xC296A0; sema 7 = CreateSema id=7 init=0 max=1 created during GZMFS.IRX load). Semas 3 and 7 signaled ZERO times entire run -> next fix: find who signals sema 7 / wakes thread 0x1B4A80 in original (likely save-worker job queue) and why HLE path never queues the create job. libmc global 0x20074C = 0xFFFFFFFF at stall. Evidence: hunts_parscan/port_trace_p7d.json, port_p7d_stall_ram.bin, p7d_threads.png, boot_p7d.log."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "p7e_no_path_works_new_gs_crash",
+    "outcome": "fails",
+    "details": "Triangle/No at MC dialog WORKS (dialog advanced, follow-up prompt answered Cross) but runner SIGSEGV exit 139 deterministically 1-6s later on MC-decline->title transition, 4/4 runs identical: GsPutIMR new=0x65280 pc=0x1109920 -> burst of 64 [gs:packed-xyz] vertices with byte-identical garbage (x=44415 y=22270 z=0xcd7f2887) from ps2_gs_gpu.cpp:1476 PACKED XYZ2 path -> one frame (fbp 70->0) -> native 0xC0000005 READ at ps2EntryRunner+0x32F8A21, deref of ptr 0xFF in arg-forwarding vtable dispatch thunk (caller +0x32EF674 virtual call [rax+0x10]); recursion frames +0x335503F x3; r13=639 suggests 640-wide scanline loop. No PDB - rebuild with /MAP or /Zi to name. Debugger recipe hunts_parscan/p7e_dbg.py + p7e_dbg_out.txt."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "p7e_mkdir_binding_correction",
+    "outcome": "investigated",
+    "details": "Analyst (analysis/save_worker_sema_chain.md): 0x11B7C0 is sceMcFormat NOT MkDir (finding 158 binding was wrong; harmless since unreachable). Real sceMcMkdir = 0x11ABF8 thin wrapper sceMcOpen(mode 0x40) + patches libmc current-func @0x200748=0xB; manager gate sub_00154DC0 waits SyncCmd==0xB. Sema-7 thread 0x1B4A80 = deferred SOUND worker (red herring). Fix applied in source: bind 0x11ABF8=sceMcMkdir, rebind 0x11B7C0=sceMcFormat. Pending build+verify (p7f)."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "p7g_intermittent_resumable_entry_boot_death",
+    "outcome": "fails",
+    "details": "Build 2026-07-18 19:07 died at boot ~5s (GS idx~312) during GZMVS.RBB sound init: jr  with ra=0 at guest 0x1d4080 in FUN_001d4078, chain cdrom0_00152a50->func_1B4BE0(0x1b4be0)->FUN_001a6170->FUN_001a7230->FUN_001a6c60->FUN_001d4078. [dispatch:pc-zero] from=0x152c78 ra=0. This is INTERMITTENT not a regression: re-probe boot_p7h_probe.log of SAME exe = alive 40s, 0 pc-zero, frames to idx146 healthy. Matches MEMORY.md feedback_ps2recomp_resumable_entry_bug (merged-function resume dispatch missing case+label). Blocks autonomous multi-min drive runs ~1 in N boots. FIX is recompiler-side: add resume case for 0x1d4080 return path / null-ra guard in dispatchLoop."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "mkdir_currentfunc_patch_bootsafe",
+    "outcome": "investigated",
+    "details": "sceMcMkdir HLE now wosSceMcMkdir_0x11abf8 (game_overrides.cpp): calls ps2_stubs::sceMcMkdir, logs [mc] Mkdir, writes rdram+0x200748=0xB (libmc current-func the manager gate sub_00154DC0 reads). Also rebound 0x11B7C0 to sceMcFormat (was wrongly sceMcMkdir in 85f8ce4). BOOT-SAFE confirmed (boot_p7h_probe 40s alive). Save-create BEHAVIOR still UNVERIFIED - p7g hit intermittent boot death before reaching MC dialog. Needs a clean drive run reaching Creating-a-system-file to confirm [mc] Mkdir fires + screen resolves."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "gs_vram_func_table_oob_crash_fix",
+    "outcome": "works",
+    "details": "ROOT CAUSE of deterministic GS SIGSEGV on MC-decline->title (finding 160): GS::m_read_vram_funcs / m_write_vram_funcs declared std::array<...,0x3F> (63 entries) but GS::ReadVram/WriteVram index with (psm & 0x3F) = 0..63. Ctor init loop also ran i<0x3F. A corrupt GIF packet after GsPutIMR=0x65280 supplies garbage psm with low6=0x3F -> m_read_vram_funcs[63] reads a std::function ONE PAST array end -> invoking it = _Do_call null/garbage deref (ptr 0xFF). Named via p7h map+pdb: chain processGIFPacket->writeRegister->vertexKick->drawPrimitive->drawTriangle->sampleTexture->GS::ReadVram->_Do_call in ps2_gs_gpu.cpp.obj. FIX: arrays 0x3F->0x40, loop 0x40; index 63 now default-populated with ReadNull/WriteNull (safe 0). Built exe 2026-07-18 20:05. p7i verifying downstream. Confidence high (genuine OOB)."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "gs_oob_fix_VERIFIED_new_ee_spin_hang",
+    "outcome": "works",
+    "details": "GS OOB fix (finding 164, e51a7cc) VERIFIED p7i: runner SURVIVES MC-decline->title transition, no host AV (debugger exit 0), garbage GsPutIMR=0x65280 psm=0x3F packet still present but no longer crashes. NEXT BLOCKER (deterministic, no crash): EE main thread spins forever at guest PC 0x1d1050 (ra=0x1d0c54) in FUN_001d0c10_0x1d0c10 (unity_135_cxx.cxx.obj) immediately after frame:upload idx=6573. Render pipeline frozen: dma=1599231 gif=13307 gsw=0 vif=20 static while ticks advance = busy-wait on DMA/GS/event state that never advances -> title never renders, gate 0xC1860E stays 0. tid4 loops WaitSema/SignalSema sid9/10. Input does not unstick. Boot healthy first try. Fix target: what 0x1d1050 loop condition reads + who should advance it (DMA completion / GS busy flag / event flag). port_trace_p7i.json, port_p7i_stall_ram.bin."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "ee_spin_hang_is_malloc_freelist_heap_corruption",
+    "outcome": "investigated",
+    "details": "Spin at 0x1d1050 is NOT a hw busy-wait. FUN_001d0c10 = game dlmalloc malloc core (per heap_zeroing_verification.md); 0x1d1050 = smallbin best-fit free-list scan reading [s0+0x4]=size following [s0+0xC]=fd, exits only at bin sentinel a1 (bnel 0x1d1090) - NO null/bounds guard. Hangs because free-list is corrupt: stall dump shows u32(0xC)=0 so a NULL fd is a permanent fixed point, and smallmap @0x210F54=0xe0020003 claims bins {0,1,17,29,30,31} but only bin 6 has a chunk = allocator metadata desynced. Guest heap corruption, leading cause = recompiler pointer-store bug in free/unlink/morecore (same class as intermittent boot-death resumable-entry bug). PRIMARY FIX: HLE the guest allocator - registerFunction(0x1D0C10 malloc + free/realloc/new) served from one host allocator over guest heap arena (prior_art_research.md 4.1). FALLBACK (surgical, masks corruptor): null/out-of-arena guard at label_1d1090 + twin 0x1d0d84 to break to bin-exhausted. Exact stuck request size needs LIVE ctx regs r16/r5/r17/r10 (not in RAM dump) - capture is highest-value next step. Full writeup analysis/ee_spin_hang_0x1d1050.md."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "bootdeath_root_cause_alloc_per_instruction_cases",
+    "outcome": "investigated",
+    "details": "Boot-death (finding 162) root-caused by analyst (analysis/bootdeath_jr_null_ra.md): NOT vsync clobber (all saved-ra slots intact in death dump; old sig was ra=0x1 vs this ra=0x0), NOT HLE stubs. Cause = resumable-entry class INVERTED: alloc_mem_std_00100630 (game allocator entry 0x100630-0x1006d8) was generated with a resume case for EVERY instruction + register_functions registered all 43 inner addresses as dispatch targets. Mid-prologue entry skips addiu sp,-0x40 -> sp inflated +0x40 -> ld ra,0x20(sp) reads never-written slot = 0. Death sp 0x1ff7f70 = steady 0x1ff7f30+0x40 exactly; missing [p4:new2] entry log proves mid-entry. FIX APPLIED: cases stripped to {0x100630,0x100654,0x100668,0x1006a0,0x1006bc}, inner registrations pruned 43->5, plus bounded null-ra recovery guard in dispatchLoop (resume at dispatchedPc, max 16, logged). NOTE: same allocator as blocker D heap corruption - mis-entered alloc executions plausibly corrupt free-list; this fix may reduce/kill D. Verify: 10-boot loop counting pc-zero. g_dispatchHistory already thread_local (hunter sub-claim moot)."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "bootdeath_fix_VERIFIED_10of10",
+    "outcome": "works",
+    "details": "Boot-death fix (finding 167) VERIFIED: 10-boot loop, 32s each (past old ~5s death window): 0 pc-zero deaths, 0 exits, 0 null-ra-recover firings (guard present but never needed). alloc_mem_std_00100630 resume cases 43->5 canonical + register_functions inner registrations pruned 43->5 + bounded null-ra recovery guard in dispatchLoop. Blocker A CLEARED. Next: No-path drive to test whether mis-entered-alloc executions were also the blocker-D heap-corruptor."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "p7j2_malloc_hang_persists_after_bootdeath_fix",
+    "outcome": "fails",
+    "details": "Scripted No-path drive on boot-death-fixed exe: hang at 0x1d1050 (ra 0x1d0c54, sp 0x1ff7c90) REPRODUCED identically ~40s after Yes press. Frame idx frozen at 4931 for 75s+, dma/gif static, 0 pc-zero/null-ra-recover lines. CONCLUSION: alloc_mem_std mis-entry (finding 167) was NOT the blocker-D heap corruptor - independent bugs. Boot-death fix stands (10/10) but free-list corruption has another source. Live ctx-register harvest attempted (harvest_ctx_regs.py, pc-signature scan) - no hit (whole-region read aborts on guard pages; needs chunked reads). drive_p7j2.ps1 pattern works well for agent-free scripted drives."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "malloc_fd_corruption_guards_deployed",
+    "outcome": "investigated",
+    "details": "Deployed analyst fallback (analysis/ee_spin_hang_0x1d1050.md): null/out-of-arena fd guards after both lw s0,0xC(s0) sites in FUN_001d0c10 (0x1d108c + 0x1d0d48 twins). fd<0x100000 or >=0x2000000 -> force s0=sentinel(a1) = bin-exhausted path, log [p4:mallocguard] bad fd. This UNBLOCKS past the hang AND live-proves the null-fd theory when it logs. Masks upstream corruptor - real fix still needed (allocator HLE or find miscompiled pointer store). Verify run in progress."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "malloc_fd_guard_CLEARS_hang_new_blocker_0x110328",
+    "outcome": "works",
+    "details": "Malloc fd-corruption guards (0x1d108c + 0x1d0d48) VERIFIED CLEAR the 0x1d1050 free-list hang: scripted No-path drive, [p4:mallocguard] fired 12x (null/out-of-arena fd confirmed live = analyst theory correct), PC left 0x1d1050, dma 1.25M->1.41M + gif 10269->13873 ADVANCING (pipeline alive, was frozen). Blocker D UNBLOCKED (masking fix; upstream corruptor still open). NEW blocker: game now parks at PC 0x110328 (ra 0x110334, 4+ steady ticks), full MAGENTA cleared framebuffer, frame:upload frozen idx 5130 displayFbp=0. 0x110328 is in the SIF/sceSifInitCmd region (0x1115C0 area) - likely an RPC/SIF wait or another spin. Next: identify 0x110328 containing fn + what it polls. Screenshots hunts_parscan/p7j2_now.png + p7j2_noPanel.png (magenta). Log boot_p7j2_guard.log."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "deci2_poll_must_drive_tty_handler",
+    "outcome": "investigated",
+    "details": "Post-malloc-guard blocker at 0x110328 = DECI2 TTY drain busy-wait (magenta screen). Loop FUN_00110220+0x108: calls sub_0010FEA0 -> Deci2Call(code=4 Poll, socket=[s1+0x57D0]) then bnez [s0+0xC] loops while busy flag set. Prior session fixed code 3 (ReqSend) to drive guest DECI2 handler WRITE/WRITEDONE (clears opt[3] busy flag) but code 4 (Poll) was bare KE_OK stub - and WoS boot path reaches this loop via POLL not ReqSend. FIX: extracted driveDeci2Handler() shared helper, call from BOTH code 3/-7 and code 4. Comment in Deci2.cpp already ID this exact loop (FUN_00110220+0x108=0x110328). Build+verify pending. If wrong, WRITEDONE-every-poll could over-fire handler - watch for handler re-entry."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "SYSTEMIC_per_instruction_resume_registration_bug",
+    "outcome": "fails",
+    "details": "ROOT CAUSE of boot instability class (supersedes findings 162/167 as partial). register_functions.cpp has 131608 registerFunction calls; 1899 functions registered at >1 address (inner-address pattern); worst FUN_00200000=16483 regs, sub_001F8E70=10428, FUN_0021b6d0=7276. The generator emitted resume switch cases + dispatch registrations at EVERY instruction (not just post-call return addresses) for a whole class of functions. Any stray dispatch/preemption (shouldPreemptGuestExecution mid-fn, computed jump, return-addr resolving to inner addr) enters mid-prologue with wrong stack -> sp drift -> wrong/zero ra. Manifests as VARIED intermittent wedges across boots: 0x1d1050 malloc, 0x110328 Deci2, 0x8dcb00 data-jump, 0x152c78 null-ra. Symptom-by-symptom guards are whack-a-mole. Evidence p7 No-path drives: same exe fails at different sites per boot. alloc_mem_std strip (167) fixed ONE function; null-ra guard (167) recovers into corrupt state (boot_p7j2: recovered 0x152c78 then wedged 0x8dcb00)."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "SYSTEMIC_fix_plan_resume_point_pruning",
+    "outcome": "investigated",
+    "details": "FIX PLAN for the systemic resume-registration bug (Opus-scale, generator-level): legitimate dispatchable inner addresses = function entry + instruction-after-each-jal/jalr (return addresses). Programmatic pass: for each runner TU, extract return points from SET_GPR_U32(ctx,31,0xADDR) assignments (ra-before-call); rewrite that fns switch cases + register_functions.cpp registrations to {entry} + {those return addrs} only; strip all other inner cases/registrations. Risk: breaking dispatch if a legit resume point is missed - needs the 10-boot + No-path drive harness (drive_p7j2.ps1) to validate. Better long-term: fix PS2Recomp generator to emit resume points correctly, then regenerate. This is THE blocker to a stable boot; downstream fixes (malloc guard 171, Deci2 Poll 172) are correct but cant be cleanly verified until boots are deterministic."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "inner_dispatch_telemetry_refutes_systemic_badpc_on_nopath",
+    "outcome": "investigated",
+    "details": "Added [p4:inner-dispatch] dispatcher telemetry: logs any dispatch to a PC outside 24748 statically-legit targets (entries + post-call returns + preempt back-edges, from tools/gen_legit_dispatch_addrs.py over 3013 TUs -> wos_legit_dispatch_addrs.h). No-path drive census: ZERO inner-dispatch hits through a full run that reached 0x110328. REFUTES the systemic per-instruction-registration root cause (findings 173/174) FOR THE NO-PATH: this boot is dispatch-clean; 0x110328 is a LEGITIMATE guest busy-wait, not bad-PC corruption. The intermittent 0x8dcb00/0x152c78 deaths on OTHER boots are separate + intermittent (not reproduced this run). DETERMINISTIC blocker = Deci2 flag [s0+0xC] never clears: loop FUN_00110220+0x108 calls Deci2Call(code=4 Poll) via sub_0010FEA0, 50+ spins, 0 Deci2 log lines. My Poll->driveDeci2Handler fix (57af574) is NOT clearing it. Diagnostic build pending (log every Deci2Call code+socket+session count). Live ctx harvest failed (pc churns through loop faster than signature scan catches)."
+  }
+]

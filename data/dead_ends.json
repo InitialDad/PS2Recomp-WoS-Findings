@@ -1,0 +1,182 @@
+[
+  {
+    "serial": null,
+    "pattern": "guess-texture-by-pattern",
+    "reason": "Pattern-matching a texture as 'the sword' almost always hits an effect/light texture; replacing it crashes the game."
+  },
+  {
+    "serial": null,
+    "pattern": "DumpReplaceableTextures during gameplay",
+    "reason": "Kill animations generate 5-10 new sprites; PCSX2 stalls writing them to disk → freeze."
+  },
+  {
+    "serial": null,
+    "pattern": "MDSP pointer swap without bundle",
+    "reason": "Swapping only MDSP without the matching KMD+MTL+TEX yields skeleton mismatch → T-pose."
+  },
+  {
+    "serial": null,
+    "pattern": "loose-file mod on disk",
+    "reason": "PCSX2 reads from inside the mounted ISO; loose files do nothing — must repack ISO or use runtime hook."
+  },
+  {
+    "serial": null,
+    "pattern": "inject MDSP into wrong slot",
+    "reason": "Slot size mismatches break the archive index for ALL subsequent characters."
+  },
+  {
+    "serial": null,
+    "pattern": "save-state to test texture",
+    "reason": "Save states cache GPU state and bypass disk replacements."
+  },
+  {
+    "serial": null,
+    "pattern": "polling daemon > 1Hz",
+    "reason": "Game wins race ~65% of the time; faster polling just causes interference."
+  },
+  {
+    "serial": null,
+    "pattern": "MIPS:LE:32:R5900 as Ghidra processor",
+    "reason": "That ID does not exist. Use r5900:LE:32:default (from emotionengine-reloaded extension)."
+  },
+  {
+    "serial": null,
+    "pattern": "continuous HP/inventory writes",
+    "reason": "Causes freezes during kill animations and cutscenes — use threshold-based intervention (kill-safe daemon pattern)."
+  },
+  {
+    "serial": "SLUS-20407",
+    "pattern": "scanning for jump table of function pointers",
+    "reason": "WoS script VM does NOT use a contiguous jump table. Got 773 false-positives, most were string-pointer arrays like the IRX module path table at 0x00203900. The opcode dispatch is likely a switch cascade — need decompiler view, not pattern-scan."
+  },
+  {
+    "serial": "SLUS-20407",
+    "pattern": "assuming `MIPS:LE:32:R5900` processor ID works because ghidra_setup.py says so",
+    "reason": "Confirmed empirically: Ghidra throws InvalidInputException. Use r5900:LE:32:default."
+  },
+  {
+    "serial": "SLUS-20407",
+    "pattern": "search for var hash as 4-byte literal in RAM",
+    "reason": "WoS uses SDBM hash for parsing but does NOT store hashes as plain keys in a flat table. Hash literals appear only 0-2 times in RAM (coincidental). Find vars via static analysis of parser code instead, or by reading them through the script engine itself."
+  },
+  {
+    "serial": "SLUS-20407",
+    "pattern": "synthetic keyboard input via SendInput on PCSX2 with SDL-only bindings",
+    "reason": "User PCSX2 has no keyboard mapping in PCSX2.ini — Pad1/2 use SDL-0/SDL-1 only. SendInput keystrokes go nowhere. Use vJoy/ViGEm for virtual gamepad, or just have user provide input."
+  },
+  {
+    "serial": "SLUS-20407",
+    "pattern": "PINE load_state to wrong-game save state",
+    "reason": "Loading PCSX2 save state at slot 01 named for SLUS-20407 actually contained Wrath Unleashed VM state from a prior session (ISO ID collision). Result: black screen with bleed-through HUD because mounted ISO != VM state. Always verify state matches mounted ISO before scanning."
+  },
+  {
+    "serial": "SLUS-20407",
+    "pattern": "snapshot-diff for player position via game-state-changing input",
+    "reason": "When PCSX2 ignores input (wrong bindings), the diff captures only background animation (camera, skeletal anim, particles) = 100K+ false candidates. Use multi-round filter (idle->moved->idle2) intersection to suppress noise."
+  },
+  {
+    "serial": "SLUS-20407",
+    "pattern": "assume pause menu reads from separate save struct",
+    "reason": "CONFIRMED FALSE. PCSX2 pause menu in WoS reads directly from live HP/etc. The \"no update\" symptom = menu cache, not separate storage. Use cheat-trigger diff to find true addresses."
+  },
+  {
+    "serial": "SLUS-20407",
+    "pattern": "Trust the prior 'volume_binary_types.md' taxonomy as ground truth",
+    "reason": "Many type labels there were wrong (1F=microcode, 21=collision). Re-classify by sampling body content past the zero-header padding."
+  },
+  {
+    "serial": "SLUS-20407",
+    "pattern": "scan VM loops for cmp+beq opcode dispatch",
+    "reason": "WRONG model — vm_loop_A is only 17 instructions and uses C++ virtual dispatch: lw t9, 0x20(a0); lw t9, 8(t9); jalr t9. The CScript opcode handlers are virtual methods on instruction-node classes, not entries in a flat dispatcher cascade."
+  },
+  {
+    "serial": "SLUS-20407",
+    "pattern": "classify VOLUME.DAT blocks as VAGp/RIFF/SShd/xlss audio",
+    "reason": "Zero matches across 450 binary_unknown blocks + type_0x1C. Audio lives in cdrom0:\\SOUND\\GZMVS.RBB (string at 0x00C25A20). VOLUME.DAT does NOT contain standard PS2 audio. To classify sounds, extract and parse the RBB archive separately. The prior taxonomy claim that type 0x1C = 24-bit ADPCM was wrong."
+  },
+  {
+    "serial": "SLUS-20407",
+    "pattern": "standard codecs (zlib/gzip/lz4/lzss/lz77) on type_0x14",
+    "reason": "Tried 0 blocks, none decompressed. Likely Acquire-proprietary or encoded (not compressed). Future work: capture decompression routine in Ghidra."
+  },
+  {
+    "serial": "SLUS-20407",
+    "pattern": "treat 0x00C291F4 as 'yen'",
+    "reason": "Address conflict resolved: yen lives at 0x00C18A20. 0x00C291F4 is a UI cache / scratch field (values look extreme/non-yen). Evidence: snapshot history scores winner=33 loser=9."
+  },
+  {
+    "serial": "SLUS-20407",
+    "pattern": "standard codecs (zlib/gzip/lz4/lzss/lz77) on type_0x14",
+    "reason": "Tried 0 blocks, none decompressed. Likely Acquire-proprietary or encoded (not compressed). Future work: capture decompression routine in Ghidra."
+  },
+  {
+    "serial": "SLUS-20407",
+    "pattern": "standard codecs (zlib/gzip/lz4/lzss/lz77) on type_0x14",
+    "reason": "Tried 0 blocks, none decompressed. Likely Acquire-proprietary or encoded (not compressed). Future work: capture decompression routine in Ghidra."
+  },
+  {
+    "serial": "SLUS-20407",
+    "pattern": "standard codecs (zlib/gzip/lz4/lzss/lz77) on type_0x14",
+    "reason": "Tried 0 blocks, none decompressed. Likely Acquire-proprietary or encoded (not compressed). Future work: capture decompression routine in Ghidra."
+  },
+  {
+    "serial": "SLUS-20407",
+    "pattern": "standard codecs (zlib/gzip/lz4/lzss/lz77) on type_0x14",
+    "reason": "Tried 0 blocks, none decompressed. Likely Acquire-proprietary or encoded (not compressed). Future work: capture decompression routine in Ghidra."
+  },
+  {
+    "serial": "SLUS-20407",
+    "pattern": "Snapshot diff (paused) for Y-velocity yields kimono/bone values",
+    "reason": "Pausing mid-jump captures EVERY changing field, including bone/skin animation values. The -11.03 cluster turned out to be kimono mesh bone offsets. Need to capture WITHOUT pause OR compare jumping/walking transitions, then write-test each candidate in isolation."
+  },
+  {
+    "serial": "SLUS-20407",
+    "pattern": "Assuming RAM write-persistence == HUD display binding",
+    "reason": "WRITES THAT STICK IN RAM ARE NOT NECESSARILY THE FIELDS THE HUD READS. The game can have caching/mirror slots that keep written values without ever propagating to the rendered UI. To verify a mod, the user must SEE THE UI CHANGE — not just \"the value stays after write\". Affected: yen @ 0x00C18A20, sword_dur @ 0x00C18618."
+  },
+  {
+    "serial": "SLUS-20407",
+    "pattern": "Snapshot-diff hunt for live-bound sword durability display",
+    "reason": "TRIANGULATION worked TWICE — found inventory storage at 0x00875320 (raw int dur) AND 0x008753C0 (wear=max-cur encoding) via unique-hit value patterns. BUT live write-tests on BOTH addresses persist in RAM with zero HUD update. Then user did in-game button combo to bump dur 3→4 and 3→5: NO u8/u16/u32/f32/ASCII/SJIS transitions of 3→4 OR 3→5 anywhere in 32MB. Five candidates tested, all rejected. The display source is decoupled from any persistent inventory storage we can find. Next session: switch to LIVE poll watcher (read suspected addresses every 50ms while user uses button combo) to catch the actual changed field instead of relying on snapshot diff which races against menu re-render."
+  },
+  {
+    "serial": "SLUS-20407",
+    "pattern": "Searching EE RAM for inventory display addresses (yen, sword dur)",
+    "reason": "CONCLUSIVELY ESTABLISHED 2026-06-23: The pause menus inventory display values (yen, sword durability, sword names) are NOT bound to any address findable via EE-RAM-only snapshot diff. Triangulated 5+ inventory storage clusters with the EXACT correct values displayed: 0x00875320, 0x008752E0, 0x008753C0, 0x00D3D3A0, 0x00C74CB4, 0x00C7F704, 0x00E0D... — all of them PERSIST writes but never propagate to the visible menu. Meanwhile HP at 0x00C18608 (in the player struct at 0x00C18000) DOES bind to display in both directions. Conclusion: HP is part of game logic in EE RAM; inventory display data is rendered from PS2 VU memory (0x11000000+) or scratchpad (0x70000000), both of which are outside our 32MB EE RAM snapshot range. To find live yen/dur display: (a) use PCSX2 debugger to set memory write breakpoints on the menu render code path identified via Capstone disassembly, or (b) hook the VU upload that DMAs the inventory to GS, or (c) cross-reference our 04_OUTPUTS/decompiled/ for inventory-render functions and trace which EE addr they READ from."
+  },
+  {
+    "serial": "SLUS-20407",
+    "pattern": "Search EE RAM for HUD display addresses (yen, sword durability)",
+    "reason": "CONCLUSIVELY ESTABLISHED 2026-06-23: yen/sword-dur display values are NOT in EE RAM. Triangulated 5+ storage clusters that persist writes but never refresh the HUD. The render source is in VU mem (0x11000000+) or scratchpad (0x70000000), both outside PINE/pymem reach. To fix: (a) PCSX2 R5900 debugger memory-write breakpoint on the VU0 upload DMA, OR (b) extend wos_runtime virtual memory map in P3 to cover 0x11000000+, OR (c) Capstone-trace menu render functions for which EE addresses they read. Not gating any port phase up to P10."
+  },
+  {
+    "serial": "SLUS-20407",
+    "pattern": "Decompress VOLUME.DAT type_0x14 blocks with standard codecs",
+    "reason": "After P0 (2026-06-27): 43 blocks (11.9 MB) all failed across zlib/gzip/lz4/lzss/lz77 batteries. Probably IPU cutscene data (compressed via PS2 IPU MPEG2-VLC) or Acquire-proprietary encoding. Deferred until port discovers it needs these blocks. If still needed at P10, alternative is to PRE-RENDER cutscenes via PCSX2 video capture and replay as MP4 from wos_runtime, bypassing IPU emulation entirely."
+  },
+  {
+    "serial": "SLUS-20407",
+    "pattern": "Place Ghidra extension only in ~/.ghidra/.../Extensions/ for headless mode",
+    "reason": "2026-06-27: analyzeHeadless does NOT load extensions from the user-side Extensions dir reliably. Symptom: \"Unsupported language: r5900:LE:32:default\" even when emotionengine-reloaded ldefs is visible there. Fix: copy/symlink the extension into <GHIDRA_INSTALL>/Ghidra/Extensions/ as well (or move). The install-side path is the one headless mode actually scans."
+  },
+  {
+    "serial": "SLUS-20407",
+    "pattern": "Use Python (.py) postScripts in Ghidra 12.1.x analyzeHeadless",
+    "reason": "2026-06-27: Ghidra 12.1.x removed the bundled Jython runtime. Python postScripts now require PyGhidra (separate launcher). The error: \"Ghidra was not started with PyGhidra. Python is not available\". One Python script in a postScript chain ABORTS the rest of the chain. Fix: rewrite analysis/export scripts in Java (.java) — see <path> as the working replacement for the old ghidra_export.py."
+  },
+  {
+    "serial": "SLUS-20407",
+    "pattern": "capture PCSX2 reference RAM with pnach cheats enabled",
+    "reason": "parscan v1: 06157251_char_unlock_all.pnach polluted char-unlock 0xC2D6C4 (0xFF vs clean 0) and likely HP @0xC18608. Reference captures for port-vs-original comparison MUST run with Cheats disabled or pnach removed, else diffs are cheat artifacts not port bugs."
+  },
+  {
+    "serial": "SLUS-20407",
+    "pattern": "inject port input via ViGEm/keyboard without patching ps2_pad.cpp",
+    "reason": "p7b proven dead end while a real controller holds XInput slot 0: backend hardcodes gamepad 0 + always returns true, keyboard path unreachable, ViGEm enumerates slot 1, Disable-PnpDevice denied by policy. Patch pad backend first (neutral fall-through / findFirstGamepad / setPadOverrideState hotkey)."
+  },
+  {
+    "serial": "SLUS-20407",
+    "pattern": "fix boot instability by patching individual downstream hang sites",
+    "reason": "Boots fail at different addresses each run (malloc/Deci2/0x8dcb00/0x152c78) from ONE systemic cause: per-instruction resume-case registration across 1899 fns. Patching each site is whack-a-mole. Fix the resume-point registration (entry+return-addrs only) or the generator instead."
+  }
+]
