@@ -19,7 +19,7 @@ Tag each finding with how strongly it's verified:
 
 | Tier | Meaning |
 |------|---------|
-| `works` | Confirmed against ground truth (on-screen result or parallel scan vs. original runtime). |
+| `works` | Confirmed against a reference execution (on-screen result or parallel scan vs. a live PCSX2 run). |
 | `partial` | Works with caveats / only in some states. |
 | `investigated` | Understood but not acted on. |
 | `fails` | Tried, did not work — record it and, if it should never be retried, add a `dead_ends` row. |

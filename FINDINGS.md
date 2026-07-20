@@ -15,7 +15,7 @@ The goal is to let you recognize a bug class fast and skip the trap next to it.
 | Bug class | Symptom | Detection | Fix pattern |
 |-----------|---------|-----------|-------------|
 | **Resume mis-entry** | Boot fails at a *different* address each run (malloc / Deci2 / 0x8dcb00 / 0x152c78) | Stuck PC + constant return-address + shrinking SP = a function pointer landing mid-prologue of a merged function | Prune dispatch/resume entries to the legitimate few; add a bounded recovery guard. **Do not** patch the individual downstream hang sites — they are downstream of one systemic cause. |
-| **Free-list corruption** | Title-load spins forever inside the game's allocator on a corrupt free-list | Instrument allocator entry; watch fd/bk pointers go null / out-of-arena | Add fd-corruption guards at the alloc/free sites; a corrupt earlier iteration can poison the list. The crash site is never the bug site. |
+| **Free-list corruption** | Title-load spins forever inside the game's allocator on a corrupt free-list | Instrument allocator entry; watch fd/bk pointers go null / out-of-arena | Instrument/guard `fd` writes during allocator ops — this *detects* the corruption; it may not *fix* the upstream cause. The crash site is never the bug site. |
 | **Merged-function inner entry** | Return to address 0 after a call | Trace call target vs. function boundaries from the linker map | Add the missing case + label for the inner address. |
 
 ## 2. HLE synchronization bugs
@@ -68,7 +68,7 @@ ticks. DMA/GIF counters stop advancing. Looks like an I/O wait.
 **Wrong first hypothesis** (recorded as a dead end): "the runtime fails to set some
 GS/DMAC/INTC register the loop polls." False. The loop polls no fixed address.
 
-**What it actually is.** `0x1d1050` is inside `FUN_001d0c10` — the game's dlmalloc
+**What the evidence shows.** `0x1d1050` is inside `FUN_001d0c10` — the game's dlmalloc
 `malloc` core — specifically the smallbin best-fit scan:
 
 ```
@@ -84,7 +84,7 @@ The walk exits only when `$s0` reaches the bin sentinel `$a1`. From the RAM dump
 smallmap word (`0xe0020003`, claims bins {0,1,17,29,30,31} populated) is **desynced**
 from the actual bins (only bin 6 populated) — corrupt allocator metadata.
 
-**Where the bug is.** Not the runtime's I/O emulation — the free chunk's `fd` link was
+**Where the corruption likely originates.** Not the runtime's I/O emulation — the free chunk's `fd` link was
 already corrupted before this `malloc` call. Leading suspect: a **recompilation-
 correctness bug** in the allocator's 64-bit pointer stores (`free`/`unlink` do
 `dsll32`/`dsrl32` juggling; one wrong width truncates a link). This is why "translated"
@@ -104,7 +104,8 @@ Status: diagnosed, fix proposed, **not yet confirmed working.** That's the true 
 
 ## The one rule behind all of it
 
-**Verify against ground truth, and record what failed.** A write that sticks in
-RAM is not proof. A boot that doesn't crash is not proof. On-screen result or a
-parallel scan against the original runtime is proof — everything else is a
-hypothesis, and every dead hypothesis goes in `dead_ends.json` so it dies once.
+**Verify against a reference execution. Record every dead end.** A write that sticks
+in RAM is not proof. A boot that doesn't crash is not proof. Only externally verified
+behavior — an on-screen result, or a parallel scan matching a live PCSX2 run — is
+proof. Everything else is a hypothesis, and every disproven hypothesis belongs in
+`dead_ends.json` so nobody has to rediscover it.

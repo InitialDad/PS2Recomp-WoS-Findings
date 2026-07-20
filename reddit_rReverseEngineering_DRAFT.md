@@ -27,7 +27,7 @@ is not "correct."
 
 **How I know which memory is right:** a parallel-scan harness that dumps the port's
 guest RAM and diffs it page-by-page and address-by-address against a live PCSX2 dump as
-ground truth. On the last run, the majority of ~70 known addresses matched byte-for-byte;
+a reference implementation. On the last run, the majority of ~70 tracked addresses matched byte-for-byte;
 that's what lets me *rule out* most of memory and localize a bug instead of guessing.
 
 I catalogued the whole thing, including the failures:

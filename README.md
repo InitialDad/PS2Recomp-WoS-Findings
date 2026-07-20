@@ -10,9 +10,10 @@ translation units. Just the map, so the next person doesn't re-walk the dead end
 
 This is a **work in progress**, not a finished port. What's true today: a full PS2
 static-recompiler toolchain that builds, ~3,000 machine-translated C++ units, and a
-working parallel-scan harness that verifies the port against PCSX2 as ground truth.
+working parallel-scan harness that verifies the port against a live PCSX2 execution
+used as a reference implementation.
 What's **not** done: the runtime currently hangs in early boot on a heap-corruption
-bug (likely a recompiler-correctness defect); **no** game is playable yet, and **no**
+bug (current leading hypothesis: a recompiler-correctness defect); **no** game is playable yet, and **no**
 mod recipe is currently verified working. This repo ships the *findings and
 methodology* from that work — not the game, not the port binary.
 
@@ -39,7 +40,7 @@ beyond its evidence:
 | Tier | Meaning |
 |------|---------|
 | `on_screen` | Confirmed by a visible in-game result. |
-| `snapshot_diff` / parallel-scan `OK` | Matches the original PCSX2 runtime byte-for-byte. |
+| `snapshot_diff` / parallel-scan `OK` | Matches a live PCSX2 reference execution byte-for-byte. |
 | `stated_verified` | DB note claims verification; treat as strong-but-unaudited. |
 | `catalogued` | Address/observation recorded; not independently verified in-band. |
 | `static_vtable_walk` (opcodes) | Derived by static analysis; **not** confirmed at runtime. |
@@ -51,10 +52,12 @@ Most recompilation and RE projects fail not for lack of tools but for lack of
 **verification discipline** and **memory of what already failed**. Two things make
 this dataset unusual:
 
-1. **Ground-truth verification.** Every `works` finding was checked against the
-   original PCSX2 runtime as ground truth (parallel memory scan / on-screen
-   screenshot), never assumed from "the write stuck and it didn't crash."
-2. **Dead ends are first-class.** The 36 recorded dead ends are the most valuable
+1. **Reference-execution verification.** `works` findings were checked against a
+   live PCSX2 execution used as a reference implementation (parallel memory scan /
+   on-screen result), not assumed from "the write stuck and it didn't crash."
+   (PCSX2 is an emulator, not literal ground truth — but it's a practical, stable
+   reference for guest memory.)
+2. **Dead ends are first-class.** The 32 recorded dead ends are the most valuable
    rows here — each one is hours you don't have to spend. Examples:
    - `MIPS:LE:32:R5900` is **not** a valid Ghidra processor ID — use
      `r5900:LE:32:default` (from the emotionengine-reloaded extension).

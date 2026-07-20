@@ -7,14 +7,14 @@
 ---
 
 Hi — I've been doing deep verification work on **Way of the Samurai (SLUS-20407)**
-using a parallel-scan methodology that treats the original PCSX2 runtime as ground
-truth. I'd like to contribute the findings back in whatever form is most useful to
-the project.
+using a parallel-scan methodology that uses a live PCSX2 execution as a reference
+implementation for guest-memory verification. I'd like to contribute the findings
+back in whatever form is most useful to the project.
 
 What I have, all as sanitized metadata (no game code, no ISO, no assets):
 
 - **67 catalogued EE addresses**, each labeled with an evidence tier; most are
-  cross-checked against a live PCSX2 dump (the port matches ground truth byte-for-byte
+  cross-checked against a live PCSX2 dump (the port matches that reference byte-for-byte
   on the majority of known addresses)
 - **176 findings** — 92 confirmed-working, plus the failures
 - **32 recorded dead ends** with the reason each failed (e.g. the WoS script VM uses
@@ -31,6 +31,10 @@ recompiler-correctness defect) — nothing playable yet. Sharing the verified fi
 and methodology, not claiming a finished port.
 
 Repo: https://github.com/InitialDad/PS2Recomp-WoS-Findings (data as JSON + a debugging playbook + schema docs, CC0).
+
+My goal isn't to get this exact repo adopted — I'd rather contribute the verified data
+in whatever format is most useful to PS2Recomp, and avoid creating another incompatible
+metadata format if one already exists.
 
 A couple of questions on how you'd prefer to receive this:
 
