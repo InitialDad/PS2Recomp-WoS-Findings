@@ -57,7 +57,7 @@ value leaves a safe range.
 ## `shared_sdk_fingerprints.json`
 Hashes of the first-N MIPS instructions of functions, matched against other
 titles. **Important:** every row here is Sony SDK / C++ standard library /
-libmpeg middleware — shared runtime code, **not** the game engine. A match
+libmpeg middleware, shared runtime code, **not** the game engine. A match
 (all confirmed against `SLUS-20397`) proves both games linked the same SDK, which
 is true of most PS2 games; it has near-zero power to identify a shared *game
 engine*. The method (hash + cross-search) is a **test** for shared code, not a
@@ -76,5 +76,5 @@ claim of shared engine. `confidence` is byte-match confidence, not significance.
 ## `opcode_handlers.json`
 Script-VM opcode → handler-address mappings. WoS resolves handlers via C++
 virtual dispatch (`lw t9, 0x20(a0)` → vtable, handler at `vt+0x8`), **not** a
-contiguous jump table — the naive jump-table scan is a recorded dead end.
+contiguous jump table; the naive jump-table scan is a recorded dead end.
 `evidence` is `static_vtable_walk`: **statically derived, not runtime-verified.**

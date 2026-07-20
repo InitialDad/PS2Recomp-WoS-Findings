@@ -5,10 +5,10 @@ Way of the Samurai.
 
 ## What belongs here
 - Verified EE addresses (say how you verified).
-- Findings — including things that **didn't** work. Failures are the point.
+- Findings, including things that **didn't** work. Failures are the point.
 - Dead ends: an approach + why it failed + what to do instead.
 - Per-game recompiler notes: HLE contracts, opcode maps, shared SDK/middleware
-  fingerprints. (Label SDK/library matches honestly — they are not "engine" evidence.)
+  fingerprints. (Label SDK/library matches honestly, they are not "engine" evidence.)
 
 ## What does NOT belong here
 - Game code, ISOs, extracted assets, raw memory dumps, copyrighted in-game text.
@@ -22,9 +22,9 @@ Tag each finding with how strongly it's verified:
 | `works` | Confirmed against a reference execution (on-screen result or parallel scan vs. a live PCSX2 run). |
 | `partial` | Works with caveats / only in some states. |
 | `investigated` | Understood but not acted on. |
-| `fails` | Tried, did not work — record it and, if it should never be retried, add a `dead_ends` row. |
+| `fails` | Tried, did not work, record it and, if it should never be retried, add a `dead_ends` row. |
 
-Never delete a finding, even a wrong one — supersede it with a new row that
+Never delete a finding, even a wrong one, supersede it with a new row that
 references it. History is the value.
 
 ## How to add

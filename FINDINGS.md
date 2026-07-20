@@ -8,14 +8,14 @@ The goal is to let you recognize a bug class fast and skip the trap next to it.
 ## 1. Recompiler-correctness bugs
 
 > **Status honesty:** these are *diagnosed* bug classes with *proposed* fix patterns.
-> The WoS runtime still hangs in early boot as of this writing — the fixes below are
+> The WoS runtime still hangs in early boot as of this writing; the fixes below are
 > the methodology and the current best hypotheses, not a solved boot. Treat the "fix
 > pattern" column as "where to intervene," not "confirmed working."
 
 | Bug class | Symptom | Detection | Fix pattern |
 |-----------|---------|-----------|-------------|
-| **Resume mis-entry** | Boot fails at a *different* address each run (malloc / Deci2 / 0x8dcb00 / 0x152c78) | Stuck PC + constant return-address + shrinking SP = a function pointer landing mid-prologue of a merged function | Prune dispatch/resume entries to the legitimate few; add a bounded recovery guard. **Do not** patch the individual downstream hang sites — they are downstream of one systemic cause. |
-| **Free-list corruption** | Title-load spins forever inside the game's allocator on a corrupt free-list | Instrument allocator entry; watch fd/bk pointers go null / out-of-arena | Instrument/guard `fd` writes during allocator ops — this *detects* the corruption; it may not *fix* the upstream cause. The crash site is never the bug site. |
+| **Resume mis-entry** | Boot fails at a *different* address each run (malloc / Deci2 / 0x8dcb00 / 0x152c78) | Stuck PC + constant return-address + shrinking SP = a function pointer landing mid-prologue of a merged function | Prune dispatch/resume entries to the legitimate few; add a bounded recovery guard. **Do not** patch the individual downstream hang sites, they are downstream of one systemic cause. |
+| **Free-list corruption** | Title-load spins forever inside the game's allocator on a corrupt free-list | Instrument allocator entry; watch fd/bk pointers go null / out-of-arena | Instrument/guard `fd` writes during allocator ops, this *detects* the corruption; it may not *fix* the upstream cause. The crash site is never the bug site. |
 | **Merged-function inner entry** | Return to address 0 after a call | Trace call target vs. function boundaries from the linker map | Add the missing case + label for the inner address. |
 
 ## 2. HLE synchronization bugs
@@ -29,7 +29,7 @@ The goal is to let you recognize a bug class fast and skip the trap next to it.
 
 | False trail | Reality | Lesson |
 |-------------|---------|--------|
-| Search EE RAM for HUD/pause-menu values (yen, sword durability) | **Not in EE RAM at all** — triangulated 5+ times, conclusive | RAM write-persistence ≠ HUD display binding. The field you can freeze is not always the field the HUD reads. |
+| Search EE RAM for HUD/pause-menu values (yen, sword durability) | **Not in EE RAM at all**, triangulated 5+ times, conclusive | RAM write-persistence ≠ HUD display binding. The field you can freeze is not always the field the HUD reads. |
 | Snapshot-diff for player position / Y-velocity | Diff captured bone/skin/camera animation instead | Pausing mid-motion captures *every* changing field. Also: if the emulator is ignoring input (wrong pad bindings), the diff is pure background animation. |
 | Treat `0x00C291F4` as yen | Yen is at `0x00C18A20`; `0x00C291F4` is a UI scratch cache | Resolve address conflicts by cross-checking value semantics, not first hit. |
 | Assume pause menu reads a separate save struct | Pause menu reads **live** HP directly | "No update" symptom had a different cause. |
@@ -38,28 +38,28 @@ The goal is to let you recognize a bug class fast and skip the trap next to it.
 
 | Trap | Reality |
 |------|---------|
-| Ghidra processor `MIPS:LE:32:R5900` | Does not exist. Use `r5900:LE:32:default` (emotionengine-reloaded extension). Confirmed empirically — throws `InvalidInputException`. |
+| Ghidra processor `MIPS:LE:32:R5900` | Does not exist. Use `r5900:LE:32:default` (emotionengine-reloaded extension). Confirmed empirically, throws `InvalidInputException`. |
 | Ghidra extension in user `~/.ghidra/.../Extensions/` for headless | `analyzeHeadless` doesn't load it reliably; symlink/place into the install-side dir. |
 | Python `.py` postScripts in Ghidra 12.1.x headless | Bundled Jython removed; needs PyGhidra. |
-| Loose-file texture mod on disk | PCSX2 reads from inside the mounted ISO; loose files do nothing — repack ISO or hook at runtime. |
+| Loose-file texture mod on disk | PCSX2 reads from inside the mounted ISO; loose files do nothing, repack ISO or hook at runtime. |
 | Save-state to test a texture/replacement | Save states cache GPU state and bypass disk replacements. |
-| `DumpReplaceableTextures` during gameplay | Kill animations spawn 5–10 sprites; PCSX2 stalls writing them to disk → freeze. |
+| `DumpReplaceableTextures` during gameplay | Kill animations spawn 5-10 sprites; PCSX2 stalls writing them to disk → freeze. |
 | Inject input via ViGEm/keyboard while a real controller holds XInput slot 0 | Backend hardcodes gamepad 0; synthetic input is ignored. Merge input sources / patch the pad backend. |
 
 ## 5. Asset / format reverse engineering
 
 | Attempt | Result |
 |---------|--------|
-| Standard codecs (zlib/gzip/lz4/lzss/lz77) on `VOLUME.DAT type_0x14` | 43 blocks / 11.9 MB — **zero** decompressed. Likely Acquire-proprietary or encoded, not compressed. |
+| Standard codecs (zlib/gzip/lz4/lzss/lz77) on `VOLUME.DAT type_0x14` | 43 blocks / 11.9 MB, **zero** decompressed. Likely Acquire-proprietary or encoded, not compressed. |
 | Classify VOLUME.DAT blocks as VAGp/RIFF/SShd audio | Zero matches. Audio actually lives in `cdrom0:\SOUND\GZMVS.RBB`. |
 | Trust a prior block-type taxonomy as ground truth | Many labels wrong (1F=microcode, 21=collision). Re-classify by sampling body content, not inherited labels. |
 | Guess a texture by visual pattern-match | Almost always hits an effect/light sprite, not the asset you wanted. |
 | Swap MDSP model pointer without the matching KMD+MTL+TEX bundle | Skeleton mismatch → T-pose. Slot size mismatch corrupts the archive index for every later character. |
 
-## Worked example — the current boot hang (a diagnosis in progress)
+## Worked example: the current boot hang (a diagnosis in progress)
 
 Concrete, so the method above isn't abstract. This is the bug the port is stuck on
-*right now* — included precisely because it isn't solved yet.
+*right now*, included precisely because it isn't solved yet.
 
 **Symptom.** The recompiled runtime executes thousands of ticks, then the EE main
 thread freezes with a stable `pc=0x1d1050`, `ra=0x1d0c54`, `sp=0x1ff7c90` for 700+
@@ -68,8 +68,8 @@ ticks. DMA/GIF counters stop advancing. Looks like an I/O wait.
 **Wrong first hypothesis** (recorded as a dead end): "the runtime fails to set some
 GS/DMAC/INTC register the loop polls." False. The loop polls no fixed address.
 
-**What the evidence shows.** `0x1d1050` is inside `FUN_001d0c10` — the game's dlmalloc
-`malloc` core — specifically the smallbin best-fit scan:
+**What the evidence shows.** `0x1d1050` is inside `FUN_001d0c10`, the game's dlmalloc
+`malloc` core, specifically the smallbin best-fit scan:
 
 ```
 0x1d104c  lw   $v0, 0x4($s0)      ; v0 = chunk->head (size+flags)
@@ -82,13 +82,13 @@ The walk exits only when `$s0` reaches the bin sentinel `$a1`. From the RAM dump
 `u32(0x0000000C) == 0`, so the moment a chunk's `fd` link is corrupted to NULL,
 `[$s0+0xC] = [0xC] = 0` → `$s0` stays 0 forever → infinite loop. The `malloc_state`
 smallmap word (`0xe0020003`, claims bins {0,1,17,29,30,31} populated) is **desynced**
-from the actual bins (only bin 6 populated) — corrupt allocator metadata.
+from the actual bins (only bin 6 populated), corrupt allocator metadata.
 
-**Where the corruption likely originates.** Not the runtime's I/O emulation — the free chunk's `fd` link was
-already corrupted before this `malloc` call. Leading suspect: a **recompilation-
+**Where the corruption likely originates.** Not the runtime's I/O emulation. The free
+chunk's `fd` link was already corrupted before this `malloc` call. Leading suspect: a **recompilation-
 correctness bug** in the allocator's 64-bit pointer stores (`free`/`unlink` do
 `dsll32`/`dsrl32` juggling; one wrong width truncates a link). This is why "translated"
-≠ "correct" — the translation runs and mostly works, and a single mis-widened store
+is not "correct": the translation runs and mostly works, and a single mis-widened store
 1,000 functions away corrupts a heap link that hangs a scan much later.
 
 **Method that found it, and that you can copy:**
@@ -98,7 +98,7 @@ correctness bug** in the allocator's 64-bit pointer stores (`free`/`unlink` do
 3. Read the actual allocator metadata from the dump; prove the free-list is corrupt
    (smallmap↔bins desync) rather than the loop being a legitimate wait.
 4. Fix at the function boundary (hook the allocator) *or* add a bounds guard as a
-   diagnostic — but the guard **masks** the upstream corruption; note that honestly.
+   diagnostic, but the guard **masks** the upstream corruption; note that honestly.
 
 Status: diagnosed, fix proposed, **not yet confirmed working.** That's the true state.
 
@@ -106,6 +106,6 @@ Status: diagnosed, fix proposed, **not yet confirmed working.** That's the true 
 
 **Verify against a reference execution. Record every dead end.** A write that sticks
 in RAM is not proof. A boot that doesn't crash is not proof. Only externally verified
-behavior — an on-screen result, or a parallel scan matching a live PCSX2 run — is
+behavior, an on-screen result, or a parallel scan matching a live PCSX2 run, is
 proof. Everything else is a hypothesis, and every disproven hypothesis belongs in
 `dead_ends.json` so nobody has to rediscover it.

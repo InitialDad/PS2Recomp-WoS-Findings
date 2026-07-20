@@ -1,9 +1,9 @@
-# PS2 Recompilation Findings — Way of the Samurai (SLUS-20407)
+# PS2 Recompilation Findings: Way of the Samurai (SLUS-20407)
 
 Reverse-engineering findings and debugging methodology for PS2 static
-recompilation, distilled from a long-running private port project — each item
+recompilation, distilled from a long-running private port project. Each item is
 labeled with its evidence tier so you can judge it. This repo
-ships **findings, not game code** — no ISO, no extracted assets, no binary, no
+ships **findings, not game code**: no ISO, no extracted assets, no binary, no
 translation units. Just the map, so the next person doesn't re-walk the dead ends.
 
 ## Project status (read first)
@@ -15,18 +15,18 @@ used as a reference implementation.
 What's **not** done: the runtime currently hangs in early boot on a heap-corruption
 bug (current leading hypothesis: a recompiler-correctness defect); **no** game is playable yet, and **no**
 mod recipe is currently verified working. This repo ships the *findings and
-methodology* from that work — not the game, not the port binary.
+methodology* from that work, not the game, not the port binary.
 
 ## What's here
 
 | Count | Data | File |
 |------:|------|------|
-| 67  | Catalogued EE addresses — **17** carry in-band verification evidence (`on_screen`/`snapshot_diff`/`stated_verified`); most others are additionally cross-checked by the parallel-scan report | [`data/addresses.json`](data/addresses.json) |
+| 67  | Catalogued EE addresses, **17** carry in-band verification evidence (`on_screen`/`snapshot_diff`/`stated_verified`); most others are additionally cross-checked by the parallel-scan report | [`data/addresses.json`](data/addresses.json) |
 | 176 | Findings (92 `works`, 52 `investigated`, 19 `fails`, 13 `partial`) | [`data/findings.json`](data/findings.json) |
-| 32  | Recorded **dead ends** — approaches proven not to work, with why | [`data/dead_ends.json`](data/dead_ends.json) |
-| 104 | **Shared SDK/middleware fingerprints** — Sony SDK + libc++ + libmpeg code confirmed byte-identical in one other title (`SLUS-20397`). *Not* game-engine code. | [`data/shared_sdk_fingerprints.json`](data/shared_sdk_fingerprints.json) |
+| 32  | Recorded **dead ends**, approaches proven not to work, with why | [`data/dead_ends.json`](data/dead_ends.json) |
+| 104 | **Shared SDK/middleware fingerprints**, Sony SDK + libc++ + libmpeg code confirmed byte-identical in one other title (`SLUS-20397`). *Not* game-engine code. | [`data/shared_sdk_fingerprints.json`](data/shared_sdk_fingerprints.json) |
 | 189 | Script-VM opcode → handler mappings (statically derived, not runtime-verified) | [`data/opcode_handlers.json`](data/opcode_handlers.json) |
-| 7   | Mod recipes — **none currently verified working**: 3 `needs_recheck`, 4 `contradicted` (write sticks in RAM but HUD never updates) | [`data/mod_recipes.json`](data/mod_recipes.json) |
+| 7   | Mod recipes, **none currently verified working**: 3 `needs_recheck`, 4 `contradicted` (write sticks in RAM but HUD never updates) | [`data/mod_recipes.json`](data/mod_recipes.json) |
 
 Game: **Way of the Samurai** (Spike / Acquire, 2003), serial `SLUS-20407`, NTSC-U.
 Main data archive `VOLUME.DAT` (132 MB). Script VM uses C++ virtual dispatch, not
@@ -34,7 +34,7 @@ a jump table. Audio in `cdrom0:\SOUND\GZMVS.RBB`.
 
 ## Confidence legend
 
-Every dataset is labeled so you can judge it yourself — nothing here is asserted
+Every dataset is labeled so you can judge it yourself. Nothing here is asserted
 beyond its evidence:
 
 | Tier | Meaning |
@@ -44,7 +44,7 @@ beyond its evidence:
 | `stated_verified` | DB note claims verification; treat as strong-but-unaudited. |
 | `catalogued` | Address/observation recorded; not independently verified in-band. |
 | `static_vtable_walk` (opcodes) | Derived by static analysis; **not** confirmed at runtime. |
-| `shared_sdk_or_middleware` | SDK/library code, not game-specific — near-zero discriminating power for "same engine". |
+| `shared_sdk_or_middleware` | SDK/library code, not game-specific, near-zero discriminating power for "same engine". |
 
 ## Why this exists
 
@@ -55,16 +55,15 @@ this dataset unusual:
 1. **Reference-execution verification.** `works` findings were checked against a
    live PCSX2 execution used as a reference implementation (parallel memory scan /
    on-screen result), not assumed from "the write stuck and it didn't crash."
-   (PCSX2 is an emulator, not literal ground truth — but it's a practical, stable
+   (PCSX2 is an emulator, not literal ground truth, but it's a practical, stable
    reference for guest memory.)
 2. **Dead ends are first-class.** The 32 recorded dead ends are the most valuable
-   rows here — each one is hours you don't have to spend. Examples:
-   - `MIPS:LE:32:R5900` is **not** a valid Ghidra processor ID — use
+   rows here; each one is hours you don't have to spend. Examples:
+   - `MIPS:LE:32:R5900` is **not** a valid Ghidra processor ID, use
      `r5900:LE:32:default` (from the emotionengine-reloaded extension).
-   - WoS pause-menu inventory values (yen, sword durability) are **not in EE RAM** —
-     triangulated conclusively; stop searching RAM for them.
+   - WoS pause-menu inventory values (yen, sword durability) are **not in EE RAM**, triangulated conclusively; stop searching RAM for them.
    - Boot instability came from **one systemic allocator cause**, not the many
-     downstream hang sites (malloc / Deci2 / 0x8dcb00 / 0x152c78) — patching
+     downstream hang sites (malloc / Deci2 / 0x8dcb00 / 0x152c78), patching
      individual sites is a trap.
 
 ## How to use it
@@ -77,7 +76,7 @@ dead  = json.load(open("data/dead_ends.json", encoding="utf-8"))
 # BEFORE trying an approach, grep dead_ends for it:
 for d in dead:
     if "texture" in (d["pattern"] + d["reason"]).lower():
-        print("KNOWN DEAD END:", d["pattern"], "—", d["reason"])
+        print("KNOWN DEAD END:", d["pattern"], "::", d["reason"])
 PY
 ```
 
@@ -100,5 +99,5 @@ username by [`tools/export_public.py`](tools/export_public.py).
 
 ## License
 
-Data (`data/`, docs): [CC0 1.0](LICENSE) — public domain, use freely, attribution
+Data (`data/`, docs): [CC0 1.0](LICENSE), public domain, use freely, attribution
 appreciated but not required. This is metadata about a game, not the game.
