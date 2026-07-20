@@ -106,26 +106,6 @@
   },
   {
     "serial": "SLUS-20407",
-    "pattern": "standard codecs (zlib/gzip/lz4/lzss/lz77) on type_0x14",
-    "reason": "Tried 0 blocks, none decompressed. Likely Acquire-proprietary or encoded (not compressed). Future work: capture decompression routine in Ghidra."
-  },
-  {
-    "serial": "SLUS-20407",
-    "pattern": "standard codecs (zlib/gzip/lz4/lzss/lz77) on type_0x14",
-    "reason": "Tried 0 blocks, none decompressed. Likely Acquire-proprietary or encoded (not compressed). Future work: capture decompression routine in Ghidra."
-  },
-  {
-    "serial": "SLUS-20407",
-    "pattern": "standard codecs (zlib/gzip/lz4/lzss/lz77) on type_0x14",
-    "reason": "Tried 0 blocks, none decompressed. Likely Acquire-proprietary or encoded (not compressed). Future work: capture decompression routine in Ghidra."
-  },
-  {
-    "serial": "SLUS-20407",
-    "pattern": "standard codecs (zlib/gzip/lz4/lzss/lz77) on type_0x14",
-    "reason": "Tried 0 blocks, none decompressed. Likely Acquire-proprietary or encoded (not compressed). Future work: capture decompression routine in Ghidra."
-  },
-  {
-    "serial": "SLUS-20407",
     "pattern": "Snapshot diff (paused) for Y-velocity yields kimono/bone values",
     "reason": "Pausing mid-jump captures EVERY changing field, including bone/skin animation values. The -11.03 cluster turned out to be kimono mesh bone offsets. Need to capture WITHOUT pause OR compare jumping/walking transitions, then write-test each candidate in isolation."
   },

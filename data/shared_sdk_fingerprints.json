@@ -1,0 +1,938 @@
+[
+  {
+    "pattern_key": "shared::7a1f54d3cf629e76",
+    "game_serial": "SLUS-20407",
+    "address": "0x0010F878",
+    "signature_hex": "7a1f54d3cf629e76",
+    "confidence": 1.0,
+    "notes": "[shared_libcxx_libmpeg] a: stdcpp_node_0010f878 matches FUN_0010db78 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::b9b11842402b4528",
+    "game_serial": "SLUS-20407",
+    "address": "0x00105070",
+    "signature_hex": "b9b11842402b4528",
+    "confidence": 1.0,
+    "notes": "[shared_libcxx_libmpeg] a: err_sys_sce_mpeg_get_picture_helper8_00105070 matches FUN_00103bf0 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::4f4a79999b1a6465",
+    "game_serial": "SLUS-20407",
+    "address": "0x001099A0",
+    "signature_hex": "4f4a79999b1a6465",
+    "confidence": 1.0,
+    "notes": "[shared_libcxx_libmpeg] a: mem_node_001099a0 matches FUN_00107c60 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::463a4d46a0d79ca7",
+    "game_serial": "SLUS-20407",
+    "address": "0x00116C18",
+    "signature_hex": "463a4d46a0d79ca7",
+    "confidence": 1.0,
+    "notes": "[shared_libcxx_libmpeg] a: too_long_parameter_s_helper2_00116c18 matches FUN_00115078 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::ee0b4ecb41cc47a6",
+    "game_serial": "SLUS-20407",
+    "address": "0x00116EC8",
+    "signature_hex": "ee0b4ecb41cc47a6",
+    "confidence": 1.0,
+    "notes": "[shared_libcxx_libmpeg] a: stdcpp_root_00116ec8 matches FUN_00115328 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::00f18d6767fbfe9a",
+    "game_serial": "SLUS-20407",
+    "address": "0x00112520",
+    "signature_hex": "00f18d6767fbfe9a",
+    "confidence": 1.0,
+    "notes": "[shared_libcxx_libmpeg] a: stdcpp_node_00112520 matches FUN_00110708 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::9c5acb59180e4b8d",
+    "game_serial": "SLUS-20407",
+    "address": "0x001115C0",
+    "signature_hex": "9c5acb59180e4b8d",
+    "confidence": 1.0,
+    "notes": "[shared_libcxx_libmpeg] a: stdcpp_node_001115c0 matches FUN_0010f7a8 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::20cdf02072ea0117",
+    "game_serial": "SLUS-20407",
+    "address": "0x00116A48",
+    "signature_hex": "20cdf02072ea0117",
+    "confidence": 1.0,
+    "notes": "[shared_libcxx_libmpeg] a: stdcpp_root_00116a48 matches FUN_00114ea8 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::2729cbc2b70dae7b",
+    "game_serial": "SLUS-20407",
+    "address": "0x00105B78",
+    "signature_hex": "2729cbc2b70dae7b",
+    "confidence": 1.0,
+    "notes": "[shared_libcxx_libmpeg] a: mem_term_00105b78 matches FUN_00103e30 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::8bc44164f3edd184",
+    "game_serial": "SLUS-20407",
+    "address": "0x0010AF50",
+    "signature_hex": "8bc44164f3edd184",
+    "confidence": 1.0,
+    "notes": "[shared_libcxx_libmpeg] a: mem_node_0010af50 matches FUN_00109230 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::c43ed8a807977e6f",
+    "game_serial": "SLUS-20407",
+    "address": "0x0010E580",
+    "signature_hex": "c43ed8a807977e6f",
+    "confidence": 1.0,
+    "notes": "[shared_libcxx_libmpeg] a: mem_node_0010e580 matches FUN_0010c878 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::4c3e64c47ba86adb",
+    "game_serial": "SLUS-20407",
+    "address": "0x001D3B20",
+    "signature_hex": "4c3e64c47ba86adb",
+    "confidence": 1.0,
+    "notes": "[shared_libcxx_libmpeg] a: hot_sys_001d3b20 matches FUN_00123778 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::95d819271108cbb4",
+    "game_serial": "SLUS-20407",
+    "address": "0x001187F0",
+    "signature_hex": "95d819271108cbb4",
+    "confidence": 1.0,
+    "notes": "[shared_libcxx_libmpeg] a: stdcpp_node_001187f0 matches FUN_00117028 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::c198810cef12fe41",
+    "game_serial": "SLUS-20407",
+    "address": "0x001FDA60",
+    "signature_hex": "c198810cef12fe41",
+    "confidence": 1.0,
+    "notes": "[shared_libcxx_libmpeg] a: sys_root_001fda60 matches FUN_0037b928 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::58cf604f5b0120b0",
+    "game_serial": "SLUS-20407",
+    "address": "0x0010D718",
+    "signature_hex": "58cf604f5b0120b0",
+    "confidence": 1.0,
+    "notes": "[shared_libcxx_libmpeg] a: the_second_field_is_0010d718 matches the_second_field_is_0010b9f0 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::6050f7637b3c73e5",
+    "game_serial": "SLUS-20407",
+    "address": "0x00111510",
+    "signature_hex": "6050f7637b3c73e5",
+    "confidence": 1.0,
+    "notes": "[shared_libcxx_libmpeg] a: hot_stdcpp_00111510 matches FUN_0010f6f8 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::83ae63ea0a7cc4f8",
+    "game_serial": "SLUS-20407",
+    "address": "0x0010ADC0",
+    "signature_hex": "83ae63ea0a7cc4f8",
+    "confidence": 1.0,
+    "notes": "[shared_libcxx_libmpeg] a: mem_node_0010adc0 matches FUN_001090a0 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::f83826fff399be3f",
+    "game_serial": "SLUS-20407",
+    "address": "0x001069D0",
+    "signature_hex": "f83826fff399be3f",
+    "confidence": 1.0,
+    "notes": "[shared_libcxx_libmpeg] a: validate_a_invalid_motion_type_d_001069d0 matches FUN_00104c80 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::b04fbf2dff124541",
+    "game_serial": "SLUS-20407",
+    "address": "0x0010F7A8",
+    "signature_hex": "b04fbf2dff124541",
+    "confidence": 1.0,
+    "notes": "[shared_libcxx_libmpeg] a: stdcpp_node_0010f7a8 matches FUN_0010daa8 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::e603867003dd8902",
+    "game_serial": "SLUS-20407",
+    "address": "0x00111978",
+    "signature_hex": "e603867003dd8902",
+    "confidence": 1.0,
+    "notes": "[shared_libcxx_libmpeg] a: stdcpp_root_00111978 matches FUN_0010fb60 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::98dcc4c9903ffc61",
+    "game_serial": "SLUS-20407",
+    "address": "0x0010D098",
+    "signature_hex": "98dcc4c9903ffc61",
+    "confidence": 1.0,
+    "notes": "[shared_libcxx_libmpeg] a: mem_term_0010d098 matches FUN_0010b370 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::17f1998943923bd9",
+    "game_serial": "SLUS-20407",
+    "address": "0x0010E5E8",
+    "signature_hex": "17f1998943923bd9",
+    "confidence": 1.0,
+    "notes": "[shared_libcxx_libmpeg] a: mem_root_0010e5e8 matches FUN_0010c8e0 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::fa493986891c1c88",
+    "game_serial": "SLUS-20407",
+    "address": "0x001D14E8",
+    "signature_hex": "fa493986891c1c88",
+    "confidence": 1.0,
+    "notes": "[shared_libcxx_libmpeg] a: hot_sys_001d14e8 matches FUN_00121b20 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::64a0bd3b5f67dd01",
+    "game_serial": "SLUS-20407",
+    "address": "0x00110538",
+    "signature_hex": "64a0bd3b5f67dd01",
+    "confidence": 1.0,
+    "notes": "[shared_libcxx_libmpeg] a: stdcpp_root_00110538 matches FUN_0010e6f8 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::e00298b40fe58b26",
+    "game_serial": "SLUS-20407",
+    "address": "0x0010F0F0",
+    "signature_hex": "e00298b40fe58b26",
+    "confidence": 1.0,
+    "notes": "[shared_libcxx_libmpeg] a: stdcpp_node_0010f0f0 matches FUN_0010d3f0 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::024d6ecc83a0c2c9",
+    "game_serial": "SLUS-20407",
+    "address": "0x0010D1E8",
+    "signature_hex": "024d6ecc83a0c2c9",
+    "confidence": 1.0,
+    "notes": "[shared_libcxx_libmpeg] a: work_area_size_is_0010d1e8 matches work_area_size_is_0010b4c0 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::27ff98a3c7907652",
+    "game_serial": "SLUS-20407",
+    "address": "0x001D1598",
+    "signature_hex": "27ff98a3c7907652",
+    "confidence": 1.0,
+    "notes": "[shared_libcxx_libmpeg] a: sys_term_001d1598 matches FUN_00121bd0 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::d3eb08f276d98a76",
+    "game_serial": "SLUS-20407",
+    "address": "0x00106068",
+    "signature_hex": "d3eb08f276d98a76",
+    "confidence": 1.0,
+    "notes": "[shared_libcxx_libmpeg] a: mem_node_00106068 matches FUN_00104320 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::4b828a3451580d5a",
+    "game_serial": "SLUS-20407",
+    "address": "0x001FD738",
+    "signature_hex": "4b828a3451580d5a",
+    "confidence": 1.0,
+    "notes": "[shared_libcxx_libmpeg] a: sys_root_001fd738 matches FUN_0037b600 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::ccef52dd8a9eef77",
+    "game_serial": "SLUS-20407",
+    "address": "0x0010A7D0",
+    "signature_hex": "ccef52dd8a9eef77",
+    "confidence": 1.0,
+    "notes": "[shared_libcxx_libmpeg] a: mem_term_0010a7d0 matches FUN_00108a90 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::c23d1698f0c3b1c9",
+    "game_serial": "SLUS-20407",
+    "address": "0x0010A380",
+    "signature_hex": "c23d1698f0c3b1c9",
+    "confidence": 1.0,
+    "notes": "[shared_libcxx_libmpeg] a: mem_node_0010a380 matches FUN_00108640 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::ae5cfb914dc8bacc",
+    "game_serial": "SLUS-20407",
+    "address": "0x00108E80",
+    "signature_hex": "ae5cfb914dc8bacc",
+    "confidence": 1.0,
+    "notes": "[shared_libcxx_libmpeg] a: validate_invalid_macroblock_type_code_00108e80 matches validate_invalid_macroblock_type_code_00107140 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::4895cce96523a291",
+    "game_serial": "SLUS-20407",
+    "address": "0x00117E88",
+    "signature_hex": "4895cce96523a291",
+    "confidence": 1.0,
+    "notes": "[shared_libcxx_libmpeg] a: stdcpp_root_00117e88 matches FUN_001166c0 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::e8c2241266c2f8f9",
+    "game_serial": "SLUS-20407",
+    "address": "0x001D16A0",
+    "signature_hex": "e8c2241266c2f8f9",
+    "confidence": 1.0,
+    "notes": "[shared_libcxx_libmpeg] a: hot_sys_001d16a0 matches FUN_00121cd8 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::da1950fdf90ea65f",
+    "game_serial": "SLUS-20407",
+    "address": "0x0010D540",
+    "signature_hex": "da1950fdf90ea65f",
+    "confidence": 1.0,
+    "notes": "[shared_libcxx_libmpeg] a: image_buffer_needs_to_helper_helper1_0010d540 matches FUN_0010b818 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::6c0f2ca2496669ab",
+    "game_serial": "SLUS-20407",
+    "address": "0x00103710",
+    "signature_hex": "6c0f2ca2496669ab",
+    "confidence": 1.0,
+    "notes": "[shared_libcxx_libmpeg] a: load_mem_sce_gs_set_def_load_image_00103710 matches load_sce_gs_set_def_load_image_00101470 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::13ad781d0f621f28",
+    "game_serial": "SLUS-20407",
+    "address": "0x00103360",
+    "signature_hex": "13ad781d0f621f28",
+    "confidence": 1.0,
+    "notes": "[shared_libcxx_libmpeg] a: mem_node_00103360 matches FUN_001010c0 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::8a68ba4ff3bbffa3",
+    "game_serial": "SLUS-20407",
+    "address": "0x00109328",
+    "signature_hex": "8a68ba4ff3bbffa3",
+    "confidence": 1.0,
+    "notes": "[shared_libcxx_libmpeg] a: validate_invalid_macroblock_helper2_00109328 matches FUN_001075e8 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::f75988292dc155f1",
+    "game_serial": "SLUS-20407",
+    "address": "0x00102BC8",
+    "signature_hex": "f75988292dc155f1",
+    "confidence": 1.0,
+    "notes": "[shared_libcxx_libmpeg] a: mem_node_00102bc8 matches FUN_00100928 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::8c55bd7f985b26b1",
+    "game_serial": "SLUS-20407",
+    "address": "0x0010D018",
+    "signature_hex": "8c55bd7f985b26b1",
+    "confidence": 1.0,
+    "notes": "[shared_libcxx_libmpeg] a: the_size_of_work_helper1_0010d018 matches FUN_0010b2f0 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::b625dad19a05ed60",
+    "game_serial": "SLUS-20407",
+    "address": "0x00102F80",
+    "signature_hex": "b625dad19a05ed60",
+    "confidence": 1.0,
+    "notes": "[shared_libcxx_libmpeg] a: draw_mem_sce_gs_put_draw_env_00102f80 matches draw_sce_gs_put_draw_env_00100ce0 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::72bcad54a21d0ceb",
+    "game_serial": "SLUS-20407",
+    "address": "0x001FDFF0",
+    "signature_hex": "72bcad54a21d0ceb",
+    "confidence": 1.0,
+    "notes": "[shared_libcxx_libmpeg] a: sys_root_001fdff0 matches FUN_0037a810 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::df287218d69c799e",
+    "game_serial": "SLUS-20407",
+    "address": "0x00102C90",
+    "signature_hex": "df287218d69c799e",
+    "confidence": 1.0,
+    "notes": "[shared_libcxx_libmpeg] a: mem_node_00102c90 matches FUN_001009f0 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::d8698d2ae443f13f",
+    "game_serial": "SLUS-20407",
+    "address": "0x0010F698",
+    "signature_hex": "d8698d2ae443f13f",
+    "confidence": 1.0,
+    "notes": "[shared_libcxx_libmpeg] a: stdcpp_root_0010f698 matches FUN_0010d998 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::14170a6738d02189",
+    "game_serial": "SLUS-20407",
+    "address": "0x0010E518",
+    "signature_hex": "14170a6738d02189",
+    "confidence": 1.0,
+    "notes": "[shared_libcxx_libmpeg] a: mem_leaf_0010e518 matches FUN_0010c810 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::f23fec5ee24feddb",
+    "game_serial": "SLUS-20407",
+    "address": "0x0010CF20",
+    "signature_hex": "f23fec5ee24feddb",
+    "confidence": 1.0,
+    "notes": "[shared_libcxx_libmpeg] a: mem_root_0010cf20 matches FUN_0010b1f8 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::1d1e1ab680b77feb",
+    "game_serial": "SLUS-20407",
+    "address": "0x00109778",
+    "signature_hex": "1d1e1ab680b77feb",
+    "confidence": 1.0,
+    "notes": "[shared_libcxx_libmpeg] a: mem_node_00109778 matches FUN_00107a38 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::ba68ea4bf301cf67",
+    "game_serial": "SLUS-20407",
+    "address": "0x00104F30",
+    "signature_hex": "ba68ea4bf301cf67",
+    "confidence": 1.0,
+    "notes": "[shared_libcxx_libmpeg] a: err_sys_sce_mpeg_get_picture_helper4_00104f30 matches FUN_00103a38 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::9305a0f8dde399ae",
+    "game_serial": "SLUS-20407",
+    "address": "0x001118C0",
+    "signature_hex": "9305a0f8dde399ae",
+    "confidence": 1.0,
+    "notes": "[shared_libcxx_libmpeg] a: stdcpp_root_001118c0 matches FUN_0010faa8 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::0b31396eaf0c3a0b",
+    "game_serial": "SLUS-20407",
+    "address": "0x0010D270",
+    "signature_hex": "0b31396eaf0c3a0b",
+    "confidence": 1.0,
+    "notes": "[shared_libcxx_libmpeg] a: image_buffer_needs_to_0010d270 matches image_buffer_needs_to_0010b548 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::5e49d7cd750a9069",
+    "game_serial": "SLUS-20407",
+    "address": "0x0010F558",
+    "signature_hex": "5e49d7cd750a9069",
+    "confidence": 1.0,
+    "notes": "[shared_libcxx_libmpeg] a: stdcpp_node_0010f558 matches FUN_0010d858 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::2644e6490e1a64cb",
+    "game_serial": "SLUS-20407",
+    "address": "0x00102830",
+    "signature_hex": "2644e6490e1a64cb",
+    "confidence": 1.0,
+    "notes": "[shared_libcxx_libmpeg] a: cdrom0_helper7_helper1_helper2_00102830 matches FUN_001003d8 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::c6b2d657d8b240a9",
+    "game_serial": "SLUS-20407",
+    "address": "0x00109828",
+    "signature_hex": "c6b2d657d8b240a9",
+    "confidence": 1.0,
+    "notes": "[shared_libcxx_libmpeg] a: mem_node_00109828 matches FUN_00107ae8 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::eedaf35184d630ab",
+    "game_serial": "SLUS-20407",
+    "address": "0x001070D8",
+    "signature_hex": "eedaf35184d630ab",
+    "confidence": 1.0,
+    "notes": "[shared_libcxx_libmpeg] a: validate_a_invalid_motion_helper1_001070d8 matches FUN_00105388 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::2dd06918dcb96469",
+    "game_serial": "SLUS-20407",
+    "address": "0x00103068",
+    "signature_hex": "2dd06918dcb96469",
+    "confidence": 1.0,
+    "notes": "[shared_libcxx_libmpeg] a: mem_node_00103068 matches FUN_00100dc8 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::10e18645ff47a3f6",
+    "game_serial": "SLUS-20407",
+    "address": "0x00118D88",
+    "signature_hex": "10e18645ff47a3f6",
+    "confidence": 1.0,
+    "notes": "[shared_libcxx_libmpeg] a: stdcpp_root_00118d88 matches FUN_001175c0 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::f6eafd8e52387ee6",
+    "game_serial": "SLUS-20407",
+    "address": "0x00106240",
+    "signature_hex": "f6eafd8e52387ee6",
+    "confidence": 1.0,
+    "notes": "[shared_libcxx_libmpeg] a: vec_math_mem_00106240 matches FUN_001044f8 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::ef9d98069b312a1a",
+    "game_serial": "SLUS-20407",
+    "address": "0x00111E00",
+    "signature_hex": "ef9d98069b312a1a",
+    "confidence": 1.0,
+    "notes": "[shared_libcxx_libmpeg] a: hot_stdcpp_00111e00 matches FUN_0010ffe8 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::be7ff311cf0c14ad",
+    "game_serial": "SLUS-20407",
+    "address": "0x0010C038",
+    "signature_hex": "be7ff311cf0c14ad",
+    "confidence": 1.0,
+    "notes": "[shared_libcxx_libmpeg] a: mem_node_0010c038 matches FUN_0010a308 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::7854d6e20aa19e64",
+    "game_serial": "SLUS-20407",
+    "address": "0x00119B30",
+    "signature_hex": "7854d6e20aa19e64",
+    "confidence": 1.0,
+    "notes": "[shared_libcxx_libmpeg] a: scmd_fail_sema_cur_cmd_00119b30 matches scmd_fail_sema_cur_cmd_001187d8 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::5ecf3a07f1e79da3",
+    "game_serial": "SLUS-20407",
+    "address": "0x0010C448",
+    "signature_hex": "5ecf3a07f1e79da3",
+    "confidence": 1.0,
+    "notes": "[shared_libcxx_libmpeg] a: mem_node_0010c448 matches FUN_0010a718 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::6f7ef8e2ea172377",
+    "game_serial": "SLUS-20407",
+    "address": "0x00109AA8",
+    "signature_hex": "6f7ef8e2ea172377",
+    "confidence": 1.0,
+    "notes": "[shared_libcxx_libmpeg] a: mem_node_00109aa8 matches FUN_00107d68 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::8f9d86cfbb29f473",
+    "game_serial": "SLUS-20407",
+    "address": "0x0010F2A8",
+    "signature_hex": "8f9d86cfbb29f473",
+    "confidence": 1.0,
+    "notes": "[shared_libcxx_libmpeg] a: stdcpp_node_0010f2a8 matches FUN_0010d5a8 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::e7f22e5819f6fe66",
+    "game_serial": "SLUS-20407",
+    "address": "0x001D39D8",
+    "signature_hex": "e7f22e5819f6fe66",
+    "confidence": 1.0,
+    "notes": "[shared_libcxx_libmpeg] a: sys_term_001d39d8 matches FUN_00123630 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::283d44a5f8ebdbbc",
+    "game_serial": "SLUS-20407",
+    "address": "0x0010C608",
+    "signature_hex": "283d44a5f8ebdbbc",
+    "confidence": 1.0,
+    "notes": "[shared_libcxx_libmpeg] a: mem_node_0010c608 matches FUN_0010a8d8 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::49df80f1b8f84b51",
+    "game_serial": "SLUS-20407",
+    "address": "0x001D1450",
+    "signature_hex": "49df80f1b8f84b51",
+    "confidence": 1.0,
+    "notes": "[shared_libcxx_libmpeg] a: sys_term_001d1450 matches FUN_00121a88 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::a5d02cb3e9e53c04",
+    "game_serial": "SLUS-20407",
+    "address": "0x001171D0",
+    "signature_hex": "a5d02cb3e9e53c04",
+    "confidence": 1.0,
+    "notes": "[shared_libcxx_libmpeg] a: tlb_spad_kernel_001171d0 matches tlb_spad_kernel_00115640 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::f91c6087499a418e",
+    "game_serial": "SLUS-20407",
+    "address": "0x00108AA0",
+    "signature_hex": "f91c6087499a418e",
+    "confidence": 1.0,
+    "notes": "[shared_libcxx_libmpeg] a: start_slice_start_code_x_x_out_00108aa0 matches start_slice_start_code_x_x_out_00106d60 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::d78f72c50c2194f5",
+    "game_serial": "SLUS-20407",
+    "address": "0x001119D8",
+    "signature_hex": "d78f72c50c2194f5",
+    "confidence": 1.0,
+    "notes": "[shared_libcxx_libmpeg] a: stdcpp_root_001119d8 matches FUN_0010fbc0 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::7456424d65c1e949",
+    "game_serial": "SLUS-20407",
+    "address": "0x001FE868",
+    "signature_hex": "7456424d65c1e949",
+    "confidence": 1.0,
+    "notes": "[shared_libcxx_libmpeg] a: sys_leaf_001fe868 matches FUN_0037b0a0 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::85f527202ef8e621",
+    "game_serial": "SLUS-20407",
+    "address": "0x0010AA88",
+    "signature_hex": "85f527202ef8e621",
+    "confidence": 1.0,
+    "notes": "[shared_libcxx_libmpeg] a: too_small_buffer_size_0010aa88 matches too_small_buffer_size_00108d48 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::0c0223bca9373f28",
+    "game_serial": "SLUS-20407",
+    "address": "0x00110EF0",
+    "signature_hex": "0c0223bca9373f28",
+    "confidence": 1.0,
+    "notes": "[shared_libcxx_libmpeg] a: stdcpp_node_00110ef0 matches FUN_0010f0d8 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::5cd113857f917458",
+    "game_serial": "SLUS-20407",
+    "address": "0x00109B98",
+    "signature_hex": "5cd113857f917458",
+    "confidence": 1.0,
+    "notes": "[shared_libcxx_libmpeg] a: hot_mem_00109b98 matches FUN_00107e58 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::6008943566e7358e",
+    "game_serial": "SLUS-20407",
+    "address": "0x00110088",
+    "signature_hex": "6008943566e7358e",
+    "confidence": 1.0,
+    "notes": "[shared_libcxx_libmpeg] a: tty_00110088 matches tty_0010e248 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::809976bdebbf1c48",
+    "game_serial": "SLUS-20407",
+    "address": "0x00108BD0",
+    "signature_hex": "809976bdebbf1c48",
+    "confidence": 1.0,
+    "notes": "[shared_libcxx_libmpeg] a: too_many_macroblocks_in_00108bd0 matches too_many_macroblocks_in_00106e90 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::590d263c9dfe00ea",
+    "game_serial": "SLUS-20407",
+    "address": "0x001113E8",
+    "signature_hex": "590d263c9dfe00ea",
+    "confidence": 1.0,
+    "notes": "[shared_libcxx_libmpeg] a: stdcpp_root_001113e8 matches FUN_0010f5d0 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::f3b0a3835e5c14dc",
+    "game_serial": "SLUS-20407",
+    "address": "0x00108888",
+    "signature_hex": "f3b0a3835e5c14dc",
+    "confidence": 1.0,
+    "notes": "[shared_libcxx_libmpeg] a: validate_invalid_macroblock_address_increment_cod_00108888 matches validate_invalid_macroblock_address_increment_cod_00106b48 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::78c33bc2c87dd6b6",
+    "game_serial": "SLUS-20407",
+    "address": "0x001093B0",
+    "signature_hex": "78c33bc2c87dd6b6",
+    "confidence": 1.0,
+    "notes": "[shared_libcxx_libmpeg] a: validate_invalid_macroblock_helper1_001093b0 matches FUN_00107670 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::635af1e99048cffa",
+    "game_serial": "SLUS-20407",
+    "address": "0x0010BDB0",
+    "signature_hex": "635af1e99048cffa",
+    "confidence": 1.0,
+    "notes": "[shared_libcxx_libmpeg] a: play_no_memory_for_movie_helper1_0010bdb0 matches FUN_0010a080 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::5c13f7aea5bdd619",
+    "game_serial": "SLUS-20407",
+    "address": "0x00109DD0",
+    "signature_hex": "5c13f7aea5bdd619",
+    "confidence": 1.0,
+    "notes": "[shared_libcxx_libmpeg] a: mem_node_00109dd0 matches FUN_00108090 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::08c8fb58717cd8a8",
+    "game_serial": "SLUS-20407",
+    "address": "0x001FD878",
+    "signature_hex": "08c8fb58717cd8a8",
+    "confidence": 1.0,
+    "notes": "[shared_libcxx_libmpeg] a: sys_root_001fd878 matches FUN_0037b740 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::8ad3a84c1ca6e25e",
+    "game_serial": "SLUS-20407",
+    "address": "0x001FE688",
+    "signature_hex": "8ad3a84c1ca6e25e",
+    "confidence": 1.0,
+    "notes": "[shared_libcxx_libmpeg] a: sys_leaf_001fe688 matches FUN_0037aec0 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::c98419c9bcd56f5b",
+    "game_serial": "SLUS-20407",
+    "address": "0x00112198",
+    "signature_hex": "c98419c9bcd56f5b",
+    "confidence": 1.0,
+    "notes": "[shared_libcxx_libmpeg] a: stdcpp_root_00112198 matches FUN_00110380 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::7eea1ac2ae12755b",
+    "game_serial": "SLUS-20407",
+    "address": "0x001106B0",
+    "signature_hex": "7eea1ac2ae12755b",
+    "confidence": 1.0,
+    "notes": "[shared_libcxx_libmpeg] a: stdcpp_root_001106b0 matches FUN_0010e870 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::2c1c68a5a73e673c",
+    "game_serial": "SLUS-20407",
+    "address": "0x001179D0",
+    "signature_hex": "2c1c68a5a73e673c",
+    "confidence": 1.0,
+    "notes": "[shared_libcxx_libmpeg] a: psiilibpad_001179d0 matches FUN_00115f38 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::1a06ccfeadd829df",
+    "game_serial": "SLUS-20407",
+    "address": "0x001FE938",
+    "signature_hex": "1a06ccfeadd829df",
+    "confidence": 1.0,
+    "notes": "[shared_libcxx_libmpeg] a: sys_root_001fe938 matches FUN_0037b170 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::a4fe502c6ea772f9",
+    "game_serial": "SLUS-20407",
+    "address": "0x00109CE8",
+    "signature_hex": "a4fe502c6ea772f9",
+    "confidence": 1.0,
+    "notes": "[shared_libcxx_libmpeg] a: mem_node_00109ce8 matches FUN_00107fa8 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::48aa433d50ceaae1",
+    "game_serial": "SLUS-20407",
+    "address": "0x00116DB8",
+    "signature_hex": "48aa433d50ceaae1",
+    "confidence": 1.0,
+    "notes": "[shared_libcxx_libmpeg] a: too_long_parameter_s_00116db8 matches too_long_parameter_s_00115218 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::687b05c3820d7771",
+    "game_serial": "SLUS-20407",
+    "address": "0x00103300",
+    "signature_hex": "687b05c3820d7771",
+    "confidence": 1.0,
+    "notes": "[shared_libcxx_libmpeg] a: mem_node_00103300 matches FUN_00101060 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::edb1e27766b6adb3",
+    "game_serial": "SLUS-20407",
+    "address": "0x0011A518",
+    "signature_hex": "edb1e27766b6adb3",
+    "confidence": 1.0,
+    "notes": "[shared_libcxx_libmpeg] a: sce_cd_st_resume_call_n_0011a518 matches sce_cd_st_resume_call_n_001191c0 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::e093ab04cc110511",
+    "game_serial": "SLUS-20407",
+    "address": "0x00105D80",
+    "signature_hex": "e093ab04cc110511",
+    "confidence": 1.0,
+    "notes": "[shared_libcxx_libmpeg] a: mem_term_00105d80 matches FUN_00104038 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::c418cbdea6284d70",
+    "game_serial": "SLUS-20407",
+    "address": "0x00102E78",
+    "signature_hex": "c418cbdea6284d70",
+    "confidence": 1.0,
+    "notes": "[shared_libcxx_libmpeg] a: mem_term_00102e78 matches FUN_00100bd8 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::9ef9b3c4b360187c",
+    "game_serial": "SLUS-20407",
+    "address": "0x0011B298",
+    "signature_hex": "9ef9b3c4b360187c",
+    "confidence": 0.99,
+    "notes": "[shared_libcxx_libmpeg] a: stdcpp_node_0011b298 matches FUN_00119f28 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::d34ece71ddfc0d82",
+    "game_serial": "SLUS-20407",
+    "address": "0x0011AE50",
+    "signature_hex": "d34ece71ddfc0d82",
+    "confidence": 0.99,
+    "notes": "[shared_libcxx_libmpeg] a: stdcpp_node_0011ae50 matches FUN_00119af0 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::36c90e45c18165cd",
+    "game_serial": "SLUS-20407",
+    "address": "0x0010AB28",
+    "signature_hex": "36c90e45c18165cd",
+    "confidence": 0.98,
+    "notes": "[shared_libcxx_libmpeg] a: mem_node_0010ab28 matches FUN_00108de8 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::1b16bac965ef6a1d",
+    "game_serial": "SLUS-20407",
+    "address": "0x0010DF18",
+    "signature_hex": "1b16bac965ef6a1d",
+    "confidence": 0.97,
+    "notes": "[shared_libcxx_libmpeg] a: vertical_size_helper4_0010df18 matches FUN_0010c208 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::583fbe100baa0d74",
+    "game_serial": "SLUS-20407",
+    "address": "0x00112678",
+    "signature_hex": "583fbe100baa0d74",
+    "confidence": 0.97,
+    "notes": "[shared_libcxx_libmpeg] a: stdcpp_root_00112678 matches FUN_00110860 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::8a0c5c5b2828505c",
+    "game_serial": "SLUS-20407",
+    "address": "0x00117018",
+    "signature_hex": "8a0c5c5b2828505c",
+    "confidence": 0.96,
+    "notes": "[shared_libcxx_libmpeg] a: stdcpp_root_00117018 matches FUN_00115478 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::6448395a29a21fa7",
+    "game_serial": "SLUS-20407",
+    "address": "0x00118FB8",
+    "signature_hex": "6448395a29a21fa7",
+    "confidence": 0.96,
+    "notes": "[shared_libcxx_libmpeg] a: stdcpp_root_00118fb8 matches FUN_00117bf0 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::8b95459a2f98a676",
+    "game_serial": "SLUS-20407",
+    "address": "0x001038F8",
+    "signature_hex": "8b95459a2f98a676",
+    "confidence": 0.92,
+    "notes": "[shared_libcxx_libmpeg] a: mem_term_001038f8 matches FUN_00101658 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::dc1b401564dafe07",
+    "game_serial": "SLUS-20407",
+    "address": "0x001D3DF0",
+    "signature_hex": "dc1b401564dafe07",
+    "confidence": 0.74,
+    "notes": "[shared_libcxx_libmpeg] a: sys_term_001d3df0 matches FUN_001239c8 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::ee975c58cf4a28db",
+    "game_serial": "SLUS-20407",
+    "address": "0x001D3C38",
+    "signature_hex": "ee975c58cf4a28db",
+    "confidence": 0.7,
+    "notes": "[shared_libcxx_libmpeg] a: create_format_string_helper1_001d3c38 matches FUN_00123890 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::14453b51f9d5725a",
+    "game_serial": "SLUS-20407",
+    "address": "0x001D43F0",
+    "signature_hex": "14453b51f9d5725a",
+    "confidence": 0.61,
+    "notes": "[shared_libcxx_libmpeg] a: create_format_string_helper2_001d43f0 matches FUN_00123b88 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  },
+  {
+    "pattern_key": "shared::5a34b8adfae15384",
+    "game_serial": "SLUS-20407",
+    "address": "0x00147A90",
+    "signature_hex": "5a34b8adfae15384",
+    "confidence": 0.53,
+    "notes": "[shared_libcxx_libmpeg] a: battle_root_00147a90 matches FUN_0013d500 in SLUS-20397",
+    "kind": "shared_sdk_or_middleware"
+  }
+]

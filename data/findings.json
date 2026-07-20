@@ -1048,5 +1048,11 @@
     "topic": "inner_dispatch_telemetry_refutes_systemic_badpc_on_nopath",
     "outcome": "investigated",
     "details": "Added [p4:inner-dispatch] dispatcher telemetry: logs any dispatch to a PC outside 24748 statically-legit targets (entries + post-call returns + preempt back-edges, from tools/gen_legit_dispatch_addrs.py over 3013 TUs -> wos_legit_dispatch_addrs.h). No-path drive census: ZERO inner-dispatch hits through a full run that reached 0x110328. REFUTES the systemic per-instruction-registration root cause (findings 173/174) FOR THE NO-PATH: this boot is dispatch-clean; 0x110328 is a LEGITIMATE guest busy-wait, not bad-PC corruption. The intermittent 0x8dcb00/0x152c78 deaths on OTHER boots are separate + intermittent (not reproduced this run). DETERMINISTIC blocker = Deci2 flag [s0+0xC] never clears: loop FUN_00110220+0x108 calls Deci2Call(code=4 Poll) via sub_0010FEA0, 50+ spins, 0 Deci2 log lines. My Poll->driveDeci2Handler fix (57af574) is NOT clearing it. Diagnostic build pending (log every Deci2Call code+socket+session count). Live ctx harvest failed (pc churns through loop faster than signature scan catches)."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "recipe_status_correction_user_review_2026-07-20",
+    "outcome": "investigated",
+    "details": "User integrity review 2026-07-20: NO mod recipe independently re-confirmed on-screen this session. char_unlock_all only ever confirmed via manual in-game button combo, NOT via pnach bitmask write. hp_lock/infinite_hp have a prior 990->999 pause-menu log but flagged for re-test. yen/dur/sword_dur contradicted (RAM write ok, HUD does not update). Downgraded all manifest statuses accordingly. Prior blanket \"verified\" was unsupported."
   }
 ]

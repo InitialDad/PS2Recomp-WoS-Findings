@@ -7,7 +7,8 @@ Way of the Samurai.
 - Verified EE addresses (say how you verified).
 - Findings — including things that **didn't** work. Failures are the point.
 - Dead ends: an approach + why it failed + what to do instead.
-- Per-game recompiler notes: HLE contracts, opcode maps, engine patterns.
+- Per-game recompiler notes: HLE contracts, opcode maps, shared SDK/middleware
+  fingerprints. (Label SDK/library matches honestly — they are not "engine" evidence.)
 
 ## What does NOT belong here
 - Game code, ISOs, extracted assets, raw memory dumps, copyrighted in-game text.

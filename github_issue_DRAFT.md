@@ -1,7 +1,7 @@
 # Draft — GitHub issue for ran-j/PS2Recomp
 
 > Post at: https://github.com/ran-j/PS2Recomp/issues/new
-> Title: **Community findings database — Way of the Samurai (SLUS-20407): 67 verified addresses, 36 recorded dead ends**
+> Title: **Community findings database — Way of the Samurai (SLUS-20407): 67 catalogued addresses, 32 recorded dead ends, parallel-scan verification**
 > Delete this header block before posting. Fill in <YOUR-REPO-URL>.
 
 ---
@@ -13,13 +13,22 @@ the project.
 
 What I have, all as sanitized metadata (no game code, no ISO, no assets):
 
-- **67 verified EE addresses** (player state, script VM, inventory, camera, NPC slots)
-- **175 findings** — 92 confirmed-working, plus the failures
-- **36 recorded dead ends** with the reason each failed (e.g. the WoS script VM uses
+- **67 catalogued EE addresses**, each labeled with an evidence tier; most are
+  cross-checked against a live PCSX2 dump (the port matches ground truth byte-for-byte
+  on the majority of known addresses)
+- **176 findings** — 92 confirmed-working, plus the failures
+- **32 recorded dead ends** with the reason each failed (e.g. the WoS script VM uses
   C++ virtual dispatch, not a jump table; the pause-menu inventory values are not in
   EE RAM at all)
-- **189 script-VM opcode → handler mappings**
-- **104 shared-engine function patterns** (useful for other Acquire/Spike titles)
+- **189 script-VM opcode → handler mappings** (statically derived)
+- **104 shared SDK/middleware fingerprints** (Sony SDK / libc++ / libmpeg, confirmed
+  identical in one other title — useful for skipping re-analysis of SDK code, *not*
+  an engine map)
+
+Honest status: the toolchain builds and ~3,000 functions are machine-translated, but
+the runtime still hangs in early boot (a heap-corruption bug, likely a
+recompiler-correctness defect) — nothing playable yet. Sharing the verified findings
+and methodology, not claiming a finished port.
 
 Repo: <YOUR-REPO-URL> (data as JSON + a debugging playbook + schema docs, CC0).
 

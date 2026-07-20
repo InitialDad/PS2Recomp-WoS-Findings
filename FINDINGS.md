@@ -7,6 +7,11 @@ The goal is to let you recognize a bug class fast and skip the trap next to it.
 
 ## 1. Recompiler-correctness bugs
 
+> **Status honesty:** these are *diagnosed* bug classes with *proposed* fix patterns.
+> The WoS runtime still hangs in early boot as of this writing — the fixes below are
+> the methodology and the current best hypotheses, not a solved boot. Treat the "fix
+> pattern" column as "where to intervene," not "confirmed working."
+
 | Bug class | Symptom | Detection | Fix pattern |
 |-----------|---------|-----------|-------------|
 | **Resume mis-entry** | Boot fails at a *different* address each run (malloc / Deci2 / 0x8dcb00 / 0x152c78) | Stuck PC + constant return-address + shrinking SP = a function pointer landing mid-prologue of a merged function | Prune dispatch/resume entries to the legitimate few; add a bounded recovery guard. **Do not** patch the individual downstream hang sites — they are downstream of one systemic cause. |

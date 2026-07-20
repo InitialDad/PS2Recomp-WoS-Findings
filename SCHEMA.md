@@ -17,6 +17,7 @@ Verified EE (Emotion Engine) RAM addresses.
 | `notes` | string | how verified, caveats, conflicts resolved |
 | `pointer_chain` | string/null | pointer path if not static |
 | `code_refs` | string/null | referencing function addresses |
+| `evidence` | string | derived tier: `on_screen` \| `snapshot_diff` \| `stated_verified` \| `catalogued` (from in-band notes only; many are additionally validated by the parallel-scan report) |
 
 ## `findings.json`
 Every meaningful observation, successes and failures alike.
@@ -53,11 +54,27 @@ Working runtime modifications.
 and cutscenes. Recipes use threshold-based intervention, only writing when the
 value leaves a safe range.
 
-## `engine_patterns.json`
-Hashes of the first-N MIPS instructions of verified functions, used to find the
-same routine across games that share the engine (same developer / middleware).
+## `shared_sdk_fingerprints.json`
+Hashes of the first-N MIPS instructions of functions, matched against other
+titles. **Important:** every row here is Sony SDK / C++ standard library /
+libmpeg middleware — shared runtime code, **not** the game engine. A match
+(all confirmed against `SLUS-20397`) proves both games linked the same SDK, which
+is true of most PS2 games; it has near-zero power to identify a shared *game
+engine*. The method (hash + cross-search) is a **test** for shared code, not a
+claim of shared engine. `confidence` is byte-match confidence, not significance.
+
+| field | type | meaning |
+|-------|------|---------|
+| `pattern_key` | string | `shared::<hash>` |
+| `game_serial` | string | this game |
+| `address` | hex string | address in this game |
+| `signature_hex` | string | instruction-prefix hash |
+| `confidence` | float | byte-match confidence (not significance) |
+| `kind` | string | always `shared_sdk_or_middleware` |
+| `notes` | string | which SDK/library + matching function in the other title |
 
 ## `opcode_handlers.json`
 Script-VM opcode → handler-address mappings. WoS resolves handlers via C++
 virtual dispatch (`lw t9, 0x20(a0)` → vtable, handler at `vt+0x8`), **not** a
 contiguous jump table — the naive jump-table scan is a recorded dead end.
+`evidence` is `static_vtable_walk`: **statically derived, not runtime-verified.**

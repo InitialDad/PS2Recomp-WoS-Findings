@@ -1,24 +1,49 @@
 # PS2 Recompilation Findings — Way of the Samurai (SLUS-20407)
 
-Verified reverse-engineering metadata and debugging methodology for PS2 static
-recompilation, distilled from a long-running private port project. This repo
+Reverse-engineering findings and debugging methodology for PS2 static
+recompilation, distilled from a long-running private port project — each item
+labeled with its evidence tier so you can judge it. This repo
 ships **findings, not game code** — no ISO, no extracted assets, no binary, no
 translation units. Just the map, so the next person doesn't re-walk the dead ends.
+
+## Project status (read first)
+
+This is a **work in progress**, not a finished port. What's true today: a full PS2
+static-recompiler toolchain that builds, ~3,000 machine-translated C++ units, and a
+working parallel-scan harness that verifies the port against PCSX2 as ground truth.
+What's **not** done: the runtime currently hangs in early boot on a heap-corruption
+bug (likely a recompiler-correctness defect); **no** game is playable yet, and **no**
+mod recipe is currently verified working. This repo ships the *findings and
+methodology* from that work — not the game, not the port binary.
 
 ## What's here
 
 | Count | Data | File |
 |------:|------|------|
-| 67  | Verified EE memory addresses (player, script VM, inventory, camera, …) | [`data/addresses.json`](data/addresses.json) |
-| 175 | Catalogued findings (92 `works`, 51 `investigated`, 19 `fails`, 13 `partial`) | [`data/findings.json`](data/findings.json) |
-| 36  | Recorded **dead ends** — approaches proven not to work, with why | [`data/dead_ends.json`](data/dead_ends.json) |
-| 104 | Cross-game engine patterns (shared-engine function hashes) | [`data/engine_patterns.json`](data/engine_patterns.json) |
-| 189 | Script-VM opcode → handler mappings | [`data/opcode_handlers.json`](data/opcode_handlers.json) |
-| 7   | Working mod recipes (address + format + safe-window) | [`data/mod_recipes.json`](data/mod_recipes.json) |
+| 67  | Catalogued EE addresses — **17** carry in-band verification evidence (`on_screen`/`snapshot_diff`/`stated_verified`); most others are additionally cross-checked by the parallel-scan report | [`data/addresses.json`](data/addresses.json) |
+| 176 | Findings (92 `works`, 52 `investigated`, 19 `fails`, 13 `partial`) | [`data/findings.json`](data/findings.json) |
+| 32  | Recorded **dead ends** — approaches proven not to work, with why | [`data/dead_ends.json`](data/dead_ends.json) |
+| 104 | **Shared SDK/middleware fingerprints** — Sony SDK + libc++ + libmpeg code confirmed byte-identical in one other title (`SLUS-20397`). *Not* game-engine code. | [`data/shared_sdk_fingerprints.json`](data/shared_sdk_fingerprints.json) |
+| 189 | Script-VM opcode → handler mappings (statically derived, not runtime-verified) | [`data/opcode_handlers.json`](data/opcode_handlers.json) |
+| 7   | Mod recipes — **none currently verified working**: 3 `needs_recheck`, 4 `contradicted` (write sticks in RAM but HUD never updates) | [`data/mod_recipes.json`](data/mod_recipes.json) |
 
 Game: **Way of the Samurai** (Spike / Acquire, 2003), serial `SLUS-20407`, NTSC-U.
 Main data archive `VOLUME.DAT` (132 MB). Script VM uses C++ virtual dispatch, not
 a jump table. Audio in `cdrom0:\SOUND\GZMVS.RBB`.
+
+## Confidence legend
+
+Every dataset is labeled so you can judge it yourself — nothing here is asserted
+beyond its evidence:
+
+| Tier | Meaning |
+|------|---------|
+| `on_screen` | Confirmed by a visible in-game result. |
+| `snapshot_diff` / parallel-scan `OK` | Matches the original PCSX2 runtime byte-for-byte. |
+| `stated_verified` | DB note claims verification; treat as strong-but-unaudited. |
+| `catalogued` | Address/observation recorded; not independently verified in-band. |
+| `static_vtable_walk` (opcodes) | Derived by static analysis; **not** confirmed at runtime. |
+| `shared_sdk_or_middleware` | SDK/library code, not game-specific — near-zero discriminating power for "same engine". |
 
 ## Why this exists
 
