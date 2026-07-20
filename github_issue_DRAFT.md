@@ -2,7 +2,7 @@
 
 > Post at: https://github.com/ran-j/PS2Recomp/issues/new
 > Title: **Community findings database — Way of the Samurai (SLUS-20407): 67 catalogued addresses, 32 recorded dead ends, parallel-scan verification**
-> Delete this header block before posting. Fill in <YOUR-REPO-URL>.
+> Delete this header block before posting. Repo URL is filled in below.
 
 ---
 
@@ -30,7 +30,7 @@ the runtime still hangs in early boot (a heap-corruption bug, likely a
 recompiler-correctness defect) — nothing playable yet. Sharing the verified findings
 and methodology, not claiming a finished port.
 
-Repo: <YOUR-REPO-URL> (data as JSON + a debugging playbook + schema docs, CC0).
+Repo: https://github.com/InitialDad/PS2Recomp-WoS-Findings (data as JSON + a debugging playbook + schema docs, CC0).
 
 A couple of questions on how you'd prefer to receive this:
 
