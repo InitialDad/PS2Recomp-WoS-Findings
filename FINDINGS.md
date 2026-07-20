@@ -56,6 +56,52 @@ The goal is to let you recognize a bug class fast and skip the trap next to it.
 | Guess a texture by visual pattern-match | Almost always hits an effect/light sprite, not the asset you wanted. |
 | Swap MDSP model pointer without the matching KMD+MTL+TEX bundle | Skeleton mismatch → T-pose. Slot size mismatch corrupts the archive index for every later character. |
 
+## Worked example — the current boot hang (a diagnosis in progress)
+
+Concrete, so the method above isn't abstract. This is the bug the port is stuck on
+*right now* — included precisely because it isn't solved yet.
+
+**Symptom.** The recompiled runtime executes thousands of ticks, then the EE main
+thread freezes with a stable `pc=0x1d1050`, `ra=0x1d0c54`, `sp=0x1ff7c90` for 700+
+ticks. DMA/GIF counters stop advancing. Looks like an I/O wait.
+
+**Wrong first hypothesis** (recorded as a dead end): "the runtime fails to set some
+GS/DMAC/INTC register the loop polls." False. The loop polls no fixed address.
+
+**What it actually is.** `0x1d1050` is inside `FUN_001d0c10` — the game's dlmalloc
+`malloc` core — specifically the smallbin best-fit scan:
+
+```
+0x1d104c  lw   $v0, 0x4($s0)      ; v0 = chunk->head (size+flags)
+0x1d1050  and  $a2, $v0, $t4      ; <-- frozen PC (t4 = ~3 mask)
+0x1d108c  lw   $s0, 0xC($s0)      ; s0 = s0->fd  (follow forward link)
+0x1d1090  bnel $s0, $a1, 0x1d1050 ; loop until s0 == bin sentinel
+```
+
+The walk exits only when `$s0` reaches the bin sentinel `$a1`. From the RAM dump:
+`u32(0x0000000C) == 0`, so the moment a chunk's `fd` link is corrupted to NULL,
+`[$s0+0xC] = [0xC] = 0` → `$s0` stays 0 forever → infinite loop. The `malloc_state`
+smallmap word (`0xe0020003`, claims bins {0,1,17,29,30,31} populated) is **desynced**
+from the actual bins (only bin 6 populated) — corrupt allocator metadata.
+
+**Where the bug is.** Not the runtime's I/O emulation — the free chunk's `fd` link was
+already corrupted before this `malloc` call. Leading suspect: a **recompilation-
+correctness bug** in the allocator's 64-bit pointer stores (`free`/`unlink` do
+`dsll32`/`dsrl32` juggling; one wrong width truncates a link). This is why "translated"
+≠ "correct" — the translation runs and mostly works, and a single mis-widened store
+1,000 functions away corrupts a heap link that hangs a scan much later.
+
+**Method that found it, and that you can copy:**
+1. Parallel-scan the port against a live PCSX2 dump → confirms *which* guest state is
+   already correct (rules out most of memory).
+2. Static-trace the frozen PC to a named function, identify the loop's exit condition.
+3. Read the actual allocator metadata from the dump; prove the free-list is corrupt
+   (smallmap↔bins desync) rather than the loop being a legitimate wait.
+4. Fix at the function boundary (hook the allocator) *or* add a bounds guard as a
+   diagnostic — but the guard **masks** the upstream corruption; note that honestly.
+
+Status: diagnosed, fix proposed, **not yet confirmed working.** That's the true state.
+
 ## The one rule behind all of it
 
 **Verify against ground truth, and record what failed.** A write that sticks in
