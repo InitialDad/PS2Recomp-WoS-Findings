@@ -8,21 +8,48 @@ translation units. Just the map, so the next person doesn't re-walk the dead end
 
 ## Project status (read first)
 
-This is a **work in progress**, not a finished port. What's true today: a full PS2
-static-recompiler toolchain that builds, ~3,000 machine-translated C++ units, and a
-working parallel-scan harness that verifies the port against a live PCSX2 execution
-used as a reference implementation.
-What's **not** done: the runtime currently hangs in early boot on a heap-corruption
-bug (current leading hypothesis: a recompiler-correctness defect); **no** game is playable yet, and **no**
-mod recipe is currently verified working. This repo ships the *findings and
-methodology* from that work, not the game, not the port binary.
+*Last verified: 2026-07-27.*
+
+This is a **work in progress**, not a finished port. **No game is playable**, and
+**no mod recipe is currently verified working.** This repo ships the *findings and
+methodology*, not the game and not the port binary.
+
+What is true today, measured rather than assumed:
+
+- The toolchain builds. ~3,000 machine-translated C++ units; 2,820 translated
+  functions covering 82.6% of the 1,198,208-byte `PT_LOAD`.
+- **The early-boot hang is fixed.** The two blockers this repo previously led
+  with, `heap-arena-overlap` and `deci2-tty-drain`, are both resolved. The
+  runtime now reaches and sustains its main loop: **+2,803 frames** in the best
+  drive, no bad dispatches, no bad allocations, vblank ticking.
+- **The current blocker is rendering, not memory.** The screen is a flat clear
+  colour. Texture uploads *do* reach VRAM (a 512x512 PSMT4HH transfer, a 256x128,
+  and several 8x2 CLUT loads, all host-to-local), and 96 `TEX0` writes and 96
+  `prim=6` sprite kicks occur. So the defect sits downstream of upload:
+  rasterisation, sampling, or the draw target.
+- The parallel-scan harness verifies the port against a live PCSX2 execution used
+  as a reference implementation.
+
+### Claims previously published here that were wrong
+
+Recording these because a findings repo that only lists wins is not worth reading:
+
+- *"The runtime hangs in early boot on a heap-corruption bug."* Withdrawn. It was
+  true when first written; the underlying allocator cause was found and fixed.
+- *"No texture uploads happen."* Wrong. It came from grepping logs for `TRXDIR`,
+  a token that only ever appears as a `case` label and was never printed.
+- *"Only 9,784 bytes of the image are untranslated code."* Withdrawn. The
+  >92%-decode heuristic it rested on misclassifies: the ELF entry point, known
+  code, scores only 54.7% over a 256-byte window.
+- *"`0x21D808` is a gzmfs read that overwrites live code."* Wrong. That address
+  decodes 0.0% as MIPS; it is data.
 
 ## What's here
 
 | Count | Data | File |
 |------:|------|------|
 | 67  | Catalogued EE addresses, **17** carry in-band verification evidence (`on_screen`/`snapshot_diff`/`stated_verified`); most others are additionally cross-checked by the parallel-scan report | [`data/addresses.json`](data/addresses.json) |
-| 176 | Findings (92 `works`, 52 `investigated`, 19 `fails`, 13 `partial`) | [`data/findings.json`](data/findings.json) |
+| 202 | Findings (99 `works`, 68 `investigated`, 20 `fails`, 15 `partial`) | [`data/findings.json`](data/findings.json) |
 | 32  | Recorded **dead ends**, approaches proven not to work, with why | [`data/dead_ends.json`](data/dead_ends.json) |
 | 104 | **Shared SDK/middleware fingerprints**, Sony SDK + libc++ + libmpeg code confirmed byte-identical in one other title (`SLUS-20397`). *Not* game-engine code. | [`data/shared_sdk_fingerprints.json`](data/shared_sdk_fingerprints.json) |
 | 189 | Script-VM opcode → handler mappings (statically derived, not runtime-verified) | [`data/opcode_handlers.json`](data/opcode_handlers.json) |

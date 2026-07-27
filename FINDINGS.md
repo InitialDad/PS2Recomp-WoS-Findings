@@ -56,10 +56,16 @@ The goal is to let you recognize a bug class fast and skip the trap next to it.
 | Guess a texture by visual pattern-match | Almost always hits an effect/light sprite, not the asset you wanted. |
 | Swap MDSP model pointer without the matching KMD+MTL+TEX bundle | Skeleton mismatch → T-pose. Slot size mismatch corrupts the archive index for every later character. |
 
-## Worked example: the current boot hang (a diagnosis in progress)
+## Worked example: the boot hang (SOLVED 2026-07-2x, kept for the method)
 
-Concrete, so the method above isn't abstract. This is the bug the port is stuck on
-*right now*, included precisely because it isn't solved yet.
+> **Outcome, added 2026-07-27:** this one is **fixed**. The runtime now sustains
+> its main loop for **+2,803 frames** with no bad dispatches and no bad
+> allocations. The write-up below is kept unchanged because the *method* is the
+> transferable part, and because a playbook that quietly deletes its
+> in-progress entries once they resolve teaches nothing about how the diagnosis
+> actually went. See the next section for what the port is stuck on now.
+
+Concrete, so the method above isn't abstract.
 
 **Symptom.** The recompiled runtime executes thousands of ticks, then the EE main
 thread freezes with a stable `pc=0x1d1050`, `ra=0x1d0c54`, `sp=0x1ff7c90` for 700+
@@ -101,6 +107,60 @@ is not "correct": the translation runs and mostly works, and a single mis-widene
    diagnostic, but the guard **masks** the upstream corruption; note that honestly.
 
 Status: diagnosed, fix proposed, **not yet confirmed working.** That's the true state.
+
+## Worked example 2: the black screen, and a probe that could not answer its own question
+
+*Added 2026-07-27. This is where the port is stuck now, and it is a better lesson
+about instrumentation than about the GS.*
+
+**Symptom.** The main loop runs, vblank ticks, 96 `TEX0` writes and 96 `prim=6`
+(sprite) kicks occur per title screen, texture uploads reach VRAM, and the screen
+is still a flat clear colour.
+
+**The upload is a legitimate PS2 idiom, not a bug.** The game uploads the title
+texture as `PSMCT32` (32-bit) at `bp=0x1A40` and then reads it as `PSMT8` (8-bit
+CLUT) from the same `tbp0`. That looks wrong and isn't: `256*128*4 = 131072` bytes
+is exactly `512*256` `PSMT8` indices. Uploading an 8-bit texture through a 32-bit
+BITBLT for DMA throughput and letting the GS unswizzle on sample is standard.
+**If you are writing a GS, you must make the two formats address the same physical
+bytes**; you cannot treat the upload as malformed.
+
+**The instrumentation trap.** A probe was added to answer "are we reading the
+texture data at all?", and it printed:
+
+```
+[p4:clut] #1 psm=0x13 tbp0=0x1A40 tbw=8 (u=0 v=0) rawIndex=0x00 -> ... = 0x80000000
+```
+
+...with `rawIndex=0x00` on all 24 lines. That was written up as proof of a broken
+`PSMT8`/`PSMCT32` swizzle. **It is not proof of anything.** The probe was
+
+```c
+static std::atomic<uint32_t> s_ci{0};
+const uint32_t n = ++s_ci;
+if (n <= 24) { /* print */ }
+```
+
+The first 24 samples of the run all landed at `u<=2, v<=1`, the extreme top-left
+corner of the texture. **An empty image corner reads index 0 legitimately.** The
+measurement is equally consistent with "the swizzle is broken" and "the corner of
+the picture is blank", so it cannot distinguish them, and the conclusion drawn
+from it was unsupported. Hand-walking the page math for both formats agrees:
+`PSMCT32` at `bw=4` and `PSMT8` at `bw=8` both resolve to page 212, byte
+`0x1A4000` - the addressing matches exactly where the claim said it diverged.
+
+**The fix is to the probe, not (yet) to the swizzle.** Replace "first N samples"
+with an aggregate over every sample: how many indices were non-zero, the actual
+UV rectangle touched, and a histogram of index values. Non-zero indices anywhere
+prove the data is reachable and exonerate the swizzle; all-zero across a wide UV
+span is the real evidence the original claim needed.
+
+**Transferable rule.** *A capped "first N" log is a sampling design, and an
+unstated one.* If the first N events are correlated - and in a rasterizer they
+always are, because you get the first N texels of the first primitive - then N
+identical values is what you would see whether or not the bug exists. Before
+believing a probe, ask what its output would look like if the hypothesis were
+**false**. If the answer is "the same", the probe is not evidence.
 
 ## The one rule behind all of it
 
