@@ -22,11 +22,14 @@ What is true today, measured rather than assumed:
   with, `heap-arena-overlap` and `deci2-tty-drain`, are both resolved. The
   runtime now reaches and sustains its main loop: **+2,803 frames** in the best
   drive, no bad dispatches, no bad allocations, vblank ticking.
-- **The current blocker is rendering, not memory.** The screen is a flat clear
-  colour. Texture uploads *do* reach VRAM (a 512x512 PSMT4HH transfer, a 256x128,
-  and several 8x2 CLUT loads, all host-to-local), and 96 `TEX0` writes and 96
-  `prim=6` sprite kicks occur. So the defect sits downstream of upload:
-  rasterisation, sampling, or the draw target.
+- **The renderer works; a safety guard was starving it.** Uploads reach VRAM,
+  PSMT8 index reads are healthy (36% non-zero, all 256 distinct values across
+  full 512x256 UV coverage), 6.1 billion pixels are written to a valid
+  framebuffer, and real colour appears early in every run. Then it stops dead.
+  Cause found 2026-07-27: the runtime refused a single legitimate 515 KB asset
+  load 19,774 times because its span merely crossed a guarded address band. See
+  `Worked example 3` in [`FINDINGS.md`](FINDINGS.md). Fix committed; **not yet
+  verified on screen**, and this line will say so until it is.
 - The parallel-scan harness verifies the port against a live PCSX2 execution used
   as a reference implementation.
 
@@ -42,22 +45,27 @@ Recording these because a findings repo that only lists wins is not worth readin
   >92%-decode heuristic it rested on misclassifies: the ELF entry point, known
   code, scores only 54.7% over a 256-byte window.
 - *"`0x21D808` is a gzmfs read that overwrites live code."* Wrong. That address
-  decodes 0.0% as MIPS; it is data.
+  decodes 0.0% as MIPS; it is data. Worth noting that this withdrawal later
+  turned out to matter a great deal: the guard installed on the strength of the
+  original claim is what stalled the renderer, and the correction is part of
+  what proved the read legitimate.
+- *"The PSMT8/PSMCT32 swizzle is broken."* Wrong, and the evidence never
+  supported it. See `Worked example 2`.
 
 ## What's here
 
 | Count | Data | File |
 |------:|------|------|
 | 67  | Catalogued EE addresses, **17** carry in-band verification evidence (`on_screen`/`snapshot_diff`/`stated_verified`); most others are additionally cross-checked by the parallel-scan report | [`data/addresses.json`](data/addresses.json) |
-| 202 | Findings (99 `works`, 68 `investigated`, 20 `fails`, 15 `partial`) | [`data/findings.json`](data/findings.json) |
-| 32  | Recorded **dead ends**, approaches proven not to work, with why | [`data/dead_ends.json`](data/dead_ends.json) |
+| 207 | Findings (99 `works`, 73 `investigated`, 20 `fails`, 15 `partial`) | [`data/findings.json`](data/findings.json) |
+| 35  | Recorded **dead ends**, approaches proven not to work, with why | [`data/dead_ends.json`](data/dead_ends.json) |
 | 104 | **Shared SDK/middleware fingerprints**, Sony SDK + libc++ + libmpeg code confirmed byte-identical in one other title (`SLUS-20397`). *Not* game-engine code. | [`data/shared_sdk_fingerprints.json`](data/shared_sdk_fingerprints.json) |
 | 189 | Script-VM opcode → handler mappings (statically derived, not runtime-verified) | [`data/opcode_handlers.json`](data/opcode_handlers.json) |
 | 7   | Mod recipes, **none currently verified working**: 3 `needs_recheck`, 4 `contradicted` (write sticks in RAM but HUD never updates) | [`data/mod_recipes.json`](data/mod_recipes.json) |
 
 Plus the **raw evidence** the above was drawn from:
 
-| 10 | Port boot logs, oldest first, path-scrubbed and indexed by date, 46 MB raw published as 1.7 MB | [`logs/INDEX.md`](logs/INDEX.md) |
+| 11 | Port boot logs, oldest first, path-scrubbed and indexed by date, readable in the browser | [`logs/INDEX.md`](logs/INDEX.md) |
 
 **Please read the logs adversarially.** The findings files say what we concluded;
 the logs are what someone else can use to reach a *different* conclusion, spot a
@@ -95,7 +103,7 @@ this dataset unusual:
    on-screen result), not assumed from "the write stuck and it didn't crash."
    (PCSX2 is an emulator, not literal ground truth, but it's a practical, stable
    reference for guest memory.)
-2. **Dead ends are first-class.** The 32 recorded dead ends are the most valuable
+2. **Dead ends are first-class.** The 35 recorded dead ends are the most valuable
    rows here; each one is hours you don't have to spend. Examples:
    - `MIPS:LE:32:R5900` is **not** a valid Ghidra processor ID, use
      `r5900:LE:32:default` (from the emotionengine-reloaded extension).

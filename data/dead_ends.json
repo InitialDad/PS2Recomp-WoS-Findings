@@ -158,5 +158,20 @@
     "serial": "SLUS-20407",
     "pattern": "fix boot instability by patching individual downstream hang sites",
     "reason": "Boots fail at different addresses each run (malloc/Deci2/0x8dcb00/0x152c78) from ONE systemic cause: per-instruction resume-case registration across 1899 fns. Patching each site is whack-a-mole. Fix the resume-point registration (entry+return-addrs only) or the generator instead."
+  },
+  {
+    "serial": "SLUS-20407",
+    "pattern": "Rewrite ReadP8/ReadP4 <-> WriteCT32 PS2 block/column swizzle equivalence in ps2_gs_memory.cpp",
+    "reason": "NOT the bug. Measured 2026-07-27: PSMT8 index reads return 36% non-zero with all 256 distinct values across full 512x256 UV coverage. The 'all-zero indices' claim came from a 24-sample corner-only probe. Rewriting the swizzle tables would fix nothing."
+  },
+  {
+    "serial": "SLUS-20407",
+    "pattern": "Trust any capped 'first N samples' probe in the rasterizer",
+    "reason": "In a rasterizer the first N events are correlated - you get the first N texels of the first primitive. A capped probe is an unstated sampling design and will report identical values whether or not the hypothesis is true. Aggregate over all samples instead."
+  },
+  {
+    "serial": "SLUS-20407",
+    "pattern": "Apply a wild-store address guard to bulk file-read destinations",
+    "reason": "A 4-byte wild store from a corrupt pointer and a 527KB sequential asset load are different things. Testing the read span against the guard band refuses the whole load whenever it merely CROSSES the band, which is what stalls WoS at a black screen. Guard stores, not bulk reads."
   }
 ]

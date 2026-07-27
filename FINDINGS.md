@@ -182,6 +182,74 @@ identical values is what you would see whether or not the bug exists. Before
 believing a probe, ask what its output would look like if the hypothesis were
 **false**. If the answer is "the same", the probe is not evidence.
 
+## Worked example 3: the guard that refused a legitimate 515 KB load
+
+*Added 2026-07-27. Found by auditing which subsystems had code but no
+diagnostics, then re-reading a log we already had.*
+
+**The method.** Rather than chase the black screen further, we asked a different
+question: which parts of the GS have implementation but zero instrumentation?
+The answer was DISPFB, PMODE, ALPHA, TEXA, BITBLTBUF and ZBUF - all of them. But
+before building any new probe, one free test on the existing log settled it:
+compare tag activity *before* and *after* the moment colour stops being written.
+
+| tag | colour phase | black phase |
+|-----|-------------:|------------:|
+| `[p4:gs-sprite]` | 2,320 | 75 |
+| `[p4:clut]`      | 985   | **0** |
+| `[gzmfs]`        | 0     | 39,549 |
+| `[p4:rodata-stomp]` | 0  | **19,774** |
+
+Texture sampling does not degrade across that boundary. It **stops dead**, while
+file I/O explodes and tens of thousands of refusals appear. That is a state
+transition, not a rendering artifact.
+
+**The cause.** The runtime guards `[0x220000,0x224880)` as a read-only
+jump-table band, and applied that guard to whole file reads:
+
+```c
+if (safeWant > 0 && hitsRodata(dstPhys, safeWant)) { ...; safeWant = 0; }
+```
+
+The game issues exactly **one** bulk read in the entire run,
+`dst=0x0021D808 want=527456`, spanning `0x21D808..0x29E4E8`. That span merely
+*crosses* the guarded band, so the whole 515 KB load is refused. Same dst, same
+want, same call site `ra=0x001b5b60`, 19,774 times: a hard retry loop.
+
+**Why this is a guard bug and not a game bug.** Three independent things agree:
+
+1. The corruptor that motivated the guard was a **wild 4-byte store** from a
+   corrupt pointer. A half-megabyte sequential asset load is a different thing.
+2. That corruptor has since been **fixed at its source** (the allocator bug in
+   `Worked example 1`), so the band-aid is obsolete.
+3. Finding 191 once claimed this very read "overwrites live code at 0x21D808",
+   and finding **192 withdrew it** - `0x21D808` decodes 0.0% as MIPS, it is
+   **data**. The address was reached again by a completely different route, and
+   the older analysis says the load is legitimate.
+
+**The fix.** Guard stores, not bulk reads. Refusal is now limited to the actual
+corrupt-dst signature - a *small* read *starting inside* the band - and spanning
+bulk loads pass with a one-time log line.
+
+**Status: not yet verified on screen.** The predictions were fixed in advance and
+the comparison harness self-tested (running it on the before-log against itself
+fails every prediction, so it is capable of failing): `rodata_refused` -> 0,
+`rodata_allowed` > 0, `max_retry_same_read` -> 1, `clut_after` > 0,
+`sprite_after` much higher. Result will be recorded here either way.
+
+**Transferable rules.**
+
+- *A safety guard written for one failure mode will happily fire on an unrelated
+  one.* This one was correct about wild stores and catastrophic about bulk reads,
+  and it kept working long after the bug it was protecting against was fixed.
+  Guards need expiry review the same as any workaround.
+- *Audit for "has code, has no diagnostic."* That list is where your untested
+  assumptions live, and enumerating it cost minutes.
+- *Check that your build actually contains your fix.* The first attempt nearly
+  ran a "fixed" binary holding a six-day-old object file, because the build
+  system had captured its file list before the edit landed. Compare object and
+  source timestamps before trusting a result.
+
 ## The one rule behind all of it
 
 **Verify against a reference execution. Record every dead end.** A write that sticks

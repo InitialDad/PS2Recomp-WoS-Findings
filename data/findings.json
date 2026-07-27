@@ -1210,5 +1210,35 @@
     "topic": "SMOKING GUN: title texture uploaded as PSMCT32, read as PSMT8 - swizzle mismatch",
     "outcome": "investigated",
     "details": "The complete mechanism, proven by cross-referencing [p4:clut] (read side) with [p4:gs-trx] (upload side) in the same boot:\nREAD side: sampler wants PSMT8 (tex.psm=0x13) at tbp0=0x1A40 tbw=8; every raw index reads 0x00.\nUPLOAD side: my gs-trx prints dst=dbp*64, so block 0x1A40 == dst 0x69000. Upload #7 is exactly dst=0x69000 dbw=4 dpsm=0x0 (PSMCT32) rrw=256 rrh=128.\nSo the game UPLOADS the texture as PSMCT32 256x128 but READS it as PSMT8 with tbw=8 (512 wide). BYTE-COUNT PROOF this is intentional, not a bug in the game: 256*128*4 = 131072 bytes = exactly 512*256 PSMT8 indices. This is the standard PS2 idiom of uploading an 8-bit (or 4-bit) texture through a 32-bit BITBLT for DMA speed; the GS unswizzles on sample.\nTHE HLE BUG: WriteCT32 (upload path) and ReadP8 (sample path) do NOT lay the bytes out at consistent addresses, so ReadP8 at block 0x1A40 misses the data WriteCT32 wrote and returns 0. On hardware/PCSX2 the block+column swizzle is defined so a CT32 word and the four T8 texels occupying it map correctly; our two swizzle functions are inconsistent for the cross-format case.\nFIX (needs verification against PCSX2 via the differential harness / a VRAM dump): make ReadP8/ReadP4 address the same physical bytes that WriteCT32 wrote for a given block, i.e. implement the PS2 PSMT8<->PSMCT32 (and PSMT4<->PSMCT32) block-swizzle equivalence, as PCSX2 does with its psm block/column tables. This is the LAST thing between the port and a visible title screen."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "gs-psmt8-swizzle-hypothesis-disproved",
+    "outcome": "investigated",
+    "details": "The 2026-07-25 'pinned' root cause (WriteCT32/ReadP8 inconsistent VRAM swizzle causing all-zero PSMT8 indices) is DISPROVED. Its evidence was a probe capped at `if (n <= 24)`; all 24 samples landed at u<=2,v<=1 (top-left corner) where index 0 is legitimate, so it could not distinguish a broken swizzle from a blank corner. Aggregate probe over every sample (boot_clutprobe.log.err, 2026-07-27): at 500,000 samples u=[0..480] v=[0..255], 35.21% non-zero, all 256 distinct index values; at 187.5M samples 36.24% non-zero. PSMT8 index reads are HEALTHY. Caveat: the aggregate uses one static struct so figures are cumulative across all CLUT textures; the psm/tbp0 printed is whatever was bound at report time. Per-texture split not yet measured."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "gs-pixel-writes-are-phased-not-absent",
+    "outcome": "investigated",
+    "details": "Pixels ARE written: [p4:px] counter reached #6111600000 (6.1 billion; logging is 1-in-100k sampled), to fbp_block=0x0 at valid coords inside SCISSOR 0,0..639,223. Colour reaches the framebuffer (0x805D7280, 0x80ADC3CC, 0x80282A2D; ~9% of sampled writes non-black). But it is PHASED: black ratio by decile = 62.6/66.5/66.4/94.0 then 100.0% for deciles 4-9. Real content draws early, then every pixel written is opaque black 0x80000000 permanently. Phase transition, not a per-frame overwrite."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "gs-title-sprite-state-is-sane",
+    "outcome": "investigated",
+    "details": "Title-phase textured kicks: tme=1, TEX0 tbp=0x71000 (word addr = block 0x1C40) psm=0x13 tw=128 th=512 tbw=2, uv0(16,16) uv1(2032,2032) = texels 1.0..127.0 in 12.4 fixed point, screen rect (475,150)..(603,214) well inside scissor, TEST=0x5001B (ATE=1 ATST=GEQUAL AREF=1 AFAIL=KEEP, ZTE=1 ZTST=GEQUAL). Coords, scissor and alpha-test thresholds are all sane. Rules out 'drawn offscreen'."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "gs-dispfb-still-uninstrumented",
+    "outcome": "investigated",
+    "details": "FRAME.fbp is 0x0 on 2,361 sprite kicks and 0x8 on only 6 - not the alternation a double-buffered title screen should show. There is still NO DISPFB diagnostic, so 'drawn into a buffer that is never displayed' remains untested. Add one."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "black-screen-cause-rodata-guard-refuses-legit-load",
+    "outcome": "investigated",
+    "details": "STRONG CANDIDATE for the black screen. game_overrides.cpp hitsRodata() guards [0x00220000,0x00224880) - the 'read-only jump-table band'. The gzmfs READ path applies it to whole file reads: dst=0x0021D808 want=527456 spans 0x21D808..0x29E4E8, which CROSSES the band, so safeWant=0 and the ENTIRE 515KB load is refused. Observed 19,774 times, identical dst/want/ra=0x001b5b60 - the game retries forever and never gets its data. Phase census confirms the consequence: before the first refusal there are 2,320 sprite kicks and 985 CLUT samples; after it, 0 CLUT samples, 75 sprite kicks, 39,549 gzmfs lines. Texture sampling stops dead. NOTE the guard was a band-aid for the wild-store corruptor (findings 183/186) which has since been FIXED via the allocator bug, so it is likely obsolete. Also note finding 191 ('gzmfs read overwrites live code at 0x21D808') was withdrawn by 192 on the grounds that 0x21D808 is DATA - which supports the read being legitimate."
   }
 ]
