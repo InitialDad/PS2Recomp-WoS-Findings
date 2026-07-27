@@ -62,18 +62,42 @@ MANIFEST = {
         "510 sprite kicks with full per-kick GS state. Primary evidence that "
         "the draws are issued and the defect is downstream of upload.",
     "boot_trap_111754.log.err":
-        "THE CURRENT BLOCKER, richest single log. 8 [p4:gs-trx] uploads, 511 "
-        "[p4:gs-sprite] kicks, and the 24 [p4:clut] samples that were "
-        "MISREAD as proof of a PSMT8/PSMCT32 swizzle bug. Read those 24 lines "
-        "with FINDINGS.md 'Worked example 2' open: every one lands at u<=2, "
-        "v<=1, so index 0 is legitimate and the probe could not answer its own "
-        "question. Published deliberately, including the misleading part.",
+        "THE MISLEADING ONE. 8 [p4:gs-trx] uploads, 511 [p4:gs-sprite] kicks, "
+        "and the 24 [p4:clut] samples that were MISREAD as proof of a "
+        "PSMT8/PSMCT32 swizzle bug. Read those 24 lines with FINDINGS.md "
+        "'Worked example 2' open: every one lands at u<=2, v<=1, so index 0 is "
+        "legitimate and the probe could not answer its own question. Published "
+        "deliberately, including the misleading part. Disproved by the next log.",
+    "boot_clutprobe.log.err":
+        "THE ANSWER. Same scene, probe rewritten to aggregate over every sample "
+        "instead of printing the first 24. For the title texture "
+        "(psm=0x13 tbp0=0x1A40): at 1,000 samples the region reached is still "
+        "v=[0..1] at 0.00% non-zero (which is how the old probe fooled us), but "
+        "by 500,000 samples it is u=[0..480] v=[0..255], 35.21% non-zero, with "
+        "all 256 distinct index values present. The PSMT8 read WORKS and the "
+        "swizzle is exonerated. The black screen is caused by something else.",
 }
 
 WIN_PATH = re.compile(r"[A-Za-z]:[\\/][^\s\"',;)\]]*")
 UNIX_HOME = re.compile(r"/(?:c|mnt/c)/Users/[^/\s\"']+", re.I)
 TAG = re.compile(r"^\s*(\[[A-Za-z0-9:_.-]+\])")
-KEEP = 6            # lines kept at each end of a collapsed run
+
+# Budget per tag ACROSS THE WHOLE FILE, not per consecutive run. These logs
+# interleave tags heavily, so a consecutive-run collapse barely fires: it took
+# one 171k-line file to 125k, which is not a readable file. A global budget takes
+# the same file to a few thousand lines.
+HEAD, TAIL = 60, 60
+
+# Tags that carry the actual evidence are never budgeted away, whatever the count.
+ALWAYS_KEEP = {
+    "[p4:clut]",        # the CLUT/index probe - the whole GS argument rests on it
+    "[p4:gs-trx]",      # GS uploads reaching VRAM
+    "[p4:gs-sprite]",   # per-kick FRAME/SCISSOR/TEST/TEX0 + vertex coords
+    "[p4:malloc]",      # allocator diagnostics from the solved boot hang
+}
+# NOT here: [gzmfs]. It looks like a low-volume "file opened" tag and is one in
+# most runs, but boot_menu emits 26,543 of them, which alone pushed that file
+# past GitHub's ~1 MB in-browser preview limit. Budgeted like anything else.
 
 
 def scrub(line):
@@ -82,28 +106,43 @@ def scrub(line):
 
 
 def trim(lines):
-    """Collapse long consecutive runs of the same log tag."""
-    out, run, tag = [], [], None
-
-    def flush():
-        if not run:
-            return
-        if len(run) <= KEEP * 2 + 1:
-            out.extend(run)
-        else:
-            out.extend(run[:KEEP])
-            out.append(f"        ... [{len(run) - KEEP * 2} more "
-                       f"{tag or 'untagged'} lines elided by export_logs.py] ...\n")
-            out.extend(run[-KEEP:])
-
-    for line in lines:
+    """Budget each tag across the whole file: keep the first HEAD and last TAIL
+    occurrences, elide the middle once, and prepend a census so the reader knows
+    exactly what was dropped. Line order is preserved."""
+    idx = {}
+    for i, line in enumerate(lines):
         m = TAG.match(line)
-        t = m.group(1) if m else None
-        if t != tag:
-            flush()
-            run, tag = [], t
-        run.append(line)
-    flush()
+        idx.setdefault(m.group(1) if m else "(untagged)", []).append(i)
+
+    drop, elide_at = set(), {}
+    for tag, positions in idx.items():
+        if tag in ALWAYS_KEEP or len(positions) <= HEAD + TAIL:
+            continue
+        middle = positions[HEAD:-TAIL]
+        drop.update(middle)
+        elide_at[middle[0]] = (tag, len(middle))
+
+    header = [
+        "# ---------------------------------------------------------------\n",
+        "# Trimmed for publication by tools/export_logs.py.\n",
+        "# Per-tag census of the ORIGINAL file (kept / total):\n",
+    ]
+    for tag, positions in sorted(idx.items(), key=lambda kv: -len(kv[1])):
+        total = len(positions)
+        kept = total if (tag in ALWAYS_KEEP or total <= HEAD + TAIL) else HEAD + TAIL
+        mark = "  <- all kept (evidence)" if tag in ALWAYS_KEEP and total > HEAD + TAIL else ""
+        header.append(f"#   {tag:22s} {kept:>7,} / {total:>7,}{mark}\n")
+    header.append("# Nothing is silently removed; every elision is marked inline.\n")
+    header.append("# ---------------------------------------------------------------\n\n")
+
+    out = list(header)
+    for i, line in enumerate(lines):
+        if i in elide_at:
+            tag, n = elide_at[i]
+            out.append(f"        ... [{n:,} more {tag} lines elided by "
+                       f"export_logs.py] ...\n")
+        if i not in drop:
+            out.append(line)
     return out
 
 
@@ -129,13 +168,18 @@ def main():
         lines = [scrub(l) for l in lines]
         if not a.no_trim:
             lines = trim(lines)
-        dst = os.path.join(a.out, name + ".gz")
-        with gzip.open(dst, "wt", encoding="utf-8", compresslevel=9) as fh:
+        # Plain text, deliberately. gzip halves the size and removes the whole
+        # point: GitHub cannot preview a .gz, and Windows will not open one
+        # without extra software, so a curious reader has to download a binary
+        # blob and decompress it before seeing a single line. These files exist
+        # to be skimmed by strangers.
+        dst = os.path.join(a.out, name)
+        with open(dst, "w", encoding="utf-8", newline="\n") as fh:
             fh.writelines(lines)
         rows.append({
             "name": name, "note": note,
             "when": dt.datetime.fromtimestamp(os.path.getmtime(src)),
-            "raw": raw, "gz": os.path.getsize(dst),
+            "raw": raw, "out": os.path.getsize(dst),
             "lines_in": n_in, "lines_out": len(lines),
         })
         print(f"  {name:34s} {raw/1048576:7.2f} MB -> {os.path.getsize(dst)/1024:8.1f} KB"
@@ -166,7 +210,9 @@ def main():
         "  middle is replaced with an explicit",
         "  `... [N more [tag] lines elided by export_logs.py] ...` marker, so no",
         "  elision is silent. Regenerate untrimmed with `--no-trim`.",
-        "- **gzipped.** `gzip -dc logs/<name>.gz | less`",
+        "- **Left as plain text on purpose.** gzip would halve the size and",
+        "  destroy the point: GitHub cannot preview a `.gz`, and Windows will not",
+        "  open one without extra software. Click any file below and read it.",
         "",
         "No game code, assets, dialogue or memory dumps are included; these are the",
         "port's own diagnostic traces.",
@@ -176,13 +222,13 @@ def main():
     ]
     for r in rows:
         idx.append(
-            f"| {r['when']:%Y-%m-%d %H:%M} | [`{r['name']}.gz`]({r['name']}.gz) | "
-            f"{r['gz']/1024:.0f} KB | {r['lines_out']:,} | {r['note']} |")
+            f"| {r['when']:%Y-%m-%d %H:%M} | [`{r['name']}`]({r['name']}) | "
+            f"{r['out']/1024:.0f} KB | {r['lines_out']:,} | {r['note']} |")
     idx += [
         "",
         f"*{len(rows)} logs, "
         f"{sum(r['raw'] for r in rows)/1048576:.0f} MB raw -> "
-        f"{sum(r['gz'] for r in rows)/1048576:.1f} MB published. "
+        f"{sum(r['out'] for r in rows)/1048576:.1f} MB published. "
         f"Generated by [`tools/export_logs.py`](../tools/export_logs.py).*",
         "",
     ]

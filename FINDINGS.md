@@ -149,11 +149,31 @@ from it was unsupported. Hand-walking the page math for both formats agrees:
 `PSMCT32` at `bw=4` and `PSMT8` at `bw=8` both resolve to page 212, byte
 `0x1A4000` - the addressing matches exactly where the claim said it diverged.
 
-**The fix is to the probe, not (yet) to the swizzle.** Replace "first N samples"
-with an aggregate over every sample: how many indices were non-zero, the actual
-UV rectangle touched, and a histogram of index values. Non-zero indices anywhere
-prove the data is reachable and exonerate the swizzle; all-zero across a wide UV
-span is the real evidence the original claim needed.
+**The fix is to the probe, not the swizzle.** Replace "first N samples" with an
+aggregate over every sample: how many indices were non-zero, the actual UV
+rectangle touched, and a histogram of index values.
+
+**Result, and the hypothesis is dead.** For the title texture
+(`psm=0x13 tbp0=0x1A40`), from [`logs/boot_clutprobe.log.err`](logs/boot_clutprobe.log.err):
+
+| samples | UV rectangle reached | non-zero | distinct indices |
+|--------:|----------------------|---------:|-----------------:|
+| 1,000     | `u=[0..250] v=[0..1]`   | **0.00%**  | 1   |
+| 50,000    | `u=[0..480] v=[0..53]`  | 6.06%      | 146 |
+| 500,000   | `u=[0..480] v=[0..255]` | **35.21%** | **256** |
+| 1,000,000 | `u=[0..480] v=[0..255]` | 35.26%     | 256 |
+
+**The PSMT8 read works.** All 256 index values are present across the full
+512x256 texture and a third of sampled texels are non-zero. There is no swizzle
+defect. The black screen has a different cause, and the search moves downstream
+to the rasterizer, the blend/test path, or the display buffer.
+
+Look at the first row again, because it is the whole lesson: at 1,000 samples the
+probe had still only reached `v=[0..1]` and was still reading 0.00% non-zero. The
+original 24-sample probe was a subset of *that*. The top rows of the title art
+are genuinely blank, so a corner-biased sample reports "all zero" no matter how
+healthy the texture pipeline is. The old probe was not measuring the swizzle. It
+was measuring where the rasterizer happens to start.
 
 **Transferable rule.** *A capped "first N" log is a sampling design, and an
 unstated one.* If the first N events are correlated - and in a rasterizer they

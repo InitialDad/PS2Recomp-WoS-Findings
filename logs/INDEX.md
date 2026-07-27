@@ -21,22 +21,25 @@ something similar, an issue on this repo is very welcome.
   middle is replaced with an explicit
   `... [N more [tag] lines elided by export_logs.py] ...` marker, so no
   elision is silent. Regenerate untrimmed with `--no-trim`.
-- **gzipped.** `gzip -dc logs/<name>.gz | less`
+- **Left as plain text on purpose.** gzip would halve the size and
+  destroy the point: GitHub cannot preview a `.gz`, and Windows will not
+  open one without extra software. Click any file below and read it.
 
 No game code, assets, dialogue or memory dumps are included; these are the
 port's own diagnostic traces.
 
 | Date | Log | Size | Lines | What it shows |
 |------|-----|-----:|------:|---------------|
-| 2026-07-05 22:43 | [`boot_p6p_interactive.log.gz`](boot_p6p_interactive.log.gz) | 134 KB | 125,120 | Early interactive drive. Main loop alive, 249 vblanks. Baseline for 'the CPU side runs' before rendering was the focus. |
-| 2026-07-11 23:54 | [`boot_p6r_interactive.log.gz`](boot_p6r_interactive.log.gz) | 270 KB | 261,255 | Longer interactive drive, 527 vblanks. Confirms the loop sustains rather than limping. |
-| 2026-07-18 19:38 | [`boot_p7g.log.gz`](boot_p7g.log.gz) | 554 KB | 302,711 | Post-allocator-work drive, 337 vblanks. |
-| 2026-07-18 20:18 | [`boot_p7i.log.gz`](boot_p7i.log.gz) | 51 KB | 45,380 | THE SOLVED BOOT HANG. 1,060 samples of the EE thread frozen at pc=0x1d1050, inside the game's dlmalloc smallbin best-fit scan. This is the corrupted-free-list hang described in FINDINGS.md, now fixed. Kept as the reference signature of that failure mode. |
-| 2026-07-19 01:42 | [`boot_p7j.log.gz`](boot_p7j.log.gz) | 395 KB | 401,767 | Longest clean drive in this set, 719 vblanks, no allocator freeze. |
-| 2026-07-21 19:16 | [`boot_menu.log.err.gz`](boot_menu.log.err.gz) | 31 KB | 100,446 | Menu-path drive, 143 vblanks. |
-| 2026-07-22 12:06 | [`boot_p7j2.log.err.gz`](boot_p7j2.log.err.gz) | 11 KB | 25,396 | First run carrying [p4:gs-trx] GS transfer tracing. Shows texture uploads genuinely reaching VRAM, which retired the earlier and wrong 'no texture uploads happen' claim. |
-| 2026-07-25 00:40 | [`boot_trap_003849.log.err.gz`](boot_trap_003849.log.err.gz) | 31 KB | 6,567 | Sprite-kick tracing comes online: 51 [p4:gs-sprite] records with FRAME/SCISSOR/TEST/TEX0 and vertex coords per kick. |
-| 2026-07-25 10:59 | [`boot_trap_105751.log.err.gz`](boot_trap_105751.log.err.gz) | 79 KB | 17,115 | 510 sprite kicks with full per-kick GS state. Primary evidence that the draws are issued and the defect is downstream of upload. |
-| 2026-07-25 11:19 | [`boot_trap_111754.log.err.gz`](boot_trap_111754.log.err.gz) | 79 KB | 17,388 | THE CURRENT BLOCKER, richest single log. 8 [p4:gs-trx] uploads, 511 [p4:gs-sprite] kicks, and the 24 [p4:clut] samples that were MISREAD as proof of a PSMT8/PSMCT32 swizzle bug. Read those 24 lines with FINDINGS.md 'Worked example 2' open: every one lands at u<=2, v<=1, so index 0 is legitimate and the probe could not answer its own question. Published deliberately, including the misleading part. |
+| 2026-07-05 22:43 | [`boot_p6p_interactive.log`](boot_p6p_interactive.log) | 141 KB | 1,999 | Early interactive drive. Main loop alive, 249 vblanks. Baseline for 'the CPU side runs' before rendering was the focus. |
+| 2026-07-11 23:54 | [`boot_p6r_interactive.log`](boot_p6r_interactive.log) | 139 KB | 1,978 | Longer interactive drive, 527 vblanks. Confirms the loop sustains rather than limping. |
+| 2026-07-18 19:38 | [`boot_p7g.log`](boot_p7g.log) | 125 KB | 1,653 | Post-allocator-work drive, 337 vblanks. |
+| 2026-07-18 20:18 | [`boot_p7i.log`](boot_p7i.log) | 154 KB | 2,077 | THE SOLVED BOOT HANG. 1,060 samples of the EE thread frozen at pc=0x1d1050, inside the game's dlmalloc smallbin best-fit scan. This is the corrupted-free-list hang described in FINDINGS.md, now fixed. Kept as the reference signature of that failure mode. |
+| 2026-07-19 01:42 | [`boot_p7j.log`](boot_p7j.log) | 139 KB | 1,971 | Longest clean drive in this set, 719 vblanks, no allocator freeze. |
+| 2026-07-21 19:16 | [`boot_menu.log.err`](boot_menu.log.err) | 64 KB | 1,177 | Menu-path drive, 143 vblanks. |
+| 2026-07-22 12:06 | [`boot_p7j2.log.err`](boot_p7j2.log.err) | 63 KB | 1,160 | First run carrying [p4:gs-trx] GS transfer tracing. Shows texture uploads genuinely reaching VRAM, which retired the earlier and wrong 'no texture uploads happen' claim. |
+| 2026-07-25 00:40 | [`boot_trap_003849.log.err`](boot_trap_003849.log.err) | 161 KB | 1,010 | Sprite-kick tracing comes online: 51 [p4:gs-sprite] records with FRAME/SCISSOR/TEST/TEX0 and vertex coords per kick. |
+| 2026-07-25 10:59 | [`boot_trap_105751.log.err`](boot_trap_105751.log.err) | 216 KB | 1,619 | 510 sprite kicks with full per-kick GS state. Primary evidence that the draws are issued and the defect is downstream of upload. |
+| 2026-07-25 11:19 | [`boot_trap_111754.log.err`](boot_trap_111754.log.err) | 219 KB | 1,645 | THE MISLEADING ONE. 8 [p4:gs-trx] uploads, 511 [p4:gs-sprite] kicks, and the 24 [p4:clut] samples that were MISREAD as proof of a PSMT8/PSMCT32 swizzle bug. Read those 24 lines with FINDINGS.md 'Worked example 2' open: every one lands at u<=2, v<=1, so index 0 is legitimate and the probe could not answer its own question. Published deliberately, including the misleading part. Disproved by the next log. |
+| 2026-07-27 16:40 | [`boot_clutprobe.log.err`](boot_clutprobe.log.err) | 939 KB | 4,722 | THE ANSWER. Same scene, probe rewritten to aggregate over every sample instead of printing the first 24. For the title texture (psm=0x13 tbp0=0x1A40): at 1,000 samples the region reached is still v=[0..1] at 0.00% non-zero (which is how the old probe fooled us), but by 500,000 samples it is u=[0..480] v=[0..255], 35.21% non-zero, with all 256 distinct index values present. The PSMT8 read WORKS and the swizzle is exonerated. The black screen is caused by something else. |
 
-*10 logs, 46 MB raw -> 1.6 MB published. Generated by [`tools/export_logs.py`](../tools/export_logs.py).*
+*11 logs, 50 MB raw -> 2.3 MB published. Generated by [`tools/export_logs.py`](../tools/export_logs.py).*

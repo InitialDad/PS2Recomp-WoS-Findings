@@ -1,0 +1,1178 @@
+# ---------------------------------------------------------------
+# Trimmed for publication by tools/export_logs.py.
+# Per-tag census of the ORIGINAL file (kept / total):
+#   [p4:isig]                  120 /  85,779
+#   [gzmfs]                    120 /  26,543
+#   [p4:rodata-stomp]          120 /  13,234
+#   [p4:wake-pre]              120 /   1,302
+#   [p4:vbl]                   120 /     143
+#   [p4:gzmfs-stomp]           120 /     128
+#   [p4:malloc]                 64 /      64
+#   [p4:new2]                   64 /      64
+#   [mc]                        42 /      42
+#   [p4:EndOfHeap]              36 /      36
+#   [Deci2:call]                28 /      28
+#   [p4:sm]                     25 /      25
+#   [sceSifSetDma:CALL]         23 /      23
+#   [sceSifSetDma:DESC]         23 /      23
+#   [p4:alarm]                  16 /      16
+#   [p4:hdl]                    16 /      16
+#   [Deci2Call:kputs]           13 /      13
+#   [p4:mallocguard]            12 /      12
+#   [SyscallOverride:fallback]      11 /      11
+#   [p4:alias]                  11 /      11
+#   (untagged)                  10 /      10
+#   [Deci2Call:send]             7 /       7
+#   [p4:rd1]                     6 /       6
+#   [p4:ld]                      4 /       4
+#   [p4:guestMalloc]             2 /       2
+#   [SetupHeap]                  1 /       1
+#   [Syscall83:override]         1 /       1
+#   [dispatch:hle-leaf-ret]       1 /       1
+#   [p4:rodata-write]            1 /       1
+# Nothing is silently removed; every elision is marked inline.
+# ---------------------------------------------------------------
+
+[p4:gzmfs-stomp] addr=0x00c25000 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c25010 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c25020 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c25030 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c25040 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c25050 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c25060 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c25070 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c25080 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c25090 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c250a0 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c250b0 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c250c0 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c250d0 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c250e0 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c250f0 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c25100 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c25110 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c25120 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c25130 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c25140 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c25150 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c25160 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c25170 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c25180 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c25190 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c251a0 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c251b0 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c251c0 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c251d0 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c251e0 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c251f0 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c25200 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c25210 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c25220 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c25230 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c25240 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c25250 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c25260 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c25270 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c25280 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c25290 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c252a0 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c252b0 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c252c0 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c252d0 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c252e0 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c252f0 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c25300 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c25310 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c25320 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c25330 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c25340 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c25350 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c25360 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c25370 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c25380 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c25390 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c253a0 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c253b0 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+        ... [8 more [p4:gzmfs-stomp] lines elided by export_logs.py] ...
+[p4:gzmfs-stomp] addr=0x00c25440 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c25450 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c25460 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c25470 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c25480 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c25490 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c254a0 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c254b0 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c254c0 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c254d0 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c254e0 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c254f0 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c25500 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c25510 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c25520 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c25530 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c25540 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c25550 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c25560 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c25570 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c25580 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c25590 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c255a0 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c255b0 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c255c0 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c255d0 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c255e0 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c255f0 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c25600 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c25610 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c25620 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c25630 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c25640 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c25650 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c25660 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c25670 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c25680 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c25690 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c256a0 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c256b0 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c256c0 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c256d0 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c256e0 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c256f0 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c25700 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c25710 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c25720 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c25730 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c25740 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c25750 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c25760 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c25770 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c25780 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c25790 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c257a0 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c257b0 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c257c0 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c257d0 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c257e0 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[p4:gzmfs-stomp] addr=0x00c257f0 val=0x00000000 sz=16 pc=0x00100018 ra=0x00000000
+[SetupHeap] base=0xc29100 alignedBase=0xc29100 size=0xffffffff runtimeBase=0xc29100 runtimeEnd=0xc29100
+[p4:guestMalloc] addr=0x01f00000 size=0x4000 (runtime scratch band)
+[Syscall83:override] handler=0x117808 invoked=true pc=0x117844 ra=0x11787c a0=0x117808 a1=0x117808 a2=0x100000 a3=0x224b00 guestRet=0x8001218c builtinRet=0x0 guest-20c=0x80011f80 builtin-20c=0x0 guest-168=0x80012024 builtin-168=0x0 match=false
+[SyscallOverride:fallback] syscall=0x5b handler=0x80076000 pc=0x10f9bc ra=0x10fa68
+[SyscallOverride:fallback] syscall=0x5b handler=0x80076000 pc=0x10f9bc ra=0x10fa68
+[SyscallOverride:fallback] syscall=0x5b handler=0x80076000 pc=0x10f9bc ra=0x10fa68
+[SyscallOverride:fallback] syscall=0x5b handler=0x80076000 pc=0x10f9bc ra=0x10fa68
+[SyscallOverride:fallback] syscall=0x5b handler=0x80076000 pc=0x10f9bc ra=0x10fa68
+[SyscallOverride:fallback] syscall=0x5b handler=0x80076000 pc=0x10f9bc ra=0x10fa68
+[SyscallOverride:fallback] syscall=0x5b handler=0x80075000 pc=0x116ffc ra=0x117098
+[SyscallOverride:fallback] syscall=0x5b handler=0x80075000 pc=0x116ffc ra=0x117098
+[SyscallOverride:fallback] syscall=0x5b handler=0x80075000 pc=0x116ffc ra=0x117098
+[SyscallOverride:fallback] syscall=0x5b handler=0x80075000 pc=0x116ffc ra=0x117098
+[SyscallOverride:fallback] syscall=0x5b handler=0x80075000 pc=0x116ffc ra=0x117098
+[p4:malloc] size=0x072d4ef0 ra=0x00133618
+[p4:EndOfHeap] ret=0x01f00000 brk=0x00c29100 a0=0x072d4f10 ra=0x0010f3b8
+[p4:malloc] size=0x012d4ef0 ra=0x00133630
+[p4:EndOfHeap] ret=0x01f00000 brk=0x00c29100 a0=0x012d4f10 ra=0x0010f3b8
+[p4:EndOfHeap] ret=0x01f00000 brk=0x01efe010 a0=0x00000ff0 ra=0x0010f3b8
+[p4:EndOfHeap] ret=0x01f00000 brk=0x01eff000 a0=0x00000000 ra=0x0010f3b8
+[p4:EndOfHeap] ret=0x01f00000 brk=0x01eff000 a0=0xfed2b000 ra=0x0010f3b8
+[Deci2:call] code=1 argsAddr=0x01ff7b50 a0=0x00000210 a1=0x002257d0 a2=0x00110088 sessions=0
+[Deci2:call] code=3 argsAddr=0x01ff7b10 a0=0x00000001 a1=0x00000048 a2=0x00000002 sessions=1
+[p4:guestMalloc] addr=0x01f04000 size=0x4000 (runtime scratch band)
+[Deci2:call] code=-6 argsAddr=0x01f07fa0 a0=0x00000001 a1=0x20225800 a2=0x0000001b sessions=1
+[Deci2Call:send] ......EH....InitHeap Done
+
+[p4:alias] target=0x001548c0 owner=0x001548b0 (unexported inner call)
+[p4:alias] target=0x001548c8 owner=0x001548b0 (unexported inner call)
+[Deci2:call] code=16 argsAddr=0x01ff7d80 a0=0x00225a80 a1=0x00000000 a2=0x00000000 sessions=1
+[Deci2Call:kputs] CdVdInit----------
+[Deci2:call] code=16 argsAddr=0x01ff7d80 a0=0x00225a80 a1=0x00000000 a2=0x00000000 sessions=1
+[Deci2Call:kputs]   DEV:[CD-ROM]
+[Deci2:call] code=16 argsAddr=0x01ff7d80 a0=0x00225a80 a1=0x00000000 a2=0x00000000 sessions=1
+[Deci2Call:kputs]   PATH:[\]
+[Deci2:call] code=16 argsAddr=0x01ff7d80 a0=0x00225a80 a1=0x00000000 a2=0x00000000 sessions=1
+[Deci2Call:kputs] IOP Replace:cdrom0:\IOP\MODULES\IOPRP243.IMG;1
+[Deci2:call] code=16 argsAddr=0x01ff7c60 a0=0x00225a80 a1=0x00000000 a2=0x00000000 sessions=1
+[Deci2Call:kputs] loading module [cdrom0:\IOP\MODULES\SIO2MAN.IRX;1]...done[1]
+[Deci2:call] code=16 argsAddr=0x01ff7c60 a0=0x00225a80 a1=0x00000000 a2=0x00000000 sessions=1
+[Deci2Call:kputs] loading module [cdrom0:\IOP\MODULES\PADMAN.IRX;1]...done[2]
+[Deci2:call] code=16 argsAddr=0x01ff7c60 a0=0x00225a80 a1=0x00000000 a2=0x00000000 sessions=1
+[Deci2Call:kputs] loading module [cdrom0:\IOP\MODULES\MCMAN.IRX;1]...done[3]
+[Deci2:call] code=16 argsAddr=0x01ff7c60 a0=0x00225a80 a1=0x00000000 a2=0x00000000 sessions=1
+[Deci2Call:kputs] loading module [cdrom0:\IOP\MODULES\MCSERV.IRX;1]...done[4]
+[Deci2:call] code=16 argsAddr=0x01ff7c60 a0=0x00225a80 a1=0x00000000 a2=0x00000000 sessions=1
+[Deci2Call:kputs] loading module [cdrom0:\IOP\MODULES\LIBSD.IRX;1]...done[5]
+[Deci2:call] code=16 argsAddr=0x01ff7c60 a0=0x00225a80 a1=0x00000000 a2=0x00000000 sessions=1
+[Deci2Call:kputs] loading module [cdrom0:\IOP\MODULES\SDRDRV.IRX;1]...done[6]
+[Deci2:call] code=16 argsAddr=0x01ff7c60 a0=0x00225a80 a1=0x00000000 a2=0x00000000 sessions=1
+[Deci2Call:kputs] loading module [cdrom0:\IOP\MODULES\GZMFS.IRX;1]...done[7]
+[p4:EndOfHeap] ret=0x01f00000 brk=0x00c2a000 a0=0x00005000 ra=0x0010f3b8
+[p4:new2] size=0x00000040 ra=0x00100540
+[p4:malloc] size=0x00000040 ra=0x001006bc
+[p4:new2] size=0x00000018 ra=0x001b53e8
+[p4:malloc] size=0x00000018 ra=0x001006bc
+[p4:new2] size=0x00000018 ra=0x001b53e8
+[p4:malloc] size=0x00000018 ra=0x001006bc
+[p4:new2] size=0x00000070 ra=0x00100540
+[p4:malloc] size=0x00000070 ra=0x001006bc
+[Deci2:call] code=16 argsAddr=0x01ff7e50 a0=0x00225a80 a1=0x00000000 a2=0x001d0948 sessions=1
+[Deci2Call:kputs] Init File System Begin
+[p4:new2] size=0x00000160 ra=0x001b5df4
+[p4:malloc] size=0x00000160 ra=0x001006bc
+[gzmfs] OPEN fd=0 '\VOLUME.DAT;1' -> '<path>' size=132314355
+[p4:sm] poll n=1 obj=0x00c253e8 ra=0x001b5e54
+[p4:EndOfHeap] ret=0x01f00000 brk=0x00c2f000 a0=0x00021000 ra=0x0010f3b8
+[p4:rd1] FUN_001b5ca0 obj=0x00c253e8 dst=0x00c2d930 len=0x00020000 ra=0x0019a168
+[p4:sm] poll n=2 obj=0x00c253e8 ra=0x001b5cfc
+[gzmfs] READ fd=0 pos=0 len=131072 -> 131072 dst=0x00C2D930
+[p4:alarm] n=1 id=1 handler=0x0011c570 arg=0x01ff7e48 *arg=8
+[p4:hdl] 11c570 entry a2=0x01ff7e48
+[p4:isig] sid=8
+[p4:wake-pre] sid=8 consumed=1
+[p4:sm] poll n=3 obj=0x00c253e8 ra=0x001b5d14
+[p4:EndOfHeap] ret=0x01f00000 brk=0x00c50000 a0=0x00006000 ra=0x0010f3b8
+[p4:EndOfHeap] ret=0x01f00000 brk=0x00c56000 a0=0x00006000 ra=0x0010f3b8
+[Deci2:call] code=16 argsAddr=0x01ff7e50 a0=0x00225a80 a1=0x00000000 a2=0x00000000 sessions=1
+[Deci2Call:kputs] Init File System Done
+[p4:new2] size=0x00000520 ra=0x00152efc
+[p4:malloc] size=0x00000520 ra=0x001006bc
+[p4:new2] size=0x00000048 ra=0x0013a61c
+[p4:malloc] size=0x00000048 ra=0x001006bc
+[p4:new2] size=0x0000002c ra=0x0013a638
+[p4:malloc] size=0x0000002c ra=0x001006bc
+[p4:new2] size=0x00010000 ra=0x00100540
+[p4:malloc] size=0x00010000 ra=0x001006bc
+[p4:EndOfHeap] ret=0x01f00000 brk=0x00c5c000 a0=0x00011000 ra=0x0010f3b8
+[p4:new2] size=0x00001400 ra=0x0013a654
+[p4:malloc] size=0x00001400 ra=0x001006bc
+[p4:new2] size=0x0000002c ra=0x0013a7cc
+[p4:malloc] size=0x0000002c ra=0x001006bc
+[p4:isig] sid=9
+[p4:isig] sid=10
+[p4:isig] sid=9
+[p4:isig] sid=10
+[p4:isig] sid=9
+[p4:isig] sid=10
+[p4:isig] sid=9
+[p4:isig] sid=10
+[p4:isig] sid=9
+[p4:isig] sid=10
+[p4:isig] sid=9
+[p4:isig] sid=10
+[p4:isig] sid=9
+[p4:isig] sid=10
+[p4:new2] size=0x0000002c ra=0x00149e80
+[p4:malloc] size=0x0000002c ra=0x001006bc
+[p4:ld] load obj=0x00c64e50 size=0x00000000 ra=0x00149ed4
+[p4:new2] size=0x000200e0 ra=0x00100540
+[p4:malloc] size=0x000200e0 ra=0x001006bc
+[p4:EndOfHeap] ret=0x01f00000 brk=0x00c6d000 a0=0x00021000 ra=0x0010f3b8
+[p4:rd1] FUN_001b5ca0 obj=0x00c253e8 dst=0x00c64e80 len=0x000200e0 ra=0x0019a1d4
+[p4:sm] poll n=4 obj=0x00c253e8 ra=0x001b5cfc
+[gzmfs] SEEK fd=0 off=49723392 whence=0 -> pos=49723392
+[p4:isig] sid=9
+[p4:isig] sid=10
+[p4:alarm] n=2 id=2 handler=0x0011c570 arg=0x01ff7e18 *arg=11
+[p4:hdl] 11c570 entry a2=0x01ff7e18
+[p4:isig] sid=11
+[p4:wake-pre] sid=11 consumed=1
+[p4:sm] poll n=5 obj=0x00c253e8 ra=0x001b5d14
+[p4:isig] sid=9
+[p4:isig] sid=10
+[p4:alarm] n=3 id=3 handler=0x0011c570 arg=0x01ff7e18 *arg=12
+[p4:hdl] 11c570 entry a2=0x01ff7e18
+[p4:isig] sid=12
+[p4:wake-pre] sid=12 consumed=1
+[p4:sm] poll n=6 obj=0x00c253e8 ra=0x001b5d14
+[gzmfs] READ fd=0 pos=49723392 len=131296 -> 131296 dst=0x00C64E80
+[p4:alarm] n=4 id=4 handler=0x0011c570 arg=0x01ff7e18 *arg=13
+[p4:hdl] 11c570 entry a2=0x01ff7e18
+[p4:isig] sid=13
+[p4:wake-pre] sid=13 consumed=1
+[p4:sm] poll n=7 obj=0x00c253e8 ra=0x001b5d14
+[p4:new2] size=0x00000060 ra=0x00100540
+[p4:malloc] size=0x00000060 ra=0x001006bc
+[p4:new2] size=0x0000002c ra=0x00149f48
+[p4:malloc] size=0x0000002c ra=0x001006bc
+[p4:ld] load obj=0x00c64e50 size=0x00000000 ra=0x00149f9c
+[p4:new2] size=0x00001a5c ra=0x00100540
+[p4:malloc] size=0x00001a5c ra=0x001006bc
+[p4:rd1] FUN_001b5ca0 obj=0x00c253e8 dst=0x00c2d930 len=0x00020000 ra=0x0019a168
+[p4:sm] poll n=8 obj=0x00c253e8 ra=0x001b5cfc
+[gzmfs] SEEK fd=0 off=49715200 whence=0 -> pos=49715200
+[p4:alarm] n=5 id=5 handler=0x0011c570 arg=0x01ff7e18 *arg=14
+[p4:hdl] 11c570 entry a2=0x01ff7e18
+[p4:isig] sid=14
+[p4:wake-pre] sid=14 consumed=1
+[p4:sm] poll n=9 obj=0x00c253e8 ra=0x001b5d14
+[p4:alarm] n=6 id=6 handler=0x0011c570 arg=0x01ff7e18 *arg=15
+[p4:isig] sid=9
+[p4:isig] sid=10
+[p4:hdl] 11c570 entry a2=0x01ff7e18
+[p4:isig] sid=15
+[p4:wake-pre] sid=15 consumed=1
+[p4:sm] poll n=10 obj=0x00c253e8 ra=0x001b5d14
+[gzmfs] READ fd=0 pos=49715200 len=131072 -> 131072 dst=0x00C2D930
+[p4:alarm] n=7 id=7 handler=0x0011c570 arg=0x01ff7e18 *arg=16
+[p4:hdl] 11c570 entry a2=0x01ff7e18
+[p4:isig] sid=16
+[p4:wake-pre] sid=16 consumed=1
+[p4:sm] poll n=11 obj=0x00c253e8 ra=0x001b5d14
+[p4:isig] sid=9
+[p4:isig] sid=10
+[p4:new2] size=0x00014700 ra=0x00100540
+[p4:malloc] size=0x00014700 ra=0x001006bc
+[p4:new2] size=0x00000030 ra=0x0014b994
+[p4:malloc] size=0x00000030 ra=0x001006bc
+[p4:new2] size=0x000002c0 ra=0x001e2548
+[p4:malloc] size=0x000002c0 ra=0x001006bc
+[mc] Init enter
+[mc] Init exit
+[mc] Sync idle -> -1
+[mc] GetInfo port=0 slot=0 type=2 free=8192 fmt=1 result=0 fmtPtr=0x00C79820
+[mc] GetInfo port=0 slot=0 type=2 free=8192 fmt=1 result=0 fmtPtr=0x00C79820
+[p4:isig] sid=9
+[p4:isig] sid=10
+[p4:isig] sid=9
+[p4:isig] sid=10
+[mc] GetDir port=0 slot=0 path='/BASLUS-20407/BASLUS-20407' maxent=8 table=0x00C795E0 result=-4 entries=0
+[p4:isig] sid=9
+[p4:isig] sid=10
+[p4:isig] sid=9
+[p4:isig] sid=10
+[p4:isig] sid=9
+[p4:isig] sid=10
+[p4:isig] sid=9
+[p4:isig] sid=10
+[p4:isig] sid=9
+[p4:isig] sid=10
+[p4:isig] sid=9
+[p4:isig] sid=10
+[p4:isig] sid=9
+[p4:isig] sid=10
+[p4:isig] sid=9
+[p4:isig] sid=10
+[p4:isig] sid=9
+[p4:isig] sid=10
+[p4:isig] sid=9
+[p4:isig] sid=10
+[p4:new2] size=0x0000002c ra=0x0014a3c4
+[p4:malloc] size=0x0000002c ra=0x001006bc
+[p4:ld] load obj=0x00c64e50 size=0x00000000 ra=0x0014a418
+[p4:new2] size=0x00020430 ra=0x00100540
+[p4:malloc] size=0x00020430 ra=0x001006bc
+[p4:EndOfHeap] ret=0x01f00000 brk=0x00c8e000 a0=0x00021000 ra=0x0010f3b8
+[p4:rd1] FUN_001b5ca0 obj=0x00c253e8 dst=0x00c86a40 len=0x00020430 ra=0x0019a1d4
+[p4:sm] poll n=12 obj=0x00c253e8 ra=0x001b5cfc
+[gzmfs] SEEK fd=0 off=90687488 whence=0 -> pos=90687488
+[p4:alarm] n=8 id=8 handler=0x0011c570 arg=0x01ff7da8 *arg=17
+[p4:hdl] 11c570 entry a2=0x01ff7da8
+[p4:isig] sid=17
+[p4:wake-pre] sid=17 consumed=1
+[p4:sm] poll n=13 obj=0x00c253e8 ra=0x001b5d14
+[p4:alarm] n=9 id=9 handler=0x0011c570 arg=0x01ff7da8 *arg=18
+[p4:hdl] 11c570 entry a2=0x01ff7da8
+[p4:isig] sid=18
+[p4:wake-pre] sid=18 consumed=1
+[p4:sm] poll n=14 obj=0x00c253e8 ra=0x001b5d14
+[gzmfs] READ fd=0 pos=90687488 len=132144 -> 132144 dst=0x00C86A40
+[p4:alarm] n=10 id=10 handler=0x0011c570 arg=0x01ff7da8 *arg=19
+[p4:hdl] 11c570 entry a2=0x01ff7da8
+[p4:isig] sid=19
+[p4:wake-pre] sid=19 consumed=1
+[p4:sm] poll n=15 obj=0x00c253e8 ra=0x001b5d14
+[p4:isig] sid=9
+[p4:isig] sid=10
+[p4:malloc] size=0x00011ee0 ra=0x0014a818
+[p4:isig] sid=9
+[p4:isig] sid=10
+[p4:sm] poll n=16 obj=0x00c253e8 ra=0x0014a8f0
+[gzmfs] SEEK fd=0 off=131764224 whence=0 -> pos=131764224
+[p4:sm] poll n=17 obj=0x00c253e8 ra=0x0014a8f0
+        ... [85,659 more [p4:isig] lines elided by export_logs.py] ...
+[p4:sm] poll n=18 obj=0x00c253e8 ra=0x0014a8f0
+[gzmfs] READ fd=0 pos=131764224 len=73440 -> 73440 dst=0x00C64E50
+[p4:sm] poll n=19 obj=0x00c253e8 ra=0x0014a8f0
+[p4:malloc] size=0x00000140 ra=0x0014a8a4
+[p4:sm] poll n=20 obj=0x00c253e8 ra=0x0014a8f0
+[gzmfs] SEEK fd=0 off=131837952 whence=0 -> pos=131837952
+[gzmfs] READ fd=0 pos=131837952 len=320 -> 320 dst=0x00C76D40
+[p4:new2] size=0x00000048 ra=0x0014a924
+[p4:malloc] size=0x00000048 ra=0x001006bc
+[p4:new2] size=0x00000b8c ra=0x0015f594
+[p4:malloc] size=0x00000b8c ra=0x001006bc
+[p4:new2] size=0x00000060 ra=0x00100540
+[p4:malloc] size=0x00000060 ra=0x001006bc
+[p4:new2] size=0x00000140 ra=0x00100540
+[p4:malloc] size=0x00000140 ra=0x001006bc
+[p4:vbl] ticks=300\n[p4:isig] sid=9
+[p4:EndOfHeap] ret=0x01f00000 brk=0x00caf000 a0=0x00000000 ra=0x0010f3b8
+[p4:EndOfHeap] ret=0x01f00000 brk=0x00caf000 a0=0xfffd8000 ra=0x0010f3b8
+[p4:malloc] size=0x000ca800 ra=0x001eefac
+[p4:EndOfHeap] ret=0x01f00000 brk=0x00c87000 a0=0x000cb000 ra=0x0010f3b8
+[p4:malloc] size=0x00003068 ra=0x001ebaec
+[p4:EndOfHeap] ret=0x01f00000 brk=0x00d52000 a0=0x0032b000 ra=0x0010f3b8
+[p4:EndOfHeap] ret=0x01f00000 brk=0x0107d000 a0=0x0009a000 ra=0x0010f3b8
+[p4:EndOfHeap] ret=0x01f00000 brk=0x01117000 a0=0x001ca000 ra=0x0010f3b8
+[p4:EndOfHeap] ret=0x01f00000 brk=0x012e1000 a0=0x00081000 ra=0x0010f3b8
+[p4:EndOfHeap] ret=0x01f00000 brk=0x01362000 a0=0x00051000 ra=0x0010f3b8
+[p4:EndOfHeap] ret=0x01f00000 brk=0x013b3000 a0=0x00000000 ra=0x0010f3b8
+[p4:EndOfHeap] ret=0x01f00000 brk=0x013b3000 a0=0xff99f000 ra=0x0010f3b8
+[Deci2:call] code=3 argsAddr=0x01ff7910 a0=0x00000001 a1=0x00000048 a2=0x00000073 sessions=1
+[Deci2:call] code=-6 argsAddr=0x01f07fa0 a0=0x00000001 a1=0x20225800 a2=0x00000037 sessions=1
+[Deci2Call:send] 7.....EH....Can't Open file cdrom0:/MOVIE/SPIKE.PSS;1
+
+[p4:EndOfHeap] ret=0x01f00000 brk=0x00d52000 a0=0x00000000 ra=0x0010f3b8
+[p4:EndOfHeap] ret=0x01f00000 brk=0x00d52000 a0=0xfff35000 ra=0x0010f3b8
+[p4:malloc] size=0x000ca800 ra=0x001eefac
+[p4:EndOfHeap] ret=0x01f00000 brk=0x00c87000 a0=0x000cb000 ra=0x0010f3b8
+[p4:malloc] size=0x00003068 ra=0x001ebaec
+[p4:EndOfHeap] ret=0x01f00000 brk=0x00d52000 a0=0x0032b000 ra=0x0010f3b8
+[p4:EndOfHeap] ret=0x01f00000 brk=0x0107d000 a0=0x0009a000 ra=0x0010f3b8
+[p4:EndOfHeap] ret=0x01f00000 brk=0x01117000 a0=0x001ca000 ra=0x0010f3b8
+[p4:EndOfHeap] ret=0x01f00000 brk=0x012e1000 a0=0x00081000 ra=0x0010f3b8
+[p4:EndOfHeap] ret=0x01f00000 brk=0x01362000 a0=0x00051000 ra=0x0010f3b8
+[p4:EndOfHeap] ret=0x01f00000 brk=0x013b3000 a0=0x00000000 ra=0x0010f3b8
+[p4:EndOfHeap] ret=0x01f00000 brk=0x013b3000 a0=0xff99f000 ra=0x0010f3b8
+[Deci2:call] code=3 argsAddr=0x01ff7910 a0=0x00000001 a1=0x00000048 a2=0x00000073 sessions=1
+[Deci2:call] code=-6 argsAddr=0x01f07fa0 a0=0x00000001 a1=0x20225800 a2=0x00000039 sessions=1
+[Deci2Call:send] 9.....EH....Can't Open file cdrom0:/MOVIE/ACQUIRE.PSS;1
+
+[p4:EndOfHeap] ret=0x01f00000 brk=0x00d52000 a0=0x00000000 ra=0x0010f3b8
+[p4:EndOfHeap] ret=0x01f00000 brk=0x00d52000 a0=0xfff35000 ra=0x0010f3b8
+[p4:new2] size=0x00002bc0 ra=0x00152c5c
+[p4:malloc] size=0x00002bc0 ra=0x001006bc
+[p4:malloc] size=0x004958c0 ra=0x0014bec8
+[p4:EndOfHeap] ret=0x01f00000 brk=0x00c87000 a0=0x00496000 ra=0x0010f3b8
+[gzmfs] SEEK fd=0 off=2007040 whence=0 -> pos=2007040
+[gzmfs] READ fd=0 pos=2007040 len=4806848 -> 4806848 dst=0x00C86A40
+[p4:malloc] size=0x0075e000 ra=0x00157d68
+[p4:EndOfHeap] ret=0x01f00000 brk=0x0111d000 a0=0x0075f000 ra=0x0010f3b8
+[p4:malloc] size=0x0000000c ra=0x00157da0
+[p4:malloc] size=0x00001390 ra=0x00157dc0
+[p4:new2] size=0x0016f241 ra=0x00100540
+[p4:malloc] size=0x0016f241 ra=0x001006bc
+[gzmfs] SEEK fd=0 off=104867840 whence=0 -> pos=104867840
+[gzmfs] READ fd=0 pos=104867840 len=1503809 -> 1503809 dst=0x00C86A40
+[p4:new2] size=0x00000040 ra=0x0019ce38
+[p4:malloc] size=0x00000040 ra=0x001006bc
+[p4:malloc] size=0x00000ad8 ra=0x001b4208
+[p4:new2] size=0x00000018 ra=0x001b4274
+[p4:malloc] size=0x00000018 ra=0x001006bc
+[p4:wake-pre] sid=7 consumed=1
+[sceSifSetDma:CALL] pc=0x10f020 ra=0x11c070 list=0x22bbc0 count=1
+[sceSifSetDma:DESC] i=0 src=0xc87540 dst=0x10000 size=0x10000 attr=0x0 pc=0x10f020 ra=0x11c070
+[sceSifSetDma:CALL] pc=0x10f020 ra=0x11c070 list=0x22bbc0 count=1
+[sceSifSetDma:DESC] i=0 src=0xc97540 dst=0x10000 size=0x10000 attr=0x0 pc=0x10f020 ra=0x11c070
+[sceSifSetDma:CALL] pc=0x10f020 ra=0x11c070 list=0x22bbc0 count=1
+[sceSifSetDma:DESC] i=0 src=0xca7540 dst=0x10000 size=0x10000 attr=0x0 pc=0x10f020 ra=0x11c070
+[sceSifSetDma:CALL] pc=0x10f020 ra=0x11c070 list=0x22bbc0 count=1
+[sceSifSetDma:DESC] i=0 src=0xcb7540 dst=0x10000 size=0x10000 attr=0x0 pc=0x10f020 ra=0x11c070
+[sceSifSetDma:CALL] pc=0x10f020 ra=0x11c070 list=0x22bbc0 count=1
+[sceSifSetDma:DESC] i=0 src=0xcc7540 dst=0x10000 size=0x10000 attr=0x0 pc=0x10f020 ra=0x11c070
+[sceSifSetDma:CALL] pc=0x10f020 ra=0x11c070 list=0x22bbc0 count=1
+[sceSifSetDma:DESC] i=0 src=0xcd7540 dst=0x10000 size=0x10000 attr=0x0 pc=0x10f020 ra=0x11c070
+[sceSifSetDma:CALL] pc=0x10f020 ra=0x11c070 list=0x22bbc0 count=1
+[sceSifSetDma:DESC] i=0 src=0xce7540 dst=0x10000 size=0x10000 attr=0x0 pc=0x10f020 ra=0x11c070
+[sceSifSetDma:CALL] pc=0x10f020 ra=0x11c070 list=0x22bbc0 count=1
+[sceSifSetDma:DESC] i=0 src=0xcf7540 dst=0x10000 size=0x10000 attr=0x0 pc=0x10f020 ra=0x11c070
+[sceSifSetDma:CALL] pc=0x10f020 ra=0x11c070 list=0x22bbc0 count=1
+[sceSifSetDma:DESC] i=0 src=0xd07540 dst=0x10000 size=0x10000 attr=0x0 pc=0x10f020 ra=0x11c070
+[sceSifSetDma:CALL] pc=0x10f020 ra=0x11c070 list=0x22bbc0 count=1
+[sceSifSetDma:DESC] i=0 src=0xd17540 dst=0x10000 size=0x10000 attr=0x0 pc=0x10f020 ra=0x11c070
+[sceSifSetDma:CALL] pc=0x10f020 ra=0x11c070 list=0x22bbc0 count=1
+[sceSifSetDma:DESC] i=0 src=0xd27540 dst=0x10000 size=0x10000 attr=0x0 pc=0x10f020 ra=0x11c070
+[sceSifSetDma:CALL] pc=0x10f020 ra=0x11c070 list=0x22bbc0 count=1
+[sceSifSetDma:DESC] i=0 src=0xd37540 dst=0x10000 size=0x10000 attr=0x0 pc=0x10f020 ra=0x11c070
+[sceSifSetDma:CALL] pc=0x10f020 ra=0x11c070 list=0x22bbc0 count=1
+[sceSifSetDma:DESC] i=0 src=0xd47540 dst=0x10000 size=0x10000 attr=0x0 pc=0x10f020 ra=0x11c070
+[sceSifSetDma:CALL] pc=0x10f020 ra=0x11c070 list=0x22bbc0 count=1
+[sceSifSetDma:DESC] i=0 src=0xd57540 dst=0x10000 size=0x10000 attr=0x0 pc=0x10f020 ra=0x11c070
+[sceSifSetDma:CALL] pc=0x10f020 ra=0x11c070 list=0x22bbc0 count=1
+[sceSifSetDma:DESC] i=0 src=0xd67540 dst=0x10000 size=0x10000 attr=0x0 pc=0x10f020 ra=0x11c070
+[sceSifSetDma:CALL] pc=0x10f020 ra=0x11c070 list=0x22bbc0 count=1
+[sceSifSetDma:DESC] i=0 src=0xd77540 dst=0x10000 size=0x10000 attr=0x0 pc=0x10f020 ra=0x11c070
+[sceSifSetDma:CALL] pc=0x10f020 ra=0x11c070 list=0x22bbc0 count=1
+[sceSifSetDma:DESC] i=0 src=0xd87540 dst=0x10000 size=0x10000 attr=0x0 pc=0x10f020 ra=0x11c070
+[sceSifSetDma:CALL] pc=0x10f020 ra=0x11c070 list=0x22bbc0 count=1
+[sceSifSetDma:DESC] i=0 src=0xd97540 dst=0x10000 size=0x10000 attr=0x0 pc=0x10f020 ra=0x11c070
+[p4:malloc] size=0x000002f0 ra=0x0014bfc8
+[sceSifSetDma:CALL] pc=0x10f020 ra=0x11c070 list=0x22bbc0 count=1
+[sceSifSetDma:DESC] i=0 src=0xda7540 dst=0x10000 size=0x10000 attr=0x0 pc=0x10f020 ra=0x11c070
+[sceSifSetDma:CALL] pc=0x10f020 ra=0x11c070 list=0x22bbc0 count=1
+[sceSifSetDma:DESC] i=0 src=0xdb7540 dst=0x10000 size=0x10000 attr=0x0 pc=0x10f020 ra=0x11c070
+[sceSifSetDma:CALL] pc=0x10f020 ra=0x11c070 list=0x22bbc0 count=1
+[sceSifSetDma:DESC] i=0 src=0xdc7540 dst=0x10000 size=0x10000 attr=0x0 pc=0x10f020 ra=0x11c070
+[sceSifSetDma:CALL] pc=0x10f020 ra=0x11c070 list=0x22bbc0 count=1
+[sceSifSetDma:DESC] i=0 src=0xdd7540 dst=0x10000 size=0x10000 attr=0x0 pc=0x10f020 ra=0x11c070
+[sceSifSetDma:CALL] pc=0x10f020 ra=0x11c070 list=0x22bbc0 count=1
+[sceSifSetDma:DESC] i=0 src=0xde7540 dst=0x10000 size=0xe740 attr=0x0 pc=0x10f020 ra=0x11c070
+[gzmfs] SEEK fd=0 off=43862016 whence=0 -> pos=43862016
+[gzmfs] READ fd=0 pos=43862016 len=752 -> 752 dst=0x00DF67E0
+[p4:malloc] size=0x00001800 ra=0x00157d68
+[p4:malloc] size=0x0000000c ra=0x00157da0
+[p4:malloc] size=0x00001390 ra=0x00157dc0
+[p4:malloc] size=0x000008c4 ra=0x0014c040
+[gzmfs] SEEK fd=0 off=49186816 whence=0 -> pos=49186816
+[gzmfs] READ fd=0 pos=49186816 len=2244 -> 2244 dst=0x00DF96A0
+[p4:malloc] size=0x000093e0 ra=0x0014c0c8
+[gzmfs] SEEK fd=0 off=96229376 whence=0 -> pos=96229376
+[gzmfs] READ fd=0 pos=96229376 len=37856 -> 37856 dst=0x00DF9F70
+[p4:malloc] size=0x00006bd0 ra=0x0014c144
+[gzmfs] SEEK fd=0 off=96200704 whence=0 -> pos=96200704
+[gzmfs] READ fd=0 pos=96200704 len=27600 -> 27600 dst=0x00E03360
+[p4:malloc] size=0x00000134 ra=0x0014c1c0
+[gzmfs] SEEK fd=0 off=96198656 whence=0 -> pos=96198656
+[gzmfs] READ fd=0 pos=96198656 len=308 -> 308 dst=0x00E09F40
+[p4:malloc] size=0x0002fb90 ra=0x001337cc
+[gzmfs] SEEK fd=0 off=47202304 whence=0 -> pos=47202304
+[gzmfs] READ fd=0 pos=47202304 len=195472 -> 195472 dst=0x00E0A080
+[p4:vbl] ticks=600\n[p4:isig] sid=9
+[p4:new2] size=0x00000008 ra=0x00135764
+[p4:malloc] size=0x00000008 ra=0x001006bc
+[p4:new2] size=0x00000008 ra=0x00135764
+[p4:malloc] size=0x00000008 ra=0x001006bc
+[p4:new2] size=0x00000008 ra=0x00135764
+[p4:malloc] size=0x00000008 ra=0x001006bc
+[p4:new2] size=0x00000008 ra=0x00135764
+[p4:malloc] size=0x00000008 ra=0x001006bc
+[p4:malloc] size=0x0002c790 ra=0x001337cc
+[gzmfs] SEEK fd=0 off=415744 whence=0 -> pos=415744
+[gzmfs] READ fd=0 pos=415744 len=182160 -> 182160 dst=0x00E0A0C0
+[p4:new2] size=0x00000008 ra=0x00135764
+[p4:malloc] size=0x00000008 ra=0x001006bc
+[p4:new2] size=0x00000008 ra=0x00135764
+[p4:malloc] size=0x00000008 ra=0x001006bc
+[p4:new2] size=0x00000008 ra=0x00135764
+[p4:malloc] size=0x00000008 ra=0x001006bc
+[p4:new2] size=0x00000008 ra=0x00135764
+[p4:malloc] size=0x00000008 ra=0x001006bc
+[p4:vbl] ticks=900\n[p4:isig] sid=9
+[p4:vbl] ticks=1200\n[p4:isig] sid=9
+[p4:new2] size=0x00000054 ra=0x001b4bf4
+[p4:malloc] size=0x00000054 ra=0x001006bc
+[p4:new2] size=0x00000150 ra=0x001a6bd0
+[p4:malloc] size=0x00000150 ra=0x001006bc
+[gzmfs] OPEN fd=1 '\SOUND\GZMVS.RBB;1' -> '<path>' size=110594048
+[gzmfs] READ fd=1 pos=0 len=8 -> 8 dst=0x00E0A130
+[gzmfs] READ fd=1 pos=8 len=8 -> 8 dst=0x00E0A130
+[p4:new2] size=0x00000070 ra=0x00100540
+[p4:malloc] size=0x00000070 ra=0x001006bc
+[gzmfs] READ fd=1 pos=16 len=112 -> 112 dst=0x00E0A2C0
+[gzmfs] READ fd=1 pos=128 len=8 -> 8 dst=0x00E0A130
+[p4:new2] size=0x00001b70 ra=0x00100540
+[p4:malloc] size=0x00001b70 ra=0x001006bc
+[gzmfs] READ fd=1 pos=136 len=7024 -> 7024 dst=0x00E0A2C0
+[gzmfs] READ fd=1 pos=7160 len=8 -> 8 dst=0x00E0A130
+[p4:new2] size=0x00000db8 ra=0x00100540
+[gzmfs] READ fd=1 pos=7168 len=3512 -> 3512 dst=0x00E0BE40
+[gzmfs] READ fd=1 pos=10680 len=8 -> 8 dst=0x00E0A130
+[gzmfs] SEEK fd=1 off=1592 whence=1 -> pos=12280
+[gzmfs] READ fd=1 pos=12280 len=8 -> 8 dst=0x00E0A130
+[gzmfs] CLOSE fd=1
+[p4:new2] size=0x0000002c ra=0x001632a4
+[p4:ld] load obj=0x00e0cc00 size=0x00000000 ra=0x001632f8
+[p4:new2] size=0x000420a0 ra=0x00100540
+[p4:rd1] FUN_001b5ca0 obj=0x00c253e8 dst=0x00e0cc30 len=0x000420a0 ra=0x0019a1d4
+[gzmfs] SEEK fd=0 off=131909632 whence=0 -> pos=131909632
+[p4:alarm] n=11 id=11 handler=0x0011c570 arg=0x01ff7d68 *arg=23
+[p4:hdl] 11c570 entry a2=0x01ff7d68
+[p4:wake-pre] sid=23 consumed=1
+[p4:alarm] n=12 id=12 handler=0x0011c570 arg=0x01ff7d68 *arg=24
+[p4:hdl] 11c570 entry a2=0x01ff7d68
+[p4:wake-pre] sid=24 consumed=1
+[gzmfs] READ fd=0 pos=131909632 len=270496 -> 270496 dst=0x00E0CC30
+[p4:alarm] n=13 id=13 handler=0x0011c570 arg=0x01ff7d68 *arg=25
+[p4:hdl] 11c570 entry a2=0x01ff7d68
+[p4:wake-pre] sid=25 consumed=1
+[p4:new2] size=0x00000060 ra=0x00100540
+[p4:rd1] FUN_001b5ca0 obj=0x00c253e8 dst=0x00e4ed50 len=0x000204e0 ra=0x0019a1d4
+[gzmfs] SEEK fd=0 off=132182016 whence=0 -> pos=132182016
+[p4:alarm] n=14 id=14 handler=0x0011c570 arg=0x01ff7da8 *arg=26
+[p4:hdl] 11c570 entry a2=0x01ff7da8
+[p4:wake-pre] sid=26 consumed=1
+[p4:alarm] n=15 id=15 handler=0x0011c570 arg=0x01ff7da8 *arg=27
+[p4:hdl] 11c570 entry a2=0x01ff7da8
+[p4:wake-pre] sid=27 consumed=1
+[gzmfs] READ fd=0 pos=132182016 len=132320 -> 132320 dst=0x00E4ED50
+[p4:alarm] n=16 id=16 handler=0x0011c570 arg=0x01ff7da8 *arg=28
+[p4:hdl] 11c570 entry a2=0x01ff7da8
+[p4:wake-pre] sid=28 consumed=1
+[p4:new2] size=0x0019f000 ra=0x00100540
+[p4:vbl] ticks=1500\n[p4:isig] sid=9
+[p4:new2] size=0x00000008 ra=0x00162fcc
+[p4:new2] size=0x00000008 ra=0x00162fcc
+[p4:new2] size=0x00000008 ra=0x00162fcc
+[p4:new2] size=0x00000008 ra=0x00162fcc
+[p4:new2] size=0x00000008 ra=0x00162fcc
+[p4:new2] size=0x00000008 ra=0x00162fcc
+[p4:new2] size=0x00000008 ra=0x00162fcc
+[p4:new2] size=0x00000008 ra=0x00162fcc
+[p4:new2] size=0x00000008 ra=0x00162fcc
+[p4:new2] size=0x00000008 ra=0x00162fcc
+[p4:new2] size=0x00000008 ra=0x00162fcc
+[p4:new2] size=0x00000008 ra=0x00162fcc
+[p4:new2] size=0x00000008 ra=0x00162fcc
+[p4:new2] size=0x00000008 ra=0x00162fcc
+[p4:new2] size=0x00000008 ra=0x00162fcc
+[p4:new2] size=0x00000008 ra=0x00162fcc
+[p4:new2] size=0x00000008 ra=0x00162fcc
+[p4:new2] size=0x00000008 ra=0x00162fcc
+[p4:alias] target=0x001548d4 owner=0x001548b0 (unexported inner call)
+[p4:wake-pre] sid=9 consumed=1
+[p4:wake-pre] sid=9 consumed=1
+[p4:wake-pre] sid=9 consumed=1
+[p4:wake-pre] sid=9 consumed=1
+[p4:wake-pre] sid=9 consumed=1
+[p4:wake-pre] sid=9 consumed=1
+[p4:wake-pre] sid=9 consumed=1
+[p4:wake-pre] sid=9 consumed=1
+[p4:wake-pre] sid=9 consumed=1
+[p4:wake-pre] sid=9 consumed=1
+[p4:wake-pre] sid=9 consumed=1
+[p4:wake-pre] sid=9 consumed=1
+[p4:wake-pre] sid=9 consumed=1
+[p4:wake-pre] sid=9 consumed=1
+[p4:wake-pre] sid=9 consumed=1
+[p4:wake-pre] sid=9 consumed=1
+[mc] Init enter
+[mc] Init exit
+[mc] Init enter
+[mc] Init exit
+[p4:wake-pre] sid=9 consumed=1
+[mc] Init enter
+[mc] Init exit
+[dispatch:hle-leaf-ret] pc=0x11a720 -> ra=0x1ce130
+[p4:rodata-write] addr=0x00224760 val=0x0000000000000000 sz=1 op=WRITE8 pc=0x0019cfc4 ra=0x001522cc
+[p4:alias] target=0x0014ebb4 owner=0x0014eba0 (unexported inner call)
+[p4:alias] target=0x001517e4 owner=0x00151720 (unexported inner call)
+[p4:wake-pre] sid=9 consumed=1
+[mc] Sync idle -> -1
+[mc] GetInfo port=0 slot=0 type=2 free=8192 fmt=1 result=0 fmtPtr=0x01033670
+[mc] GetInfo port=0 slot=0 type=2 free=8192 fmt=1 result=0 fmtPtr=0x01033670
+[p4:wake-pre] sid=9 consumed=1
+[p4:alias] target=0x00151910 owner=0x00151720 (unexported inner call)
+[mc] GetDir port=0 slot=0 path='/BASLUS-20407/BASLUS-20407' maxent=8 table=0x01033430 result=-4 entries=0
+[p4:wake-pre] sid=9 consumed=1
+[p4:wake-pre] sid=9 consumed=1
+[mc] Sync idle -> -1
+[mc] GetInfo port=0 slot=0 type=2 free=8192 fmt=1 result=0 fmtPtr=0x01033670
+[p4:wake-pre] sid=9 consumed=1
+[p4:alias] target=0x00151808 owner=0x00151720 (unexported inner call)
+[p4:wake-pre] sid=9 consumed=1
+[p4:wake-pre] sid=9 consumed=1
+[p4:wake-pre] sid=9 consumed=1
+[mc] Sync idle -> -1
+[mc] GetInfo port=0 slot=0 type=2 free=8192 fmt=1 result=0 fmtPtr=0x01033670
+[p4:wake-pre] sid=9 consumed=1
+[p4:wake-pre] sid=9 consumed=1
+[p4:wake-pre] sid=9 consumed=1
+[mc] Sync idle -> -1
+[mc] GetInfo port=0 slot=0 type=2 free=8192 fmt=1 result=0 fmtPtr=0x01033670
+[p4:wake-pre] sid=9 consumed=1
+[p4:wake-pre] sid=9 consumed=1
+[mc] Sync idle -> -1
+[mc] GetInfo port=0 slot=0 type=2 free=8192 fmt=1 result=0 fmtPtr=0x01033670
+[p4:wake-pre] sid=9 consumed=1
+[p4:wake-pre] sid=9 consumed=1
+[mc] Sync idle -> -1
+[mc] GetInfo port=0 slot=0 type=2 free=8192 fmt=1 result=0 fmtPtr=0x01033670
+[p4:wake-pre] sid=9 consumed=1
+[p4:wake-pre] sid=9 consumed=1
+[p4:wake-pre] sid=9 consumed=1
+[mc] Sync idle -> -1
+[mc] GetInfo port=0 slot=0 type=2 free=8192 fmt=1 result=0 fmtPtr=0x01033670
+[p4:wake-pre] sid=9 consumed=1
+[p4:wake-pre] sid=9 consumed=1
+[mc] GetInfo port=0 slot=0 type=2 free=8192 fmt=1 result=0 fmtPtr=0x01033670
+[p4:wake-pre] sid=9 consumed=1
+[p4:wake-pre] sid=9 consumed=1
+[p4:wake-pre] sid=9 consumed=1
+[p4:wake-pre] sid=9 consumed=1
+[mc] GetInfo port=0 slot=0 type=2 free=8192 fmt=1 result=0 fmtPtr=0x01033670
+[p4:wake-pre] sid=9 consumed=1
+[p4:wake-pre] sid=9 consumed=1
+        ... [1,182 more [p4:wake-pre] lines elided by export_logs.py] ...
+[mc] GetInfo port=0 slot=0 type=2 free=8192 fmt=1 result=0 fmtPtr=0x01033670
+[mc] GetInfo port=0 slot=0 type=2 free=8192 fmt=1 result=0 fmtPtr=0x01033670
+[mc] GetInfo port=0 slot=0 type=2 free=8192 fmt=1 result=0 fmtPtr=0x01033670
+[mc] GetInfo port=0 slot=0 type=2 free=8192 fmt=1 result=0 fmtPtr=0x01033670
+[mc] GetInfo port=0 slot=0 type=2 free=8192 fmt=1 result=0 fmtPtr=0x01033670
+[mc] GetInfo port=0 slot=0 type=2 free=8192 fmt=1 result=0 fmtPtr=0x01033670
+[mc] GetInfo port=0 slot=0 type=2 free=8192 fmt=1 result=0 fmtPtr=0x01033670
+[mc] GetInfo port=0 slot=0 type=2 free=8192 fmt=1 result=0 fmtPtr=0x01033670
+[mc] GetInfo port=0 slot=0 type=2 free=8192 fmt=1 result=0 fmtPtr=0x01033670
+[mc] GetInfo port=0 slot=0 type=2 free=8192 fmt=1 result=0 fmtPtr=0x01033670
+[mc] GetInfo port=0 slot=0 type=2 free=8192 fmt=1 result=0 fmtPtr=0x01033670
+[mc] GetInfo port=0 slot=0 type=2 free=8192 fmt=1 result=0 fmtPtr=0x01033670
+[p4:alias] target=0x001517f4 owner=0x00151720 (unexported inner call)
+[p4:vbl] ticks=1800\n[p4:isig] sid=9
+[p4:alias] target=0x001517d4 owner=0x00151720 (unexported inner call)
+[p4:alias] target=0x001517ec owner=0x00151720 (unexported inner call)
+[p4:vbl] ticks=2100\n[p4:isig] sid=9
+[p4:vbl] ticks=2400\n[p4:isig] sid=9
+[p4:vbl] ticks=2700\n[p4:isig] sid=9
+[p4:vbl] ticks=3000\n[p4:isig] sid=9
+[p4:vbl] ticks=3300\n[p4:isig] sid=9
+[p4:vbl] ticks=3600\n[p4:isig] sid=9
+[p4:vbl] ticks=3900\n[p4:isig] sid=9
+[p4:vbl] ticks=4200\n[p4:isig] sid=9
+[p4:vbl] ticks=4500\n[p4:isig] sid=9
+[p4:vbl] ticks=4800\n[p4:isig] sid=9
+[p4:vbl] ticks=5100\n[p4:isig] sid=9
+[p4:vbl] ticks=5400\n[p4:isig] sid=9
+[p4:vbl] ticks=5700\n[p4:isig] sid=9
+[p4:vbl] ticks=6000\n[p4:isig] sid=9
+[p4:vbl] ticks=6300\n[p4:isig] sid=9
+[p4:alias] target=0x001517dc owner=0x00151720 (unexported inner call)
+[p4:vbl] ticks=6600\n[p4:isig] sid=9
+[p4:vbl] ticks=6900\n[p4:isig] sid=9
+[p4:vbl] ticks=7200\n[p4:isig] sid=9
+[p4:vbl] ticks=7500\n[p4:isig] sid=9
+[p4:vbl] ticks=7800\n[p4:isig] sid=9
+[p4:vbl] ticks=8100\n[p4:isig] sid=9
+[p4:vbl] ticks=8400\n[p4:isig] sid=9
+[p4:vbl] ticks=8700\n[p4:isig] sid=9
+[p4:vbl] ticks=9000\n[p4:isig] sid=9
+[p4:vbl] ticks=9300\n[p4:isig] sid=9
+[p4:vbl] ticks=9600\n[p4:isig] sid=9
+[p4:vbl] ticks=9900\n[p4:isig] sid=9
+[p4:vbl] ticks=10200\n[p4:isig] sid=9
+[p4:vbl] ticks=10500\n[p4:isig] sid=9
+[p4:vbl] ticks=10800\n[p4:isig] sid=9
+[p4:vbl] ticks=11100\n[p4:isig] sid=9
+[p4:vbl] ticks=11400\n[p4:isig] sid=9
+[p4:vbl] ticks=11700\n[p4:isig] sid=9
+[p4:vbl] ticks=12000\n[p4:isig] sid=9
+[p4:vbl] ticks=12300\n[p4:isig] sid=9
+[p4:vbl] ticks=12600\n[p4:isig] sid=9
+[p4:vbl] ticks=12900\n[p4:isig] sid=9
+[p4:vbl] ticks=13200\n[p4:isig] sid=9
+[p4:vbl] ticks=13500\n[p4:isig] sid=9
+[p4:vbl] ticks=13800\n[p4:isig] sid=9
+[p4:vbl] ticks=14100\n[p4:isig] sid=9
+[p4:vbl] ticks=14400\n[p4:isig] sid=9
+[p4:vbl] ticks=14700\n[p4:isig] sid=9
+[p4:vbl] ticks=15000\n[p4:isig] sid=9
+[p4:vbl] ticks=15300\n[p4:isig] sid=9
+[p4:vbl] ticks=15600\n[p4:isig] sid=9
+[p4:vbl] ticks=15900\n[p4:isig] sid=9
+[Deci2:call] code=3 argsAddr=0x01ff78b0 a0=0x00000001 a1=0x00000048 a2=0x00000000 sessions=1
+[Deci2:call] code=-6 argsAddr=0x01f07fa0 a0=0x00000001 a1=0x20225800 a2=0x00000039 sessions=1
+[Deci2Call:send] 9.....EH....sceGsExecStoreImage: GS does not terminate
+
+
+[Deci2:call] code=3 argsAddr=0x01ff78b0 a0=0x00000001 a1=0x00000048 a2=0x00000000 sessions=1
+[Deci2:call] code=-6 argsAddr=0x01f07fa0 a0=0x00000001 a1=0x20225800 a2=0x00000039 sessions=1
+[Deci2Call:send] 9.....EH....sceGsExecStoreImage: GS does not terminate
+
+
+[Deci2:call] code=3 argsAddr=0x01ff78b0 a0=0x00000001 a1=0x00000048 a2=0x00000000 sessions=1
+[Deci2:call] code=-6 argsAddr=0x01f07fa0 a0=0x00000001 a1=0x20225800 a2=0x00000039 sessions=1
+[Deci2Call:send] 9.....EH....sceGsExecStoreImage: GS does not terminate
+
+
+[p4:mallocguard] bad fd=0x00000000 at 0x1d108c hit#1
+[p4:mallocguard] bad fd=0x00000000 at 0x1d108c hit#2
+[p4:mallocguard] bad fd=0x00000000 at 0x1d108c hit#3
+[p4:mallocguard] bad fd=0x00000000 at 0x1d108c hit#4
+[p4:mallocguard] bad fd=0x00000000 at 0x1d108c hit#5
+[p4:mallocguard] bad fd=0x00000000 at 0x1d108c hit#6
+[p4:mallocguard] bad fd=0x00000000 at 0x1d108c hit#7
+[p4:mallocguard] bad fd=0x00000000 at 0x1d108c hit#8
+[p4:mallocguard] bad fd=0x00000000 at 0x1d108c hit#9
+[p4:mallocguard] bad fd=0x00000000 at 0x1d108c hit#10
+[p4:mallocguard] bad fd=0x00000000 at 0x1d108c hit#11
+[p4:mallocguard] bad fd=0x00000000 at 0x1d108c hit#12
+[Deci2:call] code=3 argsAddr=0x01ff7880 a0=0x00000001 a1=0x00000048 a2=0x80282a2d sessions=1
+[Deci2:call] code=-6 argsAddr=0x01f07fa0 a0=0x00000001 a1=0x20225800 a2=0x00000039 sessions=1
+[Deci2Call:send] 9.....EH....Can't Open file cdrom0:/MOVIE/OPENING.PSS;1
+
+[p4:vbl] ticks=16200\n[p4:isig] sid=9
+[gzmfs] SEEK fd=0 off=93194240 whence=0 -> pos=93194240
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[gzmfs] READ fd=0 pos=93194240 len=527456 -> 0 dst=0x0021D808
+[gzmfs] WARN short read (EOF) fd=0
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[gzmfs] READ fd=0 pos=93194240 len=527456 -> 0 dst=0x0021D808
+[gzmfs] WARN short read (EOF) fd=0
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[gzmfs] READ fd=0 pos=93194240 len=527456 -> 0 dst=0x0021D808
+[gzmfs] WARN short read (EOF) fd=0
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[gzmfs] READ fd=0 pos=93194240 len=527456 -> 0 dst=0x0021D808
+[gzmfs] WARN short read (EOF) fd=0
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[gzmfs] READ fd=0 pos=93194240 len=527456 -> 0 dst=0x0021D808
+[gzmfs] WARN short read (EOF) fd=0
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[gzmfs] READ fd=0 pos=93194240 len=527456 -> 0 dst=0x0021D808
+[gzmfs] WARN short read (EOF) fd=0
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[gzmfs] READ fd=0 pos=93194240 len=527456 -> 0 dst=0x0021D808
+        ... [26,423 more [gzmfs] lines elided by export_logs.py] ...
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+        ... [13,114 more [p4:rodata-stomp] lines elided by export_logs.py] ...
+[p4:vbl] ticks=16500\n[p4:isig] sid=9
+[p4:vbl] ticks=16800\n[p4:isig] sid=9
+[p4:vbl] ticks=17100\n[p4:isig] sid=9
+[p4:vbl] ticks=17400\n[p4:isig] sid=9
+[p4:vbl] ticks=17700\n[p4:isig] sid=9
+[p4:vbl] ticks=18000\n[p4:isig] sid=9
+        ... [23 more [p4:vbl] lines elided by export_logs.py] ...
+[p4:sm] poll n=5000 obj=0x00c253e8 ra=0x001e3ac8
+[p4:vbl] ticks=25200\n[p4:isig] sid=9
+[p4:vbl] ticks=25500\n[p4:isig] sid=9
+[p4:vbl] ticks=25800\n[p4:isig] sid=9
+[p4:vbl] ticks=26100\n[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[p4:sm] poll n=10000 obj=0x00c253e8 ra=0x001e3ac8
+[p4:vbl] ticks=26400\n[p4:isig] sid=9
+[p4:vbl] ticks=26700\n[p4:isig] sid=9
+[p4:vbl] ticks=27000\n[p4:isig] sid=9
+[p4:vbl] ticks=27300\n[p4:isig] sid=9
+[p4:vbl] ticks=27600\n[p4:isig] sid=9
+[p4:vbl] ticks=27900\n[p4:isig] sid=9
+[p4:vbl] ticks=28200\n[p4:isig] sid=9
+[p4:vbl] ticks=28500\n[p4:isig] sid=9
+[p4:vbl] ticks=28800\n[p4:isig] sid=9
+[p4:vbl] ticks=29100\n[p4:isig] sid=9
+[p4:vbl] ticks=29400\n[p4:isig] sid=9
+[p4:vbl] ticks=29700\n[p4:isig] sid=9
+[p4:vbl] ticks=30000\n[p4:isig] sid=9
+[p4:vbl] ticks=30300\n[p4:isig] sid=9
+[p4:vbl] ticks=30600\n[p4:isig] sid=9
+[p4:vbl] ticks=30900\n[p4:isig] sid=9
+[p4:sm] poll n=15000 obj=0x00c253e8 ra=0x001e3ac8
+[p4:vbl] ticks=31200\n[p4:isig] sid=9
+[p4:vbl] ticks=31500\n[p4:isig] sid=9
+[p4:vbl] ticks=31800\n[p4:isig] sid=9
+[p4:vbl] ticks=32100\n[p4:isig] sid=9
+[p4:vbl] ticks=32400\n[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[p4:vbl] ticks=32700\n[p4:isig] sid=9
+[p4:vbl] ticks=33000\n[p4:isig] sid=9
+[p4:vbl] ticks=33300\n[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[p4:vbl] ticks=33600\n[p4:isig] sid=9
+[p4:vbl] ticks=33900\n[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[p4:vbl] ticks=34200\n[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[p4:vbl] ticks=34500\n[p4:isig] sid=9
+[p4:vbl] ticks=34800\n[p4:isig] sid=9
+[p4:vbl] ticks=35100\n[p4:isig] sid=9
+[p4:vbl] ticks=35400\n[p4:isig] sid=9
+[p4:vbl] ticks=35700\n[p4:isig] sid=9
+[p4:vbl] ticks=36000\n[p4:isig] sid=9
+[p4:sm] poll n=20000 obj=0x00c253e8 ra=0x001e3ac8
+[p4:vbl] ticks=36300\n[p4:isig] sid=9
+[p4:vbl] ticks=36600\n[p4:isig] sid=9
+[p4:vbl] ticks=36900\n[p4:isig] sid=9
+[p4:vbl] ticks=37200\n[p4:isig] sid=9
+[p4:vbl] ticks=37500\n[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[p4:vbl] ticks=37800\n[p4:isig] sid=9
+[p4:vbl] ticks=38100\n[p4:isig] sid=9
+[p4:vbl] ticks=38400\n[p4:isig] sid=9
+[p4:vbl] ticks=38700\n[p4:isig] sid=9
+[p4:vbl] ticks=39000\n[p4:isig] sid=9
+[p4:vbl] ticks=39300\n[p4:isig] sid=9
+[p4:vbl] ticks=39600\n[p4:isig] sid=9
+[p4:vbl] ticks=39900\n[p4:isig] sid=9
+[p4:wake-pre] sid=9 consumed=1
+[p4:wake-pre] sid=9 consumed=1
+[p4:wake-pre] sid=9 consumed=1
+[p4:wake-pre] sid=9 consumed=1
+[p4:wake-pre] sid=9 consumed=1
+[p4:vbl] ticks=40200\n[p4:isig] sid=9
+[p4:wake-pre] sid=9 consumed=1
+[p4:wake-pre] sid=9 consumed=1
+[p4:wake-pre] sid=9 consumed=1
+[p4:wake-pre] sid=9 consumed=1
+[p4:wake-pre] sid=9 consumed=1
+[p4:wake-pre] sid=9 consumed=1
+[p4:vbl] ticks=40500\n[p4:isig] sid=9
+[p4:wake-pre] sid=9 consumed=1
+[p4:wake-pre] sid=9 consumed=1
+[p4:wake-pre] sid=9 consumed=1
+[p4:wake-pre] sid=9 consumed=1
+[p4:wake-pre] sid=9 consumed=1
+[p4:wake-pre] sid=9 consumed=1
+[p4:vbl] ticks=40800\n[p4:isig] sid=9
+[p4:wake-pre] sid=9 consumed=1
+[p4:wake-pre] sid=9 consumed=1
+[p4:wake-pre] sid=9 consumed=1
+[p4:wake-pre] sid=9 consumed=1
+[p4:wake-pre] sid=9 consumed=1
+[p4:wake-pre] sid=9 consumed=1
+[p4:vbl] ticks=41100\n[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[p4:wake-pre] sid=9 consumed=1
+[p4:wake-pre] sid=9 consumed=1
+[p4:wake-pre] sid=9 consumed=1
+[p4:wake-pre] sid=9 consumed=1
+[p4:wake-pre] sid=9 consumed=1
+[p4:sm] poll n=25000 obj=0x00c253e8 ra=0x001e3ac8
+[p4:wake-pre] sid=9 consumed=1
+[p4:vbl] ticks=41400\n[p4:isig] sid=9
+[p4:wake-pre] sid=9 consumed=1
+[p4:wake-pre] sid=9 consumed=1
+[p4:wake-pre] sid=9 consumed=1
+[p4:wake-pre] sid=9 consumed=1
+[p4:wake-pre] sid=9 consumed=1
+[p4:wake-pre] sid=9 consumed=1
+[p4:vbl] ticks=41700\n[p4:isig] sid=9
+[p4:wake-pre] sid=9 consumed=1
+[p4:wake-pre] sid=9 consumed=1
+[p4:wake-pre] sid=9 consumed=1
+[p4:wake-pre] sid=9 consumed=1
+[p4:wake-pre] sid=9 consumed=1
+[p4:wake-pre] sid=9 consumed=1
+[p4:vbl] ticks=42000\n[p4:isig] sid=9
+[p4:wake-pre] sid=9 consumed=1
+[p4:wake-pre] sid=9 consumed=1
+[p4:wake-pre] sid=9 consumed=1
+[p4:wake-pre] sid=9 consumed=1
+[p4:wake-pre] sid=9 consumed=1
+[p4:wake-pre] sid=9 consumed=1
+[p4:vbl] ticks=42300\n[p4:isig] sid=9
+[p4:wake-pre] sid=9 consumed=1
+[p4:wake-pre] sid=9 consumed=1
+[p4:wake-pre] sid=9 consumed=1
+[p4:wake-pre] sid=9 consumed=1
+[p4:wake-pre] sid=9 consumed=1
+[p4:wake-pre] sid=9 consumed=1
+[p4:vbl] ticks=42600\n[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[p4:wake-pre] sid=9 consumed=1
+[p4:wake-pre] sid=9 consumed=1
+[p4:wake-pre] sid=9 consumed=1
+[p4:wake-pre] sid=9 consumed=1
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[p4:wake-pre] sid=9 consumed=1
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[p4:wake-pre] sid=9 consumed=1
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[gzmfs] READ fd=0 pos=93194240 len=527456 -> 0 dst=0x0021D808
+[gzmfs] WARN short read (EOF) fd=0
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[gzmfs] READ fd=0 pos=93194240 len=527456 -> 0 dst=0x0021D808
+[gzmfs] WARN short read (EOF) fd=0
+[p4:vbl] ticks=42900\n[p4:isig] sid=9
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[gzmfs] READ fd=0 pos=93194240 len=527456 -> 0 dst=0x0021D808
+[gzmfs] WARN short read (EOF) fd=0
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[gzmfs] READ fd=0 pos=93194240 len=527456 -> 0 dst=0x0021D808
+[gzmfs] WARN short read (EOF) fd=0
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[gzmfs] READ fd=0 pos=93194240 len=527456 -> 0 dst=0x0021D808
+[gzmfs] WARN short read (EOF) fd=0
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[gzmfs] READ fd=0 pos=93194240 len=527456 -> 0 dst=0x0021D808
+[gzmfs] WARN short read (EOF) fd=0
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[gzmfs] READ fd=0 pos=93194240 len=527456 -> 0 dst=0x0021D808
+[gzmfs] WARN short read (EOF) fd=0
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[gzmfs] READ fd=0 pos=93194240 len=527456 -> 0 dst=0x0021D808
+[gzmfs] WARN short read (EOF) fd=0
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[gzmfs] READ fd=0 pos=93194240 len=527456 -> 0 dst=0x0021D808
+[gzmfs] WARN short read (EOF) fd=0
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[gzmfs] READ fd=0 pos=93194240 len=527456 -> 0 dst=0x0021D808
+[gzmfs] WARN short read (EOF) fd=0
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[gzmfs] READ fd=0 pos=93194240 len=527456 -> 0 dst=0x0021D808
+[gzmfs] WARN short read (EOF) fd=0
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[gzmfs] READ fd=0 pos=93194240 len=527456 -> 0 dst=0x0021D808
+[gzmfs] WARN short read (EOF) fd=0
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[gzmfs] READ fd=0 pos=93194240 len=527456 -> 0 dst=0x0021D808
+[gzmfs] WARN short read (EOF) fd=0
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[gzmfs] READ fd=0 pos=93194240 len=527456 -> 0 dst=0x0021D808
+[gzmfs] WARN short read (EOF) fd=0
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[gzmfs] READ fd=0 pos=93194240 len=527456 -> 0 dst=0x0021D808
+[gzmfs] WARN short read (EOF) fd=0
+[p4:isig] sid=9
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[gzmfs] READ fd=0 pos=93194240 len=527456 -> 0 dst=0x0021D808
+[gzmfs] WARN short read (EOF) fd=0
+[p4:isig] sid=10
+[p4:isig] sid=9
+[p4:isig] sid=10
+[p4:isig] sid=9
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[gzmfs] READ fd=0 pos=93194240 len=527456 -> 0 dst=0x0021D808
+[gzmfs] WARN short read (EOF) fd=0
+[p4:isig] sid=10
+[p4:isig] sid=9
+[p4:isig] sid=10
+[p4:isig] sid=9
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[gzmfs] READ fd=0 pos=93194240 len=527456 -> 0 dst=0x0021D808
+[gzmfs] WARN short read (EOF) fd=0
+[p4:isig] sid=10
+[p4:isig] sid=9
+[p4:isig] sid=10
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[gzmfs] READ fd=0 pos=93194240 len=527456 -> 0 dst=0x0021D808
+[gzmfs] WARN short read (EOF) fd=0
+[p4:isig] sid=9
+[p4:isig] sid=10
+[p4:isig] sid=9
+[p4:isig] sid=10
+[p4:isig] sid=9
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[gzmfs] READ fd=0 pos=93194240 len=527456 -> 0 dst=0x0021D808
+[gzmfs] WARN short read (EOF) fd=0
+[p4:isig] sid=10
+[p4:isig] sid=9
+[p4:isig] sid=10
+[p4:isig] sid=9
+[p4:isig] sid=10
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[gzmfs] READ fd=0 pos=93194240 len=527456 -> 0 dst=0x0021D808
+[gzmfs] WARN short read (EOF) fd=0
+[p4:isig] sid=9
+[p4:wake-pre] sid=9 consumed=1
+[p4:isig] sid=10
+[p4:isig] sid=9
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[gzmfs] READ fd=0 pos=93194240 len=527456 -> 0 dst=0x0021D808
+[gzmfs] WARN short read (EOF) fd=0
+[p4:isig] sid=10
+[p4:isig] sid=9
+[p4:isig] sid=10
+[p4:isig] sid=9
+[p4:isig] sid=10
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[gzmfs] READ fd=0 pos=93194240 len=527456 -> 0 dst=0x0021D808
+[gzmfs] WARN short read (EOF) fd=0
+[p4:isig] sid=9
+[p4:isig] sid=10
+[p4:isig] sid=9
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[gzmfs] READ fd=0 pos=93194240 len=527456 -> 0 dst=0x0021D808
+[gzmfs] WARN short read (EOF) fd=0
+[p4:isig] sid=10
+[p4:isig] sid=9
+[p4:isig] sid=10
+[p4:isig] sid=9
+[p4:isig] sid=10
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[gzmfs] READ fd=0 pos=93194240 len=527456 -> 0 dst=0x0021D808
+[gzmfs] WARN short read (EOF) fd=0
+[p4:isig] sid=9
+[p4:isig] sid=10
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[gzmfs] READ fd=0 pos=93194240 len=527456 -> 0 dst=0x0021D808
+[gzmfs] WARN short read (EOF) fd=0
+[p4:isig] sid=9
+[p4:isig] sid=10
+[p4:isig] sid=9
+[p4:isig] sid=10
+[p4:isig] sid=9
+[p4:isig] sid=10
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[gzmfs] READ fd=0 pos=93194240 len=527456 -> 0 dst=0x0021D808
+[gzmfs] WARN short read (EOF) fd=0
+[p4:isig] sid=9
+[p4:isig] sid=10
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[gzmfs] READ fd=0 pos=93194240 len=527456 -> 0 dst=0x0021D808
+[gzmfs] WARN short read (EOF) fd=0
+[p4:isig] sid=9
+[p4:isig] sid=10
+[p4:isig] sid=9
+[p4:isig] sid=10
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[gzmfs] READ fd=0 pos=93194240 len=527456 -> 0 dst=0x0021D808
+[gzmfs] WARN short read (EOF) fd=0
+[p4:isig] sid=9
+[p4:isig] sid=10
+[p4:isig] sid=9
+[p4:isig] sid=10
+[p4:isig] sid=9
+[p4:rodata-stomp] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 client=0x00c2d7c0 -> refused
+[gzmfs] READ fd=0 pos=93194240 len=527456 -> 0 dst=0x0021D808
+[gzmfs] WARN short read (EOF) fd=0
+[p4:isig] sid=10
+[p4:isig] sid=9
+[p4:isig] sid=10
