@@ -55,6 +55,17 @@ Recording these because a findings repo that only lists wins is not worth readin
 | 189 | Script-VM opcode → handler mappings (statically derived, not runtime-verified) | [`data/opcode_handlers.json`](data/opcode_handlers.json) |
 | 7   | Mod recipes, **none currently verified working**: 3 `needs_recheck`, 4 `contradicted` (write sticks in RAM but HUD never updates) | [`data/mod_recipes.json`](data/mod_recipes.json) |
 
+Plus the **raw evidence** the above was drawn from:
+
+| 10 | Port boot logs, oldest first, path-scrubbed and indexed by date, 46 MB raw published as 1.7 MB | [`logs/INDEX.md`](logs/INDEX.md) |
+
+**Please read the logs adversarially.** The findings files say what we concluded;
+the logs are what someone else can use to reach a *different* conclusion, spot a
+pattern we missed, or catch us being wrong. That has already happened once, and
+the log containing the misread is published deliberately, misleading part
+included (see `Worked example 2` in [`FINDINGS.md`](FINDINGS.md)). If you see
+something we didn't, an issue here is very welcome.
+
 Game: **Way of the Samurai** (Spike / Acquire, 2003), serial `SLUS-20407`, NTSC-U.
 Main data archive `VOLUME.DAT` (132 MB). Script VM uses C++ virtual dispatch, not
 a jump table. Audio in `cdrom0:\SOUND\GZMVS.RBB`.
@@ -115,8 +126,9 @@ game, see [`CONTRIBUTING.md`](CONTRIBUTING.md).
 
 | Public (this repo) | Private (never shipped) |
 |--------------------|-------------------------|
-| Verified addresses + metadata | Game ISO / disc rip |
-| Findings + dead ends | Raw EE memory dumps |
+| Port boot logs (path-scrubbed diagnostics) | Game ISO / disc rip |
+| Verified addresses + metadata | Raw EE memory dumps |
+| Findings + dead ends | Game dialogue / in-game text (copyright) |
 | Mod recipes (address + value) | Extracted assets & in-game strings (copyright) |
 | Engine / opcode maps | The recompiled C++ translation units + runtime binary |
 | Verification methodology | Internal build scripts with local paths |

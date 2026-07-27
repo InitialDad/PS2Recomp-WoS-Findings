@@ -12,12 +12,14 @@ NOT POSTED. Review, edit, then post to the issue and/or Discord.
 
 ---
 
-Sorry for the slow reply, and thanks for looking.
+Apologies for the slow reply, that was on me and I should have got back to you
+much sooner. Thanks for taking the time to look, and for asking the right
+question.
 
-**Yes, it was memory corruption, and it's now fixed.** The answer to your
-question turned out to be a single systemic allocator cause rather than the many
-downstream hang sites it presented as (malloc / Deci2 / `0x8dcb00` / `0x152c78`).
-Patching the individual sites was a trap; each fix just moved the freeze.
+**Yes, it was memory corruption, and it's now fixed.** It turned out to be a
+single systemic allocator cause rather than the many downstream hang sites it
+presented as (malloc / Deci2 / `0x8dcb00` / `0x152c78`). Patching the individual
+sites was a trap; each fix just moved the freeze somewhere else.
 
 Where it stands today, measured rather than assumed:
 
@@ -28,6 +30,16 @@ Where it stands today, measured rather than assumed:
   several 8x2 CLUT loads, all host-to-local), and 96 `TEX0` writes and 96 `prim=6`
   sprite kicks occur per title screen. So the defect is downstream of upload:
   rasterisation, sampling, or the draw target.
+
+Rather than mail you a pile of files, I've published the logs in the findings
+repo so they're just there if they're ever useful to you or anyone else:
+**https://github.com/InitialDad/PS2Recomp-WoS-Findings/blob/master/logs/INDEX.md**
+
+Ten runs, oldest first, each with a note on what it shows, indexed by date. Local
+paths are scrubbed and long runs of one tag are collapsed with an explicit
+elision marker, so 46 MB of raw logs comes to about 1.7 MB. It includes the
+reference signature of the old malloc freeze you asked about, and the current
+`[p4:gs-trx]` / `[p4:gs-sprite]` / `[p4:clut]` GS traces.
 
 One thing from this week that may be worth more to you than our address list,
 because it is about PS2Recomp's GS rather than about this game:
@@ -50,17 +62,7 @@ corner. Hand-walking the page math for both formats, they agree: `PSMCT32` at
 with an aggregate probe (non-zero ratio, actual UV rectangle touched, index
 histogram) before I claim anything either way. I will report back with numbers.
 
-Happy to attach the boot logs and the `[p4:gs-trx]` / `[p4:clut]` traces, or to
-bring it to Discord, whichever is easier for you.
+That misread is written up in the repo as well, log included, since it's a better
+lesson about instrumentation than about the GS.
 
-On the original questions, still open whenever you have time, and no problem if
-the answer is "not a priority":
-
-1. Would per-game data be more useful as `config.toml` address bindings plus a
-   `PS2_REGISTER_GAME_OVERRIDE` module, or as a separate reference repo?
-2. Is there an existing schema for per-game function/address metadata I should
-   match, rather than inventing a second incompatible one?
-3. Any interest in a shared cross-game "dead ends" list in the main repo?
-
-Findings repo, updated today with the current status and the corrections above:
-https://github.com/InitialDad/PS2Recomp-WoS-Findings
+Thanks again for building this, and happy to move to Discord if that's easier.
