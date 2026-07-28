@@ -28,8 +28,17 @@ What is true today, measured rather than assumed:
   framebuffer, and real colour appears early in every run. Then it stops dead.
   Cause found 2026-07-27: the runtime refused a single legitimate 515 KB asset
   load 19,774 times because its span merely crossed a guarded address band. See
-  `Worked example 3` in [`FINDINGS.md`](FINDINGS.md). Fix committed; **not yet
-  verified on screen**, and this line will say so until it is.
+  `Worked example 3` in [`FINDINGS.md`](FINDINGS.md). **Fix verified**: the load
+  now completes (527,456 of 527,456 bytes, once), and DMA jumped 43x. The game
+  still does not reach a title screen - it stalls elsewhere now - so this is a
+  fixed obstacle, not a fixed game.
+- **Eliminated by measurement, with numbers:** the PSMT8 swizzle, the CLUT
+  (75,416,128 coloured resolutions across ~876,544 distinct values), and
+  blend/ALPHA (of 8,857,959 coloured sources, 2,070 became black). Three whole
+  branches of investigation closed.
+- **Current blocker:** an EE thread alternating between `stdcpp_node_0010f180`
+  and `mem_node_00103360` while `activeThreads=4` and DMA/GIF keep climbing - one
+  thread stuck, not a wedged machine. Not diagnosed.
 - The parallel-scan harness verifies the port against a live PCSX2 execution used
   as a reference implementation.
 
@@ -57,8 +66,8 @@ Recording these because a findings repo that only lists wins is not worth readin
 | Count | Data | File |
 |------:|------|------|
 | 67  | Catalogued EE addresses, **17** carry in-band verification evidence (`on_screen`/`snapshot_diff`/`stated_verified`); most others are additionally cross-checked by the parallel-scan report | [`data/addresses.json`](data/addresses.json) |
-| 207 | Findings (99 `works`, 73 `investigated`, 20 `fails`, 15 `partial`) | [`data/findings.json`](data/findings.json) |
-| 35  | Recorded **dead ends**, approaches proven not to work, with why | [`data/dead_ends.json`](data/dead_ends.json) |
+| 210 | Findings (100 `works`, 75 `investigated`, 20 `fails`, 15 `partial`) | [`data/findings.json`](data/findings.json) |
+| 36  | Recorded **dead ends**, approaches proven not to work, with why | [`data/dead_ends.json`](data/dead_ends.json) |
 | 104 | **Shared SDK/middleware fingerprints**, Sony SDK + libc++ + libmpeg code confirmed byte-identical in one other title (`SLUS-20397`). *Not* game-engine code. | [`data/shared_sdk_fingerprints.json`](data/shared_sdk_fingerprints.json) |
 | 189 | Script-VM opcode → handler mappings (statically derived, not runtime-verified) | [`data/opcode_handlers.json`](data/opcode_handlers.json) |
 | 7   | Mod recipes, **none currently verified working**: 3 `needs_recheck`, 4 `contradicted` (write sticks in RAM but HUD never updates) | [`data/mod_recipes.json`](data/mod_recipes.json) |
@@ -103,7 +112,7 @@ this dataset unusual:
    on-screen result), not assumed from "the write stuck and it didn't crash."
    (PCSX2 is an emulator, not literal ground truth, but it's a practical, stable
    reference for guest memory.)
-2. **Dead ends are first-class.** The 35 recorded dead ends are the most valuable
+2. **Dead ends are first-class.** The 36 recorded dead ends are the most valuable
    rows here; each one is hours you don't have to spend. Examples:
    - `MIPS:LE:32:R5900` is **not** a valid Ghidra processor ID, use
      `r5900:LE:32:default` (from the emotionengine-reloaded extension).

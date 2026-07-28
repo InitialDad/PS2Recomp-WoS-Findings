@@ -173,5 +173,10 @@
     "serial": "SLUS-20407",
     "pattern": "Apply a wild-store address guard to bulk file-read destinations",
     "reason": "A 4-byte wild store from a corrupt pointer and a 527KB sequential asset load are different things. Testing the read span against the guard band refuses the whole load whenever it merely CROSSES the band, which is what stalls WoS at a black screen. Guard stores, not bulk reads."
+  },
+  {
+    "serial": "SLUS-20407",
+    "pattern": "Accept 'error counter went to zero' as proof a fix works",
+    "reason": "A counter reaching zero is satisfied both by the fix working and by execution never reaching the code. Run 1 of the rodata guard fix passed rodata_refused->0 while testing nothing at all. Always pair a 'bad thing stopped' metric with a 'good thing happened' metric that can only be satisfied one way (here: bulk_read_seen>0 AND rodata_allowed>0)."
   }
 ]

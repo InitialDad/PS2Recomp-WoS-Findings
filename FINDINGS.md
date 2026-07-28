@@ -231,11 +231,48 @@ want, same call site `ra=0x001b5b60`, 19,774 times: a hard retry loop.
 corrupt-dst signature - a *small* read *starting inside* the band - and spanning
 bulk loads pass with a one-time log line.
 
-**Status: not yet verified on screen.** The predictions were fixed in advance and
-the comparison harness self-tested (running it on the before-log against itself
-fails every prediction, so it is capable of failing): `rodata_refused` -> 0,
-`rodata_allowed` > 0, `max_retry_same_read` -> 1, `clut_after` > 0,
-`sprite_after` much higher. Result will be recorded here either way.
+**Result: VERIFIED at mechanism level.** The load now completes:
+
+```
+[p4:rodata-span] gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60
+                 spans the jump-table band -> ALLOWED (bulk load, not a wild store)
+[gzmfs] READ fd=0 pos=93194240 len=527456 -> 527456 dst=0x0021D808
+```
+
+527,456 bytes requested, 527,456 delivered, **once** instead of 19,774 refusals
+delivering nothing. Progression jumped with it: DMA 27,536 -> 1,196,515 (43x),
+GIF 997 -> 12,225 (12x), sprites per vblank 12.7 -> 29.6.
+
+The game still does not reach a title screen - it now stalls somewhere else -
+so this is a fixed obstacle, not a fixed game.
+
+### The near-miss that matters more than the fix
+
+**Run 1 of this exact build "passed" and proved nothing.** It reported
+`rodata_refused: 19,774 -> 0`, which looks like total success. It was not: the
+run froze at `0x8dcb00` *before ever reaching the loader*. Zero occurrences of
+`0x21D808` in the whole log.
+
+A counter falling to zero is satisfied equally by **"the fix works"** and by
+**"we never got there."** The only reason this was caught is that the
+pre-registered predictions included `rodata_allowed > 0` - a counter that can
+only move if the guard actually let a load through - and it stayed at 0.
+
+The rule, now a first-class dead end in the dataset:
+
+> Never accept "the error counter went to zero" as proof a fix works. Pair every
+> *"bad thing stopped"* metric with a *"good thing happened"* metric that cannot
+> be satisfied by failing earlier.
+
+Two other traps from the same session, both of which cost real time:
+
+- A build-freshness gate used `Select-String -Encoding Byte`, which is not valid
+  in PowerShell 5.1. It errored, returned nothing, and read as "the fix is not in
+  the binary", aborting a perfectly good build. A check that cannot distinguish
+  *"I looked and it is missing"* from *"I failed to look"* is not a check.
+- Comparing `sprite_kicks` totals across runs of different length reported a
+  regression (2,395 -> 1,985) where the per-frame rate had actually more than
+  doubled (12.7 -> 29.6 per vblank). Normalise before comparing.
 
 **Transferable rules.**
 

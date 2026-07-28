@@ -1240,5 +1240,23 @@
     "topic": "black-screen-cause-rodata-guard-refuses-legit-load",
     "outcome": "investigated",
     "details": "STRONG CANDIDATE for the black screen. game_overrides.cpp hitsRodata() guards [0x00220000,0x00224880) - the 'read-only jump-table band'. The gzmfs READ path applies it to whole file reads: dst=0x0021D808 want=527456 spans 0x21D808..0x29E4E8, which CROSSES the band, so safeWant=0 and the ENTIRE 515KB load is refused. Observed 19,774 times, identical dst/want/ra=0x001b5b60 - the game retries forever and never gets its data. Phase census confirms the consequence: before the first refusal there are 2,320 sprite kicks and 985 CLUT samples; after it, 0 CLUT samples, 75 sprite kicks, 39,549 gzmfs lines. Texture sampling stops dead. NOTE the guard was a band-aid for the wild-store corruptor (findings 183/186) which has since been FIXED via the allocator bug, so it is likely obsolete. Also note finding 191 ('gzmfs read overwrites live code at 0x21D808') was withdrawn by 192 on the grounds that 0x21D808 is DATA - which supports the read being legitimate."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "VERIFIED-rodata-guard-fix-unblocks-the-515KB-asset-load",
+    "outcome": "works",
+    "details": "The guard fix is VALIDATED at mechanism level (run 2, 2026-07-27 19:46). Evidence: [p4:rodata-span] fired once - 'gzmfs READ fd=0 dst=0x0021d808 want=527456 ra=0x001b5b60 spans the jump-table band -> ALLOWED' - and the load COMPLETED: '[gzmfs] READ fd=0 pos=93194240 len=527456 -> 527456 dst=0x0021D808'. Asked 527,456 bytes, got 527,456, ONCE. Before: 19,774 refusals of the same read, 0 bytes delivered. Progression jumped: DMA 27,536 -> 1,196,515 (43x), GIF 997 -> 12,225 (12x), sprites/vblank 12.7 -> 29.6 (2.3x). IMPORTANT METHOD NOTE: run 1 of this same build 'passed' rodata_refused->0 while testing NOTHING - it froze at 0x8dcb00 before reaching the loader (bulk_read_seen=0). 'Refusals stopped' is satisfied equally by 'fix works' and by 'never got there'. Only bulk_read_seen>0 AND rodata_allowed>0 discriminate. Both harness and predictions were corrected."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "NEW-stall-after-guard-fix-stdcpp-and-mem-nodes",
+    "outcome": "investigated",
+    "details": "With the asset load unblocked the port no longer stalls at 0x8dcb00; it gets much further and then freezes elsewhere. Run 2 ticks alternate pc=0x10f1d0 (inside stdcpp_node_0010f180) and pc=0x1033c8 (inside mem_node_00103360), activeThreads=4, dma still climbing (1,192,315 -> 1,196,515 between samples) and gif 12,105 -> 12,225, so DMA/GIF are NOT wedged - work is still being submitted while the EE thread sits in these two functions. Both names suggest allocator//C++ runtime territory, consistent with the standing note that boot instability has one systemic allocator cause rather than many downstream sites. NOT yet diagnosed."
+  },
+  {
+    "serial": "SLUS-20407",
+    "topic": "GS-clut-and-blend-both-exonerated-by-measurement",
+    "outcome": "investigated",
+    "details": "CLUT: resolved indices are real colours - coloured=75,416,128 with ~876,544 distinct values over 212.5M samples. Not a palette problem. BLEND: ALPHA=0x0000008000000044 decodes A=0 B=1 C=0 D=1 fix=128 = (Cs-Cd)*As/128+Cd. Of 8,857,959 coloured sources only 2,070 became black; sample src(0,0,0) dst(79,79,79)->(77,77,77). Destination alpha IS always zero (dstAlpha_zero=202,000,000 of 202,000,000, confirming PSMCT24 stores no alpha) but C=0 selects SOURCE alpha so the trap never bites. Both hypotheses eliminated."
   }
 ]
